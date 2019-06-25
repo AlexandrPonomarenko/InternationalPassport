@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class mainController {
 
     @RequestMapping(value = "/main", method = RequestMethod.GET)
-    public String mainPage(Model model) {
+    public String MainPage(Model model) {
         model.addAttribute("message", "Spring 5");
-        return "hello";
+        return "main";
     }
 }
