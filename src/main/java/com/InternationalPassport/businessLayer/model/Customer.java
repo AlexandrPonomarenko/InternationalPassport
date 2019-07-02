@@ -3,13 +3,14 @@ package com.InternationalPassport.businessLayer.model;
 import antlr.LexerSharedInputState;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name = "customer", schema = "test_schema", uniqueConstraints = {@UniqueConstraint(columnNames = "customerId")})
-public class Customer {
+public class Customer implements Serializable {
     @Id
     @SequenceGenerator(name = "cust_idcust_seq", sequenceName = "cust_idcust_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "cust_idcust_seq")

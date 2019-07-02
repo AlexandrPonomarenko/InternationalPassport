@@ -1,13 +1,14 @@
 package com.InternationalPassport.businessLayer.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.security.PrivateKey;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name = "role" , schema = "test_schema", uniqueConstraints = {@UniqueConstraint(columnNames = "roleId")})
-public class Role {
+public class Role implements Serializable {
     @Id
     @SequenceGenerator(name = "r_idr_seq", sequenceName = "r_idr_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "r_idr_seq")

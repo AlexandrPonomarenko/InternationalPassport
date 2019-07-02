@@ -3,12 +3,13 @@ package com.InternationalPassport.businessLayer.model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 
 @Entity
 @Table(name = "passport", uniqueConstraints = {@UniqueConstraint(columnNames = "passId")})
-public class Passport {
+public class Passport implements Serializable {
     @Id
     @SequenceGenerator(name = "pass_passId_seq", sequenceName = "pass_passId_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pass_passId_seq")
