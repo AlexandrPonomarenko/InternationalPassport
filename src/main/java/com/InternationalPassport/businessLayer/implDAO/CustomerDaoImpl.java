@@ -6,6 +6,10 @@ import com.InternationalPassport.businessLayer.model.Customer;
 import java.util.List;
 
 public class CustomerDaoImpl implements CustomerDAO {
+
+
+
+
     @Override
     public Customer findByFirstName(String firstName) {
         return null;

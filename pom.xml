@@ -14,16 +14,19 @@
   <url>http://www.example.com</url>
 
   <properties>
-      <spring.version>5.0.3.RELEASE</spring.version>
+    <spring.version>5.0.3.RELEASE</spring.version>
     <spring.context>5.0.0.RELEASE</spring.context>
     <spring.ORM>5.0.0.RELEASE</spring.ORM>
-      <thymeleaf.version>3.0.9.RELEASE</thymeleaf.version>
-      <hibernate.version>5.2.10.Final</hibernate.version>
-      <postgres.GDBC.driver>42.2.5</postgres.GDBC.driver>
-      <apache.commons.dbcp2>2.5.0</apache.commons.dbcp2>
+    <spring.data.JPA>2.1.9.RELEASE</spring.data.JPA>
+    <thymeleaf.version>3.0.9.RELEASE</thymeleaf.version>
+    <hibernate.version>5.2.10.Final</hibernate.version>
+    <postgres.GDBC.driver>42.2.5</postgres.GDBC.driver>
+    <apache.commons.dbcp2>2.5.0</apache.commons.dbcp2>
     <thymeleaf.versionSpringFive>3.0.9.RELEASE</thymeleaf.versionSpringFive>
-      <servlet.versionThree>3.0.1</servlet.versionThree>
+    <servlet.versionThree>3.0.1</servlet.versionThree>
     <servlet.versionFour>4.0.0</servlet.versionFour>
+    <jUnit.version>4.11</jUnit.version>
+<!--    <jUnitFive.version></jUnitFive.version>-->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
@@ -33,7 +36,7 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.11</version>
+      <version>${jUnit.version}</version>
       <scope>test</scope>
     </dependency>
 
@@ -67,6 +70,13 @@
       <groupId>org.springframework</groupId>
       <artifactId>spring-orm</artifactId>
       <version>${spring.ORM}</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa -->
+    <dependency>
+      <groupId>org.springframework.data</groupId>
+      <artifactId>spring-data-jpa</artifactId>
+      <version>${spring.data.JPA}</version>
     </dependency>
 
 
