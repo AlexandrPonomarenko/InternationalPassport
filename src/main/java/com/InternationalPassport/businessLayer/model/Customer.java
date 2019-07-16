@@ -20,16 +20,16 @@ public class Customer implements Serializable {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "patronymic", nullable = false)
     private String patronymic;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "lastName", nullable = false)
     private String lastName;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "age", nullable = false)
     private Integer age;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "birthData", nullable = false)
     @Temporal(TemporalType.DATE)
     private LocalDate birthDate;
 
@@ -68,13 +68,13 @@ public class Customer implements Serializable {
         this.role = role;
     }
 
-    public long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+//    public void setId(Integer id) {
+//        this.id = id;
+//    }
 
     public String getName() {
         return name;

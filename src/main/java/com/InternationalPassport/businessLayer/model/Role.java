@@ -27,12 +27,8 @@ public class Role implements Serializable {
         this.role = role;
     }
 
-    public long getId() {
+    public Integer getId() {
         return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getRole() {

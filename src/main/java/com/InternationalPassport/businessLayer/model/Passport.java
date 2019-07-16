@@ -30,12 +30,8 @@ public class Passport implements Serializable {
         this.customer = customer;
     }
 
-    public long getId() {
+    public Integer getId() {
         return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getSeria() {

@@ -40,12 +40,8 @@ public class Address implements Serializable {
         this.numberHome = numberHome;
     }
 
-    public long getId() {
+    public Integer getId() {
         return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getCountry() {

@@ -5,6 +5,9 @@ import com.InternationalPassport.businessLayer.model.Role;
 import java.util.List;
 
 public interface RoleDAO extends BaseDAO<Role> {
+
+//    Role findByRoleNameAndId(String name, Integer id)
+
     @Override
     Role findById(Integer id);
 

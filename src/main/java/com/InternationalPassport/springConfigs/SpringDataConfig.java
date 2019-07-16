@@ -28,8 +28,6 @@ import java.util.Properties;
 //@EnableJpaRepositories("com.InternationalPassport.businessLayer.DAO") // need turn on just for test
 public class SpringDataConfig {
 
-//    private Properties properties;
-
     @Autowired
     private Environment env;
 
@@ -48,12 +46,6 @@ public class SpringDataConfig {
 
         return factoryBean;
     }
-
-//    @Bean
-//    public DataSource dataSource() {
-//        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-//        return dataSource;
-//    }
 
     //for auto load prop
     @Bean
@@ -79,26 +71,22 @@ public class SpringDataConfig {
         return jpaTransactionManager;
     }
 
-//    public void loadProperty() {
-//        String rootPath = Thread.currentThread().getContextClassLoader().getResource("").getPath();
-//        String configPath = rootPath + "application.properties";
-//        properties = new Properties();
-//        try{
-//            properties.load(new FileInputStream(configPath));
-//        }catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        System.out.println(properties.toString()+  " Priperties");
+    private Properties getJpaProperties() {
+//        final Properties pr = new Properties();
+//        pr.put("hibernate.dialect", env.getProperty("hibernate.dialect"));
+//        pr.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
+//        pr.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
+//        pr.put("hibernate.format_sql", env.getProperty("hibernate.format_sql"));
+//        pr.put("hibernate.generate_statistics", env.getProperty("hibernate.generate_statistics"));
 //
-//    }
+//        return pr;
 
-    public Properties getJpaProperties() {
         final Properties pr = new Properties();
-        pr.put("hibernate.dialect", env.getProperty("hibernate.dialect"));
-        pr.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
-        pr.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
-        pr.put("hibernate.format_sql", env.getProperty("hibernate.format_sql"));
-        pr.put("hibernate.generate_statistics", env.getProperty("hibernate.generate_statistics"));
+        pr.setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
+        pr.setProperty("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
+        pr.setProperty("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
+        pr.setProperty("hibernate.format_sql", env.getProperty("hibernate.format_sql"));
+        pr.setProperty("hibernate.generate_statistics", env.getProperty("hibernate.generate_statistics"));
 
         return pr;
     }
