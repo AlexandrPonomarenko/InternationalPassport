@@ -7,7 +7,7 @@ import java.util.List;
 
 @Repository
 public interface CustomerDAO extends BaseDAO<Customer>{
-    Customer findByFirstName(String firstName);
+    List<Customer> findByFirstName(String firstName);
     Customer findByLogin(String login);
     Customer findByEmail(String email);
 

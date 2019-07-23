@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration monitorInterval = "30">
+    <Properties>
+        <Property name="LOG_PATTERN">
+            %d{yyyy-MM-dd HH:mm:ss.SSS} %5p ${hostName} --- [%15.15t] %-40.40c{1.} : %m%n%ex
+        </Property>
+    </Properties>
+    <Appenders>
+        <!--Console Appender-->
+<!--                old-->
+<!--        <Console name="Console" target="SYSTEM_OUT">-->
+<!--            <PatternLayout pattern="%d{yyyy-MMM-dd HH:mm:ss a} [%t] %-5level %logger{36} - %msg%n"/>-->
+<!--        </Console>-->
+
+
+
+        <!--File Appender-->
+<!--        <File name="File" filename="/home/alex/www/MakeYourDream/src/main/resources/log/app.log">-->
+<!--            <PatternLayout pattern="%d{yyyy-MMM-dd HH:mm:ss a} [%t] %-5level %logger{36} - %msg%n"/>-->
+<!--        </File>-->
+        <Console name="ConsoleAppender" target="SYSTEM_OUT" follow="true">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+
+
+        <Logger name="org.springframework.web" additivity="true">
+            <level value="ERROR"/>
+            <AppenderRef ref="Console"/>
+        </Logger>
+
+<!--        additivity="false"-->
+        <Logger name="com.InternationalPassport.businessLayer" level="debug">
+            <AppenderRef ref="ConsoleAppender" />
+        </Logger>
+
+<!--        <Logger name="com.InternationalPassport.businessLayer.implDAO" level="trace">-->
+<!--            <AppenderRef ref="ConsoleAppender" />-->
+<!--        </Logger>-->
+
+        <Root level="info">
+            <AppenderRef ref="ConsoleAppender" />
+        </Root>
+    </Loggers>
+</Configuration>

@@ -2,6 +2,7 @@ package com.InternationalPassport.businessLayer.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -17,23 +18,22 @@ public class Address implements Serializable {
     @Column(name = "country", nullable = false)
     private String country;
 
-    @Column(name = "country", nullable = false)
+    @Column(name = "city", nullable = false)
     private String city;
 
-    @Column(name = "country", nullable = false)
+    @Column(name = "street", nullable = false)
     private String street;
 
-    @Column(name = "country", nullable = false)
+    @Column(name = "numberHome", nullable = false)
     private Integer numberHome;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "address")
-    private List<Customer> customerList;
+    private List<Customer> customerList = new ArrayList<Customer>();
 
     public Address() {
     }
 
-    public Address(Integer id, String country, String city, String street, Integer numberHome) {
-        this.id = id;
+    public Address(String country, String city, String street, Integer numberHome) {
         this.country = country;
         this.city = city;
         this.street = street;
@@ -105,7 +105,7 @@ public class Address implements Serializable {
                 ", city='" + city + '\'' +
                 ", street='" + street + '\'' +
                 ", numberHome=" + numberHome +
-                ", customerList=" + customerList +
+                ", customerList=" + customerList.toString() +
                 '}';
     }
 }

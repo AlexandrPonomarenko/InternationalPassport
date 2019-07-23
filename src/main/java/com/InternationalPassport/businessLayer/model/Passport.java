@@ -19,14 +19,18 @@ public class Passport implements Serializable {
     @Column(name = "seria", nullable = false)
     private String seria;
 
+    @Column(name = "type", nullable = false)
+    private String type;
+
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "customer", nullable = false)
     private Customer customer;
 
     public Passport() { }
 
-    public Passport(String seria, Customer customer) {
+    public Passport(String seria, String type,  Customer customer) {
         this.seria = seria;
+        this.type = type;
         this.customer = customer;
     }
 
@@ -70,7 +74,8 @@ public class Passport implements Serializable {
         return "Passport{" +
                 "id=" + id +
                 ", seria='" + seria + '\'' +
-                ", customer=" + customer +
+                ", type='" + type + '\'' +
+                ", customer=" + customer.getName() +
                 '}';
     }
 }

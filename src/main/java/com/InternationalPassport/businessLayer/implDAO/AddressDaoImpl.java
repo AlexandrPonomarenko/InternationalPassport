@@ -19,6 +19,7 @@ public class AddressDaoImpl implements AddressDAO {
         Address address = (Address) entityManager.createQuery("SELECT a.id FROM Address a WHERE a.id LIKE :id")
             .setParameter("id", id)
             .getSingleResult();
+        return address;
     }
 
     @Override

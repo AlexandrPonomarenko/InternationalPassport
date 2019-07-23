@@ -3,6 +3,7 @@ package com.InternationalPassport.businessLayer.model;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.security.PrivateKey;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -19,11 +20,11 @@ public class Role implements Serializable {
     private String role;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "role")
-    private List<Customer> customers;
+    private List<Customer> customers = new ArrayList<Customer>();
 
     public Role() { }
 
-    public Role( String role) {
+    public Role(String role) {
         this.role = role;
     }
 
@@ -66,7 +67,7 @@ public class Role implements Serializable {
         return "Role{" +
                 "id=" + id +
                 ", role='" + role + '\'' +
-                ", customers=" + customers +
+                ", customers=" + customers.toString() +
                 '}';
     }
 }

@@ -5,7 +5,7 @@ import com.InternationalPassport.businessLayer.model.Customer;
 import java.util.List;
 
 public interface CustomerService {
-    Customer findByFirstName(String firstName);
+    List<Customer> findByFirstName(String firstName);
     Customer findByLogin(String login);
     Customer findByEmail(String email);
     Customer findById(Integer id);

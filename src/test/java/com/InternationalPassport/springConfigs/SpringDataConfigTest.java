@@ -13,6 +13,9 @@ import java.util.Properties;
 import static org.junit.Assert.*;
 
 public class SpringDataConfigTest {
+
+    // THIS OS CLASS FOR TESTS PROPERTY!
+
     public String rootPath = Thread.currentThread().getContextClassLoader().getResource("").getPath();
 
     @Before
@@ -106,31 +109,6 @@ public class SpringDataConfigTest {
         }
 
         int size = prop.size();
-        assertEquals(10, size);
-    }
-
-    @Test
-    public void getEntityManagerFactoryBean() {
-    }
-
-    @Test
-    public void dataSource() {
-    }
-
-    @Test
-    public void exceptionTranslation() {
-    }
-
-    @Test
-    public void transactionManager() {
-    }
-
-    @Test
-    public void getJpaProperties() {
-    }
-
-    @Test
-    public void loadProperty(){
-
+        assertEquals(9, size);
     }
 }

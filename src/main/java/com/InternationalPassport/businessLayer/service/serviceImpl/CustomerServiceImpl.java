@@ -15,7 +15,7 @@ public class CustomerServiceImpl implements CustomerService {
     CustomerDAO customerDAO;
 
     @Override
-    public Customer findByFirstName(String firstName) {
+    public List<Customer> findByFirstName(String firstName) {
         return customerDAO.findByFirstName(firstName);
     }
 

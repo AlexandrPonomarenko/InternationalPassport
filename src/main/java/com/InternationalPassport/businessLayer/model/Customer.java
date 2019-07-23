@@ -5,6 +5,7 @@ import antlr.LexerSharedInputState;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -30,7 +31,7 @@ public class Customer implements Serializable {
     private Integer age;
 
     @Column(name = "birthData", nullable = false)
-    @Temporal(TemporalType.DATE)
+//    @Temporal(TemporalType.DATE)
     private LocalDate birthDate;
 
     @Basic
@@ -48,7 +49,7 @@ public class Customer implements Serializable {
     private Role role;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "customer")
-    private List<Passport> passportList;
+    private List<Passport> passportList = new ArrayList<Passport>();
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "address", nullable = false)
@@ -190,9 +191,9 @@ public class Customer implements Serializable {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", repeatPassword='" + repeatPassword + '\'' +
-                ", role=" + role +
-                ", passportList=" + passportList +
-                ", address=" + address +
+                ", role=" + role.getRole() +
+                ", passportList=" + passportList.toString() +
+                ", address=" + address.getCountry() +
                 '}';
     }
 }
