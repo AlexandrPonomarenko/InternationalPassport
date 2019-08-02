@@ -2,7 +2,6 @@ package com.InternationalPassport.businessLayer.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.security.PrivateKey;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -11,7 +10,7 @@ import java.util.Objects;
 @Table(name = "role" , schema = "test_schema", uniqueConstraints = {@UniqueConstraint(columnNames = "roleId")})
 public class Role implements Serializable {
     @Id
-    @SequenceGenerator(name = "r_idr_seq", sequenceName = "r_idr_seq", allocationSize = 1)
+    @SequenceGenerator(name = "r_idr_seq", schema = "test_schema", sequenceName = "r_idr_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "r_idr_seq")
     @Column(name = "roleId")
     private Integer id;
@@ -44,9 +43,8 @@ public class Role implements Serializable {
         return customers;
     }
 
-    public void setCustomers(Customer customer) {
-//        this.customers = customers;
-        customers.add(customer);
+    public void setCustomers(List<Customer> customers) {
+        this.customers = customers;
     }
 
     @Override
@@ -67,7 +65,7 @@ public class Role implements Serializable {
         return "Role{" +
                 "id=" + id +
                 ", role='" + role + '\'' +
-                ", customers=" + customers.toString() +
+                ", customers=" + customers.size() +
                 '}';
     }
 }

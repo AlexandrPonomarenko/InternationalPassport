@@ -8,11 +8,11 @@ import java.util.Objects;
 
 
 @Entity
-@Table(name = "passport", uniqueConstraints = {@UniqueConstraint(columnNames = "passId")})
+@Table(name = "passport", schema = "test_schema",  uniqueConstraints = {@UniqueConstraint(columnNames = "passId")})
 public class Passport implements Serializable {
     @Id
-    @SequenceGenerator(name = "pass_passId_seq", sequenceName = "pass_passId_seq", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pass_passId_seq")
+    @SequenceGenerator(name = "pass_idpass_seq", schema = "test_schema", sequenceName = "pass_idpass_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pass_idpass_seq")
     @Column(name = "passId")
     private Integer id;
 
@@ -22,8 +22,9 @@ public class Passport implements Serializable {
     @Column(name = "type", nullable = false)
     private String type;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "customer", nullable = false)
+//    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    @JoinColumn(name = "customer", nullable = false)
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "passport")
     private Customer customer;
 
     public Passport() { }

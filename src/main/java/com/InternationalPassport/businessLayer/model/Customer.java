@@ -13,7 +13,7 @@ import java.util.Objects;
 @Table(name = "customer", schema = "test_schema", uniqueConstraints = {@UniqueConstraint(columnNames = "customerId")})
 public class Customer implements Serializable {
     @Id
-    @SequenceGenerator(name = "cust_idcust_seq", sequenceName = "cust_idcust_seq", allocationSize = 1)
+    @SequenceGenerator(name = "cust_idcust_seq", schema = "test_schema", sequenceName = "cust_idcust_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "cust_idcust_seq")
     @Column(name = "customerId")
     private Integer id;
@@ -38,33 +38,50 @@ public class Customer implements Serializable {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
+    @Column(name = "login", nullable = false, unique = true)
+    private String login;
+
     @Column(name = "password", nullable = false)
     private String password;
 
     @Transient
     private String repeatPassword;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
     @JoinColumn(name = "role", nullable = false)
     private Role role;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "customer")
-    private List<Passport> passportList = new ArrayList<Passport>();
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "passport", nullable = false)
+    private Passport passport;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "address", nullable = false)
     private Address address;
 
     public Customer () { }
 
     public Customer(String name, String patronymic, String lastName, Integer age, LocalDate birthDate, String email,
-        String password, Role role) {
+                    String login, String password) {
         this.name = name;
         this.patronymic = patronymic;
         this.lastName = lastName;
         this.age = age;
         this.birthDate = birthDate;
         this.email = email;
+        this.login = login;
+        this.password = password;
+    }
+
+    public Customer(String name, String patronymic, String lastName, Integer age, LocalDate birthDate, String email,
+        String login, String password, Role role) {
+        this.name = name;
+        this.patronymic = patronymic;
+        this.lastName = lastName;
+        this.age = age;
+        this.birthDate = birthDate;
+        this.email = email;
+        this.login = login;
         this.password = password;
         this.role = role;
     }
@@ -72,10 +89,6 @@ public class Customer implements Serializable {
     public Integer getId() {
         return id;
     }
-
-//    public void setId(Integer id) {
-//        this.id = id;
-//    }
 
     public String getName() {
         return name;
@@ -125,6 +138,14 @@ public class Customer implements Serializable {
         this.email = email;
     }
 
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -149,12 +170,12 @@ public class Customer implements Serializable {
         this.role = role;
     }
 
-    public List<Passport> getPassportList() {
-        return passportList;
+    public Passport getPassport() {
+        return this.passport;
     }
 
-    public void setPassportList(Passport passportList) {
-        this.passportList.add(passportList);
+    public void setPassport(Passport passport) {
+        this.passport = passport;
     }
 
     public Address getAddress() {
@@ -168,15 +189,16 @@ public class Customer implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Customer)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         Customer customer = (Customer) o;
         return id.equals(customer.id) &&
-                birthDate.equals(customer.birthDate);
+                email.equals(customer.email) &&
+                login.equals(customer.login);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, birthDate);
+        return Objects.hash(id, email, login);
     }
 
     @Override
@@ -189,11 +211,12 @@ public class Customer implements Serializable {
                 ", age=" + age +
                 ", birthDate=" + birthDate +
                 ", email='" + email + '\'' +
+                ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
                 ", repeatPassword='" + repeatPassword + '\'' +
-                ", role=" + role.getRole() +
-                ", passportList=" + passportList.toString() +
-                ", address=" + address.getCountry() +
+                ", role=" + role.getId() +
+                ", passport=" + passport.getId() +
+                ", address=" + address.getId() +
                 '}';
     }
 }

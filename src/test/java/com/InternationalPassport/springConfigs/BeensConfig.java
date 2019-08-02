@@ -24,10 +24,10 @@ public class BeensConfig {
         return new RoleDaoImpl();
     }
 
-    @Bean
-    public PassportDaoImpl getPassportDaoImpl(){
-        return new PassportDaoImpl();
-    }
+//    @Bean
+//    public PassportDaoImpl getPassportDaoImpl(){
+//        return new PassportDaoImpl();
+//    }
 
     @Bean
     public AddressDaoImpl getAddressDaoImpl(){

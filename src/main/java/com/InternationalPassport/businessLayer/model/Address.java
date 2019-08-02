@@ -10,7 +10,7 @@ import java.util.Objects;
 @Table(name = "address", schema = "test_schema", uniqueConstraints = {@UniqueConstraint(columnNames = "addressId") })
 public class Address implements Serializable {
     @Id
-    @SequenceGenerator(name = "addr_idaddr_seq", sequenceName = "addr_idaddr_seq", allocationSize = 1)
+    @SequenceGenerator(name = "addr_idaddr_seq", schema = "test_schema", sequenceName = "addr_idaddr_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "addr_idaddr_seq")
     @Column(name = "addressId")
     private Integer id;
@@ -80,8 +80,8 @@ public class Address implements Serializable {
         return customerList;
     }
 
-    public void setCustomerList(Customer customer) {
-        this.customerList.add(customer);
+    public void setCustomerList(List<Customer> customers) {
+        this.customerList = customers;
     }
 
     @Override
@@ -105,7 +105,7 @@ public class Address implements Serializable {
                 ", city='" + city + '\'' +
                 ", street='" + street + '\'' +
                 ", numberHome=" + numberHome +
-                ", customerList=" + customerList.toString() +
+                ", customerList=" + customerList.size() +
                 '}';
     }
 }
