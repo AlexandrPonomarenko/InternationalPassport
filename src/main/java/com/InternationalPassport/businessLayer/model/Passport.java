@@ -24,12 +24,17 @@ public class Passport implements Serializable {
 
 //    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 //    @JoinColumn(name = "customer", nullable = false)
-    @OneToOne(fetch = FetchType.EAGER, mappedBy = "passport")
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "passport")
     private Customer customer;
 
     public Passport() { }
 
-    public Passport(String seria, String type,  Customer customer) {
+    public Passport(String seria, String type) {
+        this.seria = seria;
+        this.type = type;
+    }
+
+    public Passport(String seria, String type, Customer customer) {
         this.seria = seria;
         this.type = type;
         this.customer = customer;

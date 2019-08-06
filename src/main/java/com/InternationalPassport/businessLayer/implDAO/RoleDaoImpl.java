@@ -24,10 +24,6 @@ public class RoleDaoImpl implements RoleDAO {
     public Role findById(Integer id) {
         Role role = null;
         try {
-//            role = (Role) entityManager.createQuery("SELECT r FROM Role r WHERE r.id=:id")
-//                    .setParameter("id", id)
-//                    .getSingleResult();
-
             List<Role> roles = entityManager.createQuery("SELECT r FROM Role r WHERE r.id=:id")
                     .setParameter("id", id)
                     .getResultList();

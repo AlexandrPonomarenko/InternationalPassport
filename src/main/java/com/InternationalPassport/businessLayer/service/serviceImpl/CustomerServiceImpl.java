@@ -21,7 +21,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer findByLogin(String login) {
-        return null;
+        return customerDAO.findByLogin(login);
     }
 
     @Override

@@ -19,18 +19,18 @@ public class BeensConfig {
 //        return new CustomerDaoImpl();
 //    }
 
-    @Bean
-    public RoleDaoImpl getRoleDaoImpl(){
-        return new RoleDaoImpl();
-    }
+//    @Bean
+//    public RoleDaoImpl getRoleDaoImpl(){
+//        return new RoleDaoImpl();
+//    }
 
 //    @Bean
 //    public PassportDaoImpl getPassportDaoImpl(){
 //        return new PassportDaoImpl();
 //    }
 
-    @Bean
-    public AddressDaoImpl getAddressDaoImpl(){
-        return new AddressDaoImpl();
-    }
+//    @Bean
+//    public AddressDaoImpl getAddressDaoImpl(){
+//        return new AddressDaoImpl();
+//    }
 }
