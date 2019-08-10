@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Appenders>
+        <!--Console Appender-->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MMM-dd HH:mm:ss a} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+
+        <!--File Appender-->
+        <!--        <File name="File" filename="/home/alex/www/MakeYourDream/src/main/resources/log/app.log">-->
+        <!--            <PatternLayout pattern="%d{yyyy-MMM-dd HH:mm:ss a} [%t] %-5level %logger{36} - %msg%n"/>-->
+        <!--        </File>-->
+    </Appenders>
+    <Loggers>
+
+        <Logger name="org.springframework.web" additivity="true">
+            <level value="DEBUG"/>
+            <AppenderRef ref="Console"/>
+        </Logger>
+
+
+        <Root level="debug">
+            <AppenderRef ref="Console"/>
+            <!--<AppenderRef ref="File"/>-->
+        </Root>
+    </Loggers>
+</Configuration>

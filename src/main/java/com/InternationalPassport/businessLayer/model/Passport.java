@@ -8,34 +8,40 @@ import java.util.Objects;
 
 
 @Entity
-@Table(name = "passport", uniqueConstraints = {@UniqueConstraint(columnNames = "passId")})
+@Table(name = "passport", schema = "test_schema",  uniqueConstraints = {@UniqueConstraint(columnNames = "passId")})
 public class Passport implements Serializable {
     @Id
-    @SequenceGenerator(name = "pass_passId_seq", sequenceName = "pass_passId_seq", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pass_passId_seq")
+    @SequenceGenerator(name = "pass_idpass_seq", schema = "test_schema", sequenceName = "pass_idpass_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pass_idpass_seq")
     @Column(name = "passId")
     private Integer id;
 
     @Column(name = "seria", nullable = false)
     private String seria;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "customer", nullable = false)
+    @Column(name = "type", nullable = false)
+    private String type;
+
+//    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    @JoinColumn(name = "customer", nullable = false)
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "passport")
     private Customer customer;
 
     public Passport() { }
 
-    public Passport(String seria, Customer customer) {
+    public Passport(String seria, String type) {
         this.seria = seria;
+        this.type = type;
+    }
+
+    public Passport(String seria, String type, Customer customer) {
+        this.seria = seria;
+        this.type = type;
         this.customer = customer;
     }
 
-    public long getId() {
+    public Integer getId() {
         return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getSeria() {
@@ -74,6 +80,7 @@ public class Passport implements Serializable {
         return "Passport{" +
                 "id=" + id +
                 ", seria='" + seria + '\'' +
+                ", type='" + type + '\'' +
                 ", customer=" + customer +
                 '}';
     }
