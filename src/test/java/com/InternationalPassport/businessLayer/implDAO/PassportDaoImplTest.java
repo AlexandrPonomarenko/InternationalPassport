@@ -53,10 +53,19 @@ public class PassportDaoImplTest {
         assertSame(expectSize, actualSize);
     }
 
-//    @Test
-//    public void persist() {
-//
-//    }
+    @Test
+    public void persist() {
+        int expectSize = 4;
+        int actualSize = 0;
+        Passport passport = new Passport("GG00TT33", "native");
+        passportDAO.persist(passport);
+        logger.debug("Test DAO persist --- " + passport);
+        List<Passport> passportList = passportDAO.findAll();
+        actualSize = passportList.size();
+        logger.debug("Test DAO persist " + actualSize + " ::: " + expectSize);
+        assertEquals(expectSize, actualSize);
+
+    }
 
     @Test
     public void update() {

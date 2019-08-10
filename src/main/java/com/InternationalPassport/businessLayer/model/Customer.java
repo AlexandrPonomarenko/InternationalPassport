@@ -47,7 +47,7 @@ public class Customer implements Serializable {
     @Transient
     private String repeatPassword;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     @JoinColumn(name = "role", nullable = false)
     private Role role;
 

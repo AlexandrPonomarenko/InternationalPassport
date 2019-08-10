@@ -81,7 +81,7 @@ public class Passport implements Serializable {
                 "id=" + id +
                 ", seria='" + seria + '\'' +
                 ", type='" + type + '\'' +
-                ", customer=" + customer.getName() +
+                ", customer=" + customer +
                 '}';
     }
 }
