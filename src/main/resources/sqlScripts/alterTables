@@ -1,0 +1,19 @@
+
+insert into my_test_schema.role (role) values ('manager'),('customer'),('boss');
+insert into my_test_schema.address (country, city, street, numberhome ) values
+ ('USA', 'New York', 'first st.', '11'),
+ ('Ukraine','Kharkiv','second st.','22'),
+ ('Germany','Munhen','thirsty st.','33');
+ insert into my_test_schema.passport (seria, type) values
+  ('MM44TTG', 'foreign'),
+  ('DD55BBQ','native'),
+  ('VV77AAM','foreign');
+
+insert into my_test_schema.customer (name, patronymic, lastname, age, birthdata, email, login,
+    password, fk_passid, fk_roleid, fk_addresid) values
+    ('Alex','GON','Vladim', 11, '1992-03-15','ddrr@gmail.com','pushka','12345q',
+        '1','1','1'),
+    ('Vasia','Fon','Anat', 22, '1993-04-17','aabb@gmail.com','gunsun','54321q',
+        '2','2','2'),
+    ('Jon','Don','Serg', 33, '1990-05-20','ttyy@gmail.com','blyton','17778q',
+        '3','3','3');

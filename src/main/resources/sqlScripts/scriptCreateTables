@@ -1,0 +1,39 @@
+
+create table my_test_schema.customer (
+    customerId serial unique primary key,
+    name varchar(256) not null,
+    patronymic varchar(256) not null,
+    lastName varchar(256) not null,
+    age int not null,
+    birthData timestamp not null,
+    email varchar(256) not null unique,
+    login varchar(256) not null unique,
+    password varchar(256) not null,
+    fk_passId int not null unique,
+    fk_roleId int not null,
+    fk_addresId int not null,
+    foreign key(fk_passId) references my_test_schema.passport(passId),
+    foreign key(fk_roleId) references my_test_schema.role(roleId),
+    foreign key(fk_addresId) references my_test_schema.address(addressId)
+);
+
+create table my_test_schema.role (
+    roleId serial unique primary key,
+    role varchar(256) not null
+);
+
+create table my_test_schema.passport (
+    passId serial unique primary key,
+    seria varchar(256) not null unique,
+    type varchar(256) not null
+);
+
+create table my_test_schema.address (
+    addressId serial unique primary key,
+    country varchar(256) not null unique,
+    city varchar(256) not null,
+    street varchar(256) not null,
+    numberHome int not null
+);
+
+alter schema my_test_schema owner to postgres;
