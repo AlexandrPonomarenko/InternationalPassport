@@ -13,10 +13,11 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
+import org.thymeleaf.templatemode.TemplateMode;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan("com.InternationalPassport")
+@ComponentScan("com.InternationalPassport.controller")
 public class WebConfig implements WebMvcConfigurer {
 
     @Autowired
@@ -25,18 +26,20 @@ public class WebConfig implements WebMvcConfigurer {
 
     //configure thymeleaf
     @Bean
-    public SpringResourceTemplateResolver templateResolvel() {
+    public SpringResourceTemplateResolver templateResolver() {
         SpringResourceTemplateResolver springResourceTemplateResolver = new SpringResourceTemplateResolver();
         springResourceTemplateResolver.setApplicationContext(applicationContext);
         springResourceTemplateResolver.setPrefix("WEB-INF/views/");
         springResourceTemplateResolver.setSuffix(".html");
+        springResourceTemplateResolver.setTemplateMode(TemplateMode.HTML); // TODO default value
+        springResourceTemplateResolver.setCacheable(false); // TODO default value .... set false for tests/develop
         return springResourceTemplateResolver;
     }
 
     @Bean
     public SpringTemplateEngine templateEngine() {
         SpringTemplateEngine templateEngine = new SpringTemplateEngine();
-        templateEngine.setTemplateResolver(templateResolvel());
+        templateEngine.setTemplateResolver(templateResolver());
         templateEngine.setEnableSpringELCompiler(true);
         return templateEngine;
     }
@@ -45,6 +48,9 @@ public class WebConfig implements WebMvcConfigurer {
     public void configureViewResolvers(ViewResolverRegistry registry) {
         ThymeleafViewResolver thymeleafViewResolver = new ThymeleafViewResolver();
         thymeleafViewResolver.setTemplateEngine(templateEngine());
+        thymeleafViewResolver.setContentType("UTF-8");
+//        thymeleafViewResolver.setViewNames(new String[] {"*.html", "xhtml"});
+        thymeleafViewResolver.setViewNames(new String[] {"*"});
         registry.viewResolver(thymeleafViewResolver);
     }
 }

@@ -6,8 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+// TODO schema = test_schema -- for tests
+// TODO schema = dev_schema -- for work and tests
+// TODO schema = prod_schema -- for deploy
+// TODO schema = my_test_schema -- for custom tables
+
+
 @Entity
-@Table(name = "role" , schema = "test_schema", uniqueConstraints = {@UniqueConstraint(columnNames = "roleId")})
+@Table(name = "role" , schema = "dev_schema", uniqueConstraints = {@UniqueConstraint(columnNames = "roleId")})
 public class Role implements Serializable {
     @Id
     @SequenceGenerator(name = "r_idr_seq", schema = "test_schema", sequenceName = "r_idr_seq", allocationSize = 1)

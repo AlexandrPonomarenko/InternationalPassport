@@ -13,18 +13,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class AddressDaoImpl implements AddressDAO {
+public class AddressDaoImpl extends AbstractPersistenceProducer implements AddressDAO {
 
     private static final Logger logger = LogManager.getLogger(AddressDaoImpl.class);
 
-    @Autowired
-    private EntityManager entityManager;
+//    @Autowired
+//    private EntityManager entityManager;
 
     @Override
     public Address findById(Integer id) {
         Address address = null;
         try {
-            List<Address> addresses = entityManager.createQuery("SELECT a FROM Address a WHERE a.id =:id")
+            List<Address> addresses = getEntityManager().createQuery("SELECT a FROM Address a WHERE a.id =:id")
                     .setParameter("id", id)
                     .getResultList();
             if (addresses.isEmpty()) {
@@ -48,27 +48,27 @@ public class AddressDaoImpl implements AddressDAO {
 
     @Override
     public List<Address> findAll() {
-        List<Address> allAddreses = entityManager.createQuery("FROM Address", Address.class)
+        List<Address> allAddreses = getEntityManager().createQuery("FROM Address", Address.class)
                 .getResultList();
         return allAddreses;
     }
 
     @Override
     public void persist(Address entity) {
-        entityManager.persist(entity);
+        getEntityManager().persist(entity);
     }
 
     @Override
     public void update(Address entity) {
         if(findById(entity.getId()).getId() == null) {
-            entityManager.persist(entity);
+            getEntityManager().persist(entity);
         } else {
-            entityManager.merge(entity);
+            getEntityManager().merge(entity);
         }
     }
 
     @Override
     public void delete(Address entity) {
-        entityManager.remove(entity);
+        getEntityManager().remove(entity);
     }
 }

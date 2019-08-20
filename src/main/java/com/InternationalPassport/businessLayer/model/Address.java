@@ -6,8 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+// TODO schema = test_schema -- for tests
+// TODO schema = dev_schema -- for work and tests
+// TODO schema = prod_schema -- for deploy
+// TODO schema = my_test_schema -- for custom tables
+
 @Entity
-@Table(name = "address", schema = "test_schema", uniqueConstraints = {@UniqueConstraint(columnNames = "addressId") })
+@Table(name = "address", schema = "dev_schema", uniqueConstraints = {@UniqueConstraint(columnNames = "addressId") })
 public class Address implements Serializable {
     @Id
     @SequenceGenerator(name = "addr_idaddr_seq", schema = "test_schema", sequenceName = "addr_idaddr_seq", allocationSize = 1)

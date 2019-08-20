@@ -22,10 +22,12 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScans(value = { @ComponentScan("com.InternationalPassport.businessLayer.DAO"),
-        @ComponentScan("com.InternationalPassport.businessLayer.service")})
+//@ComponentScans(value = { @ComponentScan("com.InternationalPassport.businessLayer.DAO"),
+//        @ComponentScan("com.InternationalPassport.businessLayer.service"),
+//        @ComponentScan("com.InternationalPassport.businessLayer.implDAO")})
+@ComponentScan("com.InternationalPassport.businessLayer")
 @PropertySource("classpath:application.properties")
-//@EnableJpaRepositories("com.InternationalPassport.businessLayer.DAO") // need turn on just for test
+@EnableJpaRepositories("com.InternationalPassport.businessLayer.implDAO") // need turn on just for test
 public class SpringDataConfig {
 
     @Autowired
