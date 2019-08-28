@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Service("AddressService")
+@Service("addressService")
 @Transactional
 public class AddressServiceImpl implements AddressService {
 

@@ -1,14 +1,13 @@
 package com.InternationalPassport.springConfigs;
 
+import nz.net.ultraq.thymeleaf.LayoutDialect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.ComponentScans;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
@@ -17,14 +16,14 @@ import org.thymeleaf.templatemode.TemplateMode;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan("com.InternationalPassport.controller")
+@ComponentScans(value = {@ComponentScan("com.InternationalPassport.springConfigs")})
 public class WebConfig implements WebMvcConfigurer {
 
     @Autowired
     private ApplicationContext applicationContext;
 
 
-    //configure thymeleaf
+    //TODO configure thymeleaf
     @Bean
     public SpringResourceTemplateResolver templateResolver() {
         SpringResourceTemplateResolver springResourceTemplateResolver = new SpringResourceTemplateResolver();
@@ -39,6 +38,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Bean
     public SpringTemplateEngine templateEngine() {
         SpringTemplateEngine templateEngine = new SpringTemplateEngine();
+        templateEngine.addDialect(new LayoutDialect());
         templateEngine.setTemplateResolver(templateResolver());
         templateEngine.setEnableSpringELCompiler(true);
         return templateEngine;
@@ -52,5 +52,13 @@ public class WebConfig implements WebMvcConfigurer {
 //        thymeleafViewResolver.setViewNames(new String[] {"*.html", "xhtml"});
         thymeleafViewResolver.setViewNames(new String[] {"*"});
         registry.viewResolver(thymeleafViewResolver);
+    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/resources/**").addResourceLocations("/WEB-INF/resources/");
+        registry.addResourceHandler("/resources/js/**").addResourceLocations("/WEB-INF/resources/js/");
+        registry.addResourceHandler("/resources/css/**").addResourceLocations("/WEB-INF/resources/css/");
+        registry.addResourceHandler("/resources/bootstrapComponent/**").addResourceLocations("/WEB-INF/resources/bootstrapComponent/");
     }
 }

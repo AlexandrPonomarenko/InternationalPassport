@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th = "http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div th:fragment="navigation">
+        <nav class="nav nav-pills flex-column flex-sm-row navbar-passport">
+            <a href="/main" class="flex-sm-fill text-sm-center nav-link active">Main</a>
+            <a href="/logIn" class="flex-sm-fill text-sm-center nav-link">logIn</a>
+            <a href="/main" class="flex-sm-fill text-sm-center nav-link">We</a>
+            <a href="/signIn" class="flex-sm-fill text-sm-center nav-link">Sing Up</a>
+            <a class="flex-sm-fill text-sm-center nav-link disabled" href="#">Disabled</a>
+<!--            <form action="#" th:action="@{/main}" method="post" class="form-inline">-->
+<!--                <input class="form-control mr-sm-2" type="search" name="seria" th:value="${seria}" placeholder="Search" aria-label="Search">-->
+            <form action="#" th:action="@{/main}" th:object="${searchPassportForm}" method="post" class="form-inline">
+                <input class="form-control mr-sm-2" type="search" th:field="*{seria}" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </nav>
+    </div>
+</body>
+</html>
