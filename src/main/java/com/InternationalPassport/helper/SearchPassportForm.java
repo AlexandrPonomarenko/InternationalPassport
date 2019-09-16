@@ -18,6 +18,11 @@ public class SearchPassportForm {
         return type;
     }
 
+    public void clearFields() {
+        seria = null;
+        type = null;
+    }
+
     public void setType(String type) {
         this.type = type;
     }

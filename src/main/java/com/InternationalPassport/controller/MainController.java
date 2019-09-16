@@ -21,6 +21,7 @@ import java.util.List;
 public class MainController {
 
     private final Logger logger = LogManager.getLogger(MainController.class);
+    private  SearchPassportForm searchPassportForm = new SearchPassportForm();
 
     @Autowired
     private CustomerService customerService;
@@ -29,7 +30,7 @@ public class MainController {
     public String mainPage(Model model) {
         List<Customer> list = getUsersNames();
         model.addAttribute("users", list);
-        model.addAttribute("searchPassportForm", new SearchPassportForm());
+        model.addAttribute("searchPassportForm", searchPassportForm);
         logger.debug("mainPage, size list is " + list.size());
         return "main";
     }
@@ -44,7 +45,6 @@ public class MainController {
     public void searchUser(@ModelAttribute SearchPassportForm searchPassportForm) {
         logger.debug("searchUser " + searchPassportForm.getSeria());
     }
-
 
     @RequestMapping(value = "/signUp", method = RequestMethod.GET)
     public String signUp(Model model) {
@@ -63,6 +63,7 @@ public class MainController {
 
     @RequestMapping(value = "/logIn", method = RequestMethod.GET)
     public String logIn(Model model) {
+        model.addAttribute("searchPassportForm", searchPassportForm);
         return "logIn";
     }
 }
