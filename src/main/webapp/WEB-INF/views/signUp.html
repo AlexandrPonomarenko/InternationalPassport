@@ -1,11 +1,83 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th = "http://www.thymeleaf.org">
+      xmlns:th = "http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{patternViews/layout}">
+
 <head>
     <meta charset="UTF-8">
-    <title>Sign IN</title>
+    <title>Sign Up</title>
 </head>
-<body>
-    <div th:fragment="registrayion"></div>
-</body>
+    <body>
+        <section layout:fragment="content">
+<!--            <div class="signup-form">-->
+<!--                <form th:action="@{/signUp}" th:object="${customer}"  method="post">-->
+<!--                    <h2>Register</h2>-->
+<!--                    <p class="hint-text">Create your account. It's free and only takes a minute.</p>-->
+<!--                    <div class="form-group">-->
+<!--                        <div class="row">-->
+<!--                            <div class="col-xs-6"><input type="text" th:field="*{name}" class="form-control" name="first_name" placeholder="First Name" required="required"></div>-->
+<!--                            <div class="col-xs-6"><input type="text" th:field="*{lastName}" class="form-control" name="last_name" placeholder="Last Name" required="required"></div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <input type="email" th:field="*{email}" class="form-control" name="email" placeholder="Email" required="required">-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <input type="password" th:field="*{password}" class="form-control" name="password" placeholder="Password" required="required">-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <input type="password" th:field="*{repeatPassword}" class="form-control" name="confirm_password" placeholder="Confirm Password" required="required">-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label class="checkbox-inline"><input type="checkbox" required="required"> I accept the <a href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a></label>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <button type="submit" class="btn btn-success btn-lg btn-block">Register Now</button>-->
+<!--                    </div>-->
+<!--                </form>-->
+<!--                <div class="text-center">Already have an account? <a href="/InternationalPassport/logIn" th:href="@{/logIn}">Sign in</a></div>-->
+<!--            </div>-->
+
+            <form th:action="@{/signUp}" th:object="${customer}"  method="post" class="form-inline">
+                <div class="form-group">
+                    <label>First name</label>
+                    <input type="text" class="form-control mx-sm-3">
+                    <small class="text-muted">Must be 5-20 characters long.</small>
+
+                    <label>Middle name</label>
+                    <input type="text" class="form-control mx-sm-3">
+                    <small class="text-muted">Must be 8-20 characters long.</small>
+
+                    <label>Last name</label>
+                    <input type="text" class="form-control mx-sm-3">
+                    <small class="text-muted">Must be 8-20 characters long.</small>
+
+                    <label>Login</label>
+                    <input type="text" class="form-control mx-sm-3">
+                    <small class="text-muted">Must be 8-20 characters long.</small>
+
+                    <label>Email</label>
+                    <input type="email" class="form-control mx-sm-3">
+                    <small class="text-muted">Must be 8-20 characters long.</small>
+
+                    <label>Age</label>
+                    <input type="password" class="form-control mx-sm-3">
+                    <small class="text-muted">Must be 8-20 characters long.</small>
+
+                    <label>Birth day</label>
+                    <input type="date" class="form-control mx-sm-3">
+                    <small class="text-muted">Must be 8-20 characters long.</small>
+
+                    <label>Password</label>
+                    <input type="password" class="form-control mx-sm-3">
+                    <small class="text-muted">Must be 8-20 characters long.</small>
+
+                    <label>Repeat password</label>
+                    <input type="password" class="form-control mx-sm-3">
+                    <small class="text-muted">Must be 8-20 characters long.</small>
+                </div>
+            </form>
+        </section>
+    </body>
 </html>

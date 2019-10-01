@@ -7,6 +7,8 @@ import com.InternationalPassport.businessLayer.model.Passport;
 import com.InternationalPassport.businessLayer.model.Role;
 import com.InternationalPassport.springConfigs.BeensConfig;
 import com.InternationalPassport.springConfigs.SpringJPAConfigTest;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,11 +29,13 @@ import static org.junit.Assert.assertNotNull;
 @Transactional
 @RunWith(SpringJUnit4ClassRunner.class)
 public class InitEntityTest {
-//    private static final Logger logger = LogManager.getLogger(CustomerDaoImplTest.class);
-
-    @Autowired
-    CustomerDAO customerDAO;
-
+//    private static final Logger logger = LogManager.getLogger(InitEntityTest.class);
+//
+//
+//
+//    @Autowired
+//    CustomerDAO customerDAO;
+//
 //    @Rollback(false)
 //    @Test
 //    public void persist() {
@@ -119,6 +123,5 @@ public class InitEntityTest {
 //        }
 //        assertEquals(expected, actual);
 //        assertNotNull(actual);
-//
 //    }
 }

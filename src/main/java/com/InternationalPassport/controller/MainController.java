@@ -46,11 +46,6 @@ public class MainController {
         logger.debug("searchUser " + searchPassportForm.getSeria());
     }
 
-    @RequestMapping(value = "/signUp", method = RequestMethod.GET)
-    public String signUp(Model model) {
-        return "signUp";
-    }
-
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public String home(Model model) {
         return "home";
@@ -59,11 +54,5 @@ public class MainController {
     @RequestMapping(value = "/about", method = RequestMethod.GET)
     public String about(Model model) {
         return "about";
-    }
-
-    @RequestMapping(value = "/logIn", method = RequestMethod.GET)
-    public String logIn(Model model) {
-        model.addAttribute("searchPassportForm", searchPassportForm);
-        return "logIn";
     }
 }

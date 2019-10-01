@@ -159,12 +159,12 @@ public class Customer implements Serializable {
         this.password = password;
     }
 
-    public String getRepitePassword() {
+    public String getRepeatPassword() {
         return repeatPassword;
     }
 
-    public void setRepitePassword(String repitePassword) {
-        this.repeatPassword = repitePassword;
+    public void setRepeatPassword(String repeatPassword) {
+        this.repeatPassword = repeatPassword;
     }
 
     public Role getRole() {
@@ -222,6 +222,21 @@ public class Customer implements Serializable {
                 ", role=" + role.getId() +
                 ", passport=" + passport.getId() +
                 ", address=" + address.getId() +
+                '}';
+    }
+
+    public String toStringLogin() {
+        return "Customer{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", patronymic='" + patronymic + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", age=" + age +
+                ", birthDate=" + birthDate +
+                ", email='" + email + '\'' +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", repeatPassword='" + repeatPassword + '\'' +
                 '}';
     }
 }
