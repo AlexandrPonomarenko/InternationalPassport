@@ -1,6 +1,7 @@
 package com.InternationalPassport.businessLayer.model;
 
 import antlr.LexerSharedInputState;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -9,8 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+// TODO schema = test_schema -- for tests
+// TODO schema = dev_schema -- for work and tests
+// TODO schema = prod_schema -- for deploy
+// TODO schema = my_test_schema -- for custom tables
+
 @Entity
-@Table(name = "customer", schema = "test_schema", uniqueConstraints = {@UniqueConstraint(columnNames = "customerId")})
+@Table(name = "customer", schema = "dev_schema", uniqueConstraints = {@UniqueConstraint(columnNames = "customerId")})
 public class Customer implements Serializable {
     @Id
     @SequenceGenerator(name = "cust_idcust_seq", schema = "test_schema", sequenceName = "cust_idcust_seq", allocationSize = 1)
@@ -32,6 +38,7 @@ public class Customer implements Serializable {
 
     @Column(name = "birthData", nullable = false)
 //    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDate;
 
     @Basic
@@ -114,7 +121,7 @@ public class Customer implements Serializable {
         this.lastName = lastName;
     }
 
-    public long getAge() {
+    public Integer getAge() {
         return age;
     }
 
@@ -154,12 +161,12 @@ public class Customer implements Serializable {
         this.password = password;
     }
 
-    public String getRepitePassword() {
+    public String getRepeatPassword() {
         return repeatPassword;
     }
 
-    public void setRepitePassword(String repitePassword) {
-        this.repeatPassword = repitePassword;
+    public void setRepeatPassword(String repeatPassword) {
+        this.repeatPassword = repeatPassword;
     }
 
     public Role getRole() {
@@ -217,6 +224,21 @@ public class Customer implements Serializable {
                 ", role=" + role.getId() +
                 ", passport=" + passport.getId() +
                 ", address=" + address.getId() +
+                '}';
+    }
+
+    public String toStringLogin() {
+        return "Customer{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", patronymic='" + patronymic + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", age=" + age +
+                ", birthDate=" + birthDate +
+                ", email='" + email + '\'' +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", repeatPassword='" + repeatPassword + '\'' +
                 '}';
     }
 }

@@ -6,15 +6,21 @@
             <PatternLayout pattern="%d{yyyy-MMM-dd HH:mm:ss a} [%t] %-5level %logger{36} - %msg%n"/>
         </Console>
 
-        <!--File Appender-->
-        <!--        <File name="File" filename="/home/alex/www/MakeYourDream/src/main/resources/log/app.log">-->
-        <!--            <PatternLayout pattern="%d{yyyy-MMM-dd HH:mm:ss a} [%t] %-5level %logger{36} - %msg%n"/>-->
-        <!--        </File>-->
     </Appenders>
     <Loggers>
 
         <Logger name="org.springframework.web" additivity="true">
-            <level value="DEBUG"/>
+            <level value="debug"/>
+            <AppenderRef ref="Console"/>
+        </Logger>
+
+        <Logger name="com.InternationalPassport.businessLayer" additivity="true">
+            <level value="debug"/>
+            <AppenderRef ref="Console"/>
+        </Logger>
+
+        <Logger name="com.InternationalPassport.controller" additivity="true">
+            <level value="debug"/>
             <AppenderRef ref="Console"/>
         </Logger>
 

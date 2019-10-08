@@ -1,11 +1,30 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{patternViews/layout}">
 <head>
     <meta charset="UTF-8">
     <title>Template Thymeleaf</title>
 </head>
 <body>
-    <h1>Spring MVC + Thymeleaf  Hello World example</h1>
-    <p th:text="${message}"></p>
+    <section layout:fragment="content">
+        <p th:text="@{/}"></p>
+
+        <div class="container-content">
+            <div class="block-user">
+                <div>left block</div>
+                <th:block th:each="user: ${users}">
+                    <div>
+                        <span th:text="${user.name}"></span>
+                    </div>
+                </th:block>
+            </div>
+
+            <div class="block-description">
+                <div>right block</div>
+            </div>
+        </div>
+    </section>
+
 </body>
 </html>

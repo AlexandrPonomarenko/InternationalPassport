@@ -31,7 +31,6 @@ import static org.junit.Assert.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class CustomerDaoImplTest {
 
-
     private static final Logger logger = LogManager.getLogger(CustomerDaoImplTest.class);
 
 

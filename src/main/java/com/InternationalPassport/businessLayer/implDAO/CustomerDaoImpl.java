@@ -14,18 +14,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class CustomerDaoImpl implements CustomerDAO {
+public class CustomerDaoImpl extends AbstractPersistenceProducer implements CustomerDAO {
 
     private static final Logger logger = LogManager.getLogger(CustomerDaoImpl.class);
 
-    @PersistenceContext
-    private EntityManager entityManager;
+//    @PersistenceContext
+//    private EntityManager entityManager;
 
     @Override
     public List<Customer> findByFirstName(String firstName) {
         List<Customer> customers = new ArrayList<Customer>();
         try {
-            customers = entityManager.createQuery("SELECT c FROM Customer c WHERE c.name = :firstName")
+            customers = getEntityManager().createQuery("SELECT c FROM Customer c WHERE c.name = :firstName")
                 .setParameter("firstName", firstName).getResultList();
             logger.debug(customers + " findByFirstName" + customers.getClass());
         } catch (JDBCException e ) {
@@ -36,7 +36,7 @@ public class CustomerDaoImpl implements CustomerDAO {
 
     @Override
     public Customer findByLogin(String login) {
-        Customer customer = (Customer) entityManager.createQuery("SELECT c FROM Customer AS c WHERE c.login LIKE :login")
+        Customer customer = (Customer) getEntityManager().createQuery("SELECT c FROM Customer AS c WHERE c.login LIKE :login")
                 .setParameter("login", login)
                 .getSingleResult();
         logger.debug(customer + " findByLogin: " + customer.getLogin());
@@ -45,7 +45,7 @@ public class CustomerDaoImpl implements CustomerDAO {
 
     @Override
     public Customer findByEmail(String email) {
-        Customer customer = (Customer) entityManager.createQuery("SELECT c FROM Customer AS c WHERE c.email LIKE :email")
+        Customer customer = (Customer) getEntityManager().createQuery("SELECT c FROM Customer AS c WHERE c.email LIKE :email")
             .setParameter("email", email)
             .getSingleResult();
         logger.debug(customer + " findByEmail:  " + customer.getEmail());
@@ -54,7 +54,7 @@ public class CustomerDaoImpl implements CustomerDAO {
 
     @Override
     public Customer findById(Integer id) {
-        Customer customer = (Customer) entityManager.createQuery("SELECT c FROM Customer AS c WHERE c.id =:id")
+        Customer customer = (Customer) getEntityManager().createQuery("SELECT c FROM Customer AS c WHERE c.id =:id")
                 .setParameter("id", id)
                 .getSingleResult();
         logger.debug(customer + " findById: " + customer.getId());
@@ -68,7 +68,7 @@ public class CustomerDaoImpl implements CustomerDAO {
 
     @Override
     public List<Customer> findAll() {
-        List<Customer> allCustomer = entityManager.createQuery("FROM Customer", Customer.class)
+        List<Customer> allCustomer = getEntityManager().createQuery("FROM Customer", Customer.class)
             .getResultList();
         logger.debug(allCustomer + " findAll: -" + allCustomer.size());
         return allCustomer;
@@ -76,23 +76,23 @@ public class CustomerDaoImpl implements CustomerDAO {
 
     @Override
     public void persist(Customer entity) {
-        entityManager.persist(entity);
+        getEntityManager().persist(entity);
     }
 
     @Override
     public void update(Customer entity) {
         if(findById(entity.getId()).getId() == null) {
-            entityManager.persist(entity);
+            getEntityManager().persist(entity);
             logger.debug(" update : - " + entity);
         } else {
-            entityManager.merge(entity);
+            getEntityManager().merge(entity);
             logger.debug(" update merge : - " + entity);
         }
     }
 
     @Override
     public void delete(Customer entity) {
-        entityManager.remove(entity);
+        getEntityManager().remove(entity);
         logger.debug(" delete: - " + entity);
     }
 }

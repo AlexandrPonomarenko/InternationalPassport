@@ -13,18 +13,18 @@ import javax.persistence.EntityManager;
 import java.util.List;
 
 @Repository
-public class RoleDaoImpl implements RoleDAO {
+public class RoleDaoImpl extends AbstractPersistenceProducer implements RoleDAO {
 
     private static final Logger logger = LogManager.getLogger(RoleDaoImpl.class);
 
-    @Autowired
-    private EntityManager entityManager;
+//    @Autowired
+//    private EntityManager entityManager;
 
     @Override
     public Role findById(Integer id) {
         Role role = null;
         try {
-            List<Role> roles = entityManager.createQuery("SELECT r FROM Role r WHERE r.id=:id")
+            List<Role> roles = getEntityManager().createQuery("SELECT r FROM Role r WHERE r.id=:id")
                     .setParameter("id", id)
                     .getResultList();
             if(roles.isEmpty()) {
@@ -46,31 +46,31 @@ public class RoleDaoImpl implements RoleDAO {
 
     @Override
     public List<Role> findAll() {
-        List<Role> allRoles = entityManager.createQuery("FROM Role", Role.class)
+        List<Role> allRoles = getEntityManager().createQuery("FROM Role", Role.class)
                 .getResultList();
         return allRoles;
     }
 
     @Override
     public void persist(Role entity) {
-        entityManager.persist(entity);
+        getEntityManager().persist(entity);
         logger.debug("RoleDaoImpl Save -- " + entity);
     }
 
     @Override
     public void update(Role entity) {
         if(findById(entity.getId()).getId() == null) {
-            entityManager.persist(entity);
+            getEntityManager().persist(entity);
             logger.debug("RoleDaoImpl Save  -- " + entity);
         } else {
-            entityManager.merge(entity);
+            getEntityManager().merge(entity);
             logger.debug("RoleDaoImpl Update  -- " + entity);
         }
     }
 
     @Override
     public void delete(Role entity) {
-        entityManager.remove(entity);
+        getEntityManager().remove(entity);
         logger.debug("RoleDaoImpl delete -- " + entity);
     }
 }

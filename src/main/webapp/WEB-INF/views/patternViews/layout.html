@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th = "http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      >
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <header th:insert="patternViews/header :: header"></header>
+</head>
+<body>
+    <div class="main-container">
+        <div th:insert="patternViews/navbar :: navigation"></div>
+
+        <section layout:fragment ="content">
+
+        </section>
+
+        <div th:insert="patternViews/footer :: footer"></div>
+
+        <th:block th:insert="../resources/bootstrapComponent/scriptsBS :: script">
+
+        </th:block>
+    </div>
+</body>
+</html>

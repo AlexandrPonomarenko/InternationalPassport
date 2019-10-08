@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Service("PassportService")
+@Service("passportService")
 @Transactional
 public class PassportServiceImpl implements PassportService {
 

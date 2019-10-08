@@ -12,18 +12,18 @@ import javax.persistence.EntityManager;
 import java.util.List;
 
 @Repository
-public class PassportDaoImpl implements PassportDAO {
+public class PassportDaoImpl extends AbstractPersistenceProducer implements PassportDAO {
 
     private static final Logger logger = LogManager.getLogger(PassportDaoImpl.class);
 
-    @Autowired
-    private EntityManager entityManager;
+//    @Autowired
+//    private EntityManager entityManager;
 
     @Override
     public Passport findById(Integer id) {
         Passport passport = null;
         try {
-            passport = (Passport) entityManager.createQuery("SELECT r FROM Passport r WHERE r.id=:id")
+            passport = (Passport) getEntityManager().createQuery("SELECT r FROM Passport r WHERE r.id=:id")
                     .setParameter("id", id)
                     .getSingleResult();
             logger.debug("Passport  findById --- " + passport.toString());
@@ -40,7 +40,7 @@ public class PassportDaoImpl implements PassportDAO {
 
     @Override
     public List<Passport> findAll() {
-        List<Passport> allPassports = entityManager.createQuery("FROM Passport", Passport.class)
+        List<Passport> allPassports = getEntityManager().createQuery("FROM Passport", Passport.class)
                 .getResultList();
         logger.debug("Passport  findAll --- " + allPassports.size());
         return allPassports;
@@ -48,24 +48,24 @@ public class PassportDaoImpl implements PassportDAO {
 
     @Override
     public void persist(Passport entity) {
-        entityManager.persist(entity);
+        getEntityManager().persist(entity);
         logger.debug("Passport  persist --- " + entity.toString());
     }
 
     @Override
     public void update(Passport entity) {
         if(findById(entity.getId()).getId() == null) {
-            entityManager.persist(entity);
+            getEntityManager().persist(entity);
             logger.debug("Passport  update SAVE --- " + entity);
         } else {
-            entityManager.merge(entity);
+            getEntityManager().merge(entity);
             logger.debug("Passport  update / MERGE --- " + entity);
         }
     }
 
     @Override
     public void delete(Passport entity) {
-        entityManager.remove(entity);
+        getEntityManager().remove(entity);
         logger.debug("Passport  delete --- " + entity);
     }
 }

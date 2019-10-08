@@ -6,9 +6,13 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
+// TODO schema = test_schema -- for tests
+// TODO schema = dev_schema -- for work and tests
+// TODO schema = prod_schema -- for deploy
+// TODO schema = my_test_schema -- for custom tables
 
 @Entity
-@Table(name = "passport", schema = "test_schema",  uniqueConstraints = {@UniqueConstraint(columnNames = "passId")})
+@Table(name = "passport", schema = "dev_schema",  uniqueConstraints = {@UniqueConstraint(columnNames = "passId")})
 public class Passport implements Serializable {
     @Id
     @SequenceGenerator(name = "pass_idpass_seq", schema = "test_schema", sequenceName = "pass_idpass_seq", allocationSize = 1)

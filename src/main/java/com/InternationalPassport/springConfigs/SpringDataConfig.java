@@ -21,11 +21,13 @@ import java.io.InputStreamReader;
 import java.util.Properties;
 
 @Configuration
-@EnableTransactionManagement
-@ComponentScans(value = { @ComponentScan("com.InternationalPassport.businessLayer.DAO"),
-        @ComponentScan("com.InternationalPassport.businessLayer.service")})
 @PropertySource("classpath:application.properties")
-//@EnableJpaRepositories("com.InternationalPassport.businessLayer.DAO") // need turn on just for test
+@ComponentScan("com.InternationalPassport")
+//@ComponentScans(value = { @ComponentScan("com.InternationalPassport.controller"),
+//        @ComponentScan("com.InternationalPassport.businessLayer.DAO"),
+//        @ComponentScan("com.InternationalPassport.businessLayer.service")})
+@EnableTransactionManagement
+@EnableJpaRepositories("com.InternationalPassport.businessLayer.implDAO") // need turn on just for test
 public class SpringDataConfig {
 
     @Autowired
