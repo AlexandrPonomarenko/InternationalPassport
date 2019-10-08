@@ -39,45 +39,59 @@
 <!--                <div class="text-center">Already have an account? <a href="/InternationalPassport/logIn" th:href="@{/logIn}">Sign in</a></div>-->
 <!--            </div>-->
 
-            <form th:action="@{/signUp}" th:object="${customer}"  method="post" class="form-inline">
-                <div class="form-group">
-                    <label>First name</label>
-                    <input type="text" class="form-control mx-sm-3">
-                    <small class="text-muted">Must be 5-20 characters long.</small>
+            <div class="container-signup">
+                <div class="sign-up">
+                    <form th:action="@{/signUp}" th:object="${customer}"  method="post">
+                        <div class="form-group">
+                            <label class="labelForm top" for="formFirstName">First name</label>
+                            <input type="text" class="form-control" th:field="*{name}" id="formFirstName" placeholder="First name">
+                        </div>
+                        <div class="form-group">
+                            <label class="labelForm" for="formMiddleName">Middle name</label>
+                            <input type="text" class="form-control" th:field="*{patronymic}" id="formMiddleName" placeholder="Middle name">
+                        </div>
 
-                    <label>Middle name</label>
-                    <input type="text" class="form-control mx-sm-3">
-                    <small class="text-muted">Must be 8-20 characters long.</small>
+                        <div class="form-group">
+                            <label class="labelForm" for="formLastName">Last name</label>
+                            <input type="text" class="form-control" th:field="*{lastName}" id="formLastName" placeholder="Last name">
+                        </div>
 
-                    <label>Last name</label>
-                    <input type="text" class="form-control mx-sm-3">
-                    <small class="text-muted">Must be 8-20 characters long.</small>
+                        <div class="form-group">
+                            <label class="labelForm" for="formLogin">Login</label>
+                            <input type="text" class="form-control" th:field="*{login}" id="formLogin" placeholder="Login">
+                        </div>
 
-                    <label>Login</label>
-                    <input type="text" class="form-control mx-sm-3">
-                    <small class="text-muted">Must be 8-20 characters long.</small>
+                        <div class="form-group">
+                            <label class="labelForm" for="formEmail">Email</label>
+                            <input type="email" class="form-control" th:field="*{email}" id="formEmail" placeholder="Email">
+                        </div>
 
-                    <label>Email</label>
-                    <input type="email" class="form-control mx-sm-3">
-                    <small class="text-muted">Must be 8-20 characters long.</small>
+                        <div class="form-group">
+                            <label class="labelForm" for="formAge">Age</label>
+                            <input type="text" class="form-control" th:field="*{age}" id="formAge" placeholder="Age">
+                        </div>
 
-                    <label>Age</label>
-                    <input type="password" class="form-control mx-sm-3">
-                    <small class="text-muted">Must be 8-20 characters long.</small>
+                        <div class="form-group">
+                            <label class="labelForm" for="formBirthDay">Birth day</label>
+<!--                            <input type="date" class="form-control" th:value="*{birthDate}" th:field="*{birthDate}" id="formBirthDay" placeholder="Birth day">-->
+                            <input type="date" class="form-control" th:field="*{birthDate}" id="formBirthDay" placeholder="Birth day">
+<!--                            <input type="text" class="form-control" th:field="*{birthDate}" id="formBirthDay" placeholder="Birth day">-->
+                        </div>
 
-                    <label>Birth day</label>
-                    <input type="date" class="form-control mx-sm-3">
-                    <small class="text-muted">Must be 8-20 characters long.</small>
+                        <div class="form-group">
+                            <label class="labelForm" for="formPass">Password</label>
+                            <input type="password" class="form-control" th:field="*{password}" id="formPass" placeholder="Password">
+                        </div>
 
-                    <label>Password</label>
-                    <input type="password" class="form-control mx-sm-3">
-                    <small class="text-muted">Must be 8-20 characters long.</small>
-
-                    <label>Repeat password</label>
-                    <input type="password" class="form-control mx-sm-3">
-                    <small class="text-muted">Must be 8-20 characters long.</small>
+                        <div class="form-group">
+                            <label class="labelForm" for="formRepPass">Repeat password</label>
+                            <input type="password" class="form-control" th:field="*{repeatPassword}" id="formRepPass" placeholder="Repeat password">
+                        </div>
+                        <button type="submit" class="btn btn-primary btnForm">Sign in</button>
+                    </form>
                 </div>
-            </form>
+                <div class="picture"></div>
+            </div>
         </section>
     </body>
 </html>

@@ -1,6 +1,7 @@
 package com.InternationalPassport.businessLayer.model;
 
 import antlr.LexerSharedInputState;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -37,6 +38,7 @@ public class Customer implements Serializable {
 
     @Column(name = "birthData", nullable = false)
 //    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDate;
 
     @Basic
@@ -119,7 +121,7 @@ public class Customer implements Serializable {
         this.lastName = lastName;
     }
 
-    public long getAge() {
+    public Integer getAge() {
         return age;
     }
 
