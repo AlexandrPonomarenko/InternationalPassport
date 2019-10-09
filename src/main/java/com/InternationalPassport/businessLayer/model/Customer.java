@@ -1,6 +1,7 @@
 package com.InternationalPassport.businessLayer.model;
 
 import antlr.LexerSharedInputState;
+import com.InternationalPassport.validation.CustomerAgeConstrain;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -9,6 +10,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 // TODO schema = test_schema -- for tests
 // TODO schema = dev_schema -- for work and tests
@@ -24,15 +29,24 @@ public class Customer implements Serializable {
     @Column(name = "customerId")
     private Integer id;
 
+    @Size(min = 3, max = 30)
+    @NotNull(message = "Name cant be null")
     @Column(name = "name", nullable = false)
     private String name;
 
+    @Size(min = 3, max = 30)
+    @NotNull(message = "Patronymic cant be null")
     @Column(name = "patronymic", nullable = false)
     private String patronymic;
 
+    @Size(min = 3, max = 30)
+    @NotNull(message = "Last name cant be null")
     @Column(name = "lastName", nullable = false)
     private String lastName;
 
+    @Digits(integer = 3, fraction = 0, message = "No more then three characters")
+    @NotNull(message = "Age cant be null")
+    @CustomerAgeConstrain
     @Column(name = "age", nullable = false)
     private Integer age;
 
@@ -41,13 +55,19 @@ public class Customer implements Serializable {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDate;
 
+    @Email(message = "Email should be valid")
+    @NotNull(message = "Email cant be null")
     @Basic
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
+    @Size(min = 5, max = 30)
+    @NotNull(message = "Login name cant be null")
     @Column(name = "login", nullable = false, unique = true)
     private String login;
 
+    @Size(min = 8, max = 32)
+    @NotNull(message = "Password name cant be null")
     @Column(name = "password", nullable = false)
     private String password;
 

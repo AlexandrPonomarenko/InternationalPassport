@@ -24,6 +24,9 @@
         <Logger name="com.InternationalPassport.businessLayer" level="trace" additivity="false">
             <AppenderRef ref="Console" />
         </Logger>
+        <Logger name="com.InternationalPassport.validation" level="trace" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
         <Logger name="org.springframework.data" level="debug"/>
 
         <Logger name="com.InternationalPassport.businessLayer.implDAO.CustomerDaoImplTest" level="debug"/>

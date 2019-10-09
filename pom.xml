@@ -27,6 +27,8 @@
         <thymeleaf.versionSpringFive>3.0.9.RELEASE</thymeleaf.versionSpringFive>
         <servlet.versionThree>3.0.1</servlet.versionThree>
         <servlet.versionFour>4.0.0</servlet.versionFour>
+        <validation>2.0.1.Final</validation>
+      <hibernate-validator>6.0.17.Final</hibernate-validator>
         <jUnit.version>4.12</jUnit.version>
         <logger.Log4J2.version>2.8.2</logger.Log4J2.version>
         <logger.SLF4J.version>1.7.25</logger.SLF4J.version>
@@ -160,13 +162,43 @@
       </dependency>
 
 
-
-
       <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>
       <version>${servlet.versionFour}</version>
     </dependency>
+
+<!--      TODO validation -->
+      <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-validator -->
+      <dependency>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-validator</artifactId>
+          <version>${hibernate-validator}</version>
+      </dependency>
+
+      <!-- https://mvnrepository.com/artifact/javax.el/javax.el-api -->
+      <dependency>
+          <groupId>javax.el</groupId>
+          <artifactId>javax.el-api</artifactId>
+          <version>3.0.0</version>
+      </dependency>
+
+      <dependency>
+          <groupId>org.glassfish.web</groupId>
+          <artifactId>javax.el</artifactId>
+          <version>2.2.6</version>
+      </dependency>
+
+
+
+      <!-- https://mvnrepository.com/artifact/javax.validation/validation-api -->
+      <dependency>
+          <groupId>javax.validation</groupId>
+          <artifactId>validation-api</artifactId>
+          <version>${validation}</version>
+      </dependency>
+
+
 
       <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
       <dependency>
