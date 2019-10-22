@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = CustomerAgeConstrainValidator.class)
 public @interface CustomerAgeConstrain {
-    String message() default "value.negative";
+    String message() default "{negative.value}";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

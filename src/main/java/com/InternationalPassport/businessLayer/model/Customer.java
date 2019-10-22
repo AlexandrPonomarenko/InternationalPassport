@@ -10,10 +10,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 // TODO schema = test_schema -- for tests
 // TODO schema = dev_schema -- for work and tests
@@ -29,48 +26,53 @@ public class Customer implements Serializable {
     @Column(name = "customerId")
     private Integer id;
 
+    @NotNull(message = "Name cant be null - annotation")
     @Size(min = 3, max = 30)
-    @NotNull(message = "Name cant be null")
     @Column(name = "name", nullable = false)
     private String name;
 
+    @NotNull(message = "Patronymic cant be null - annotation")
     @Size(min = 3, max = 30)
-    @NotNull(message = "Patronymic cant be null")
     @Column(name = "patronymic", nullable = false)
     private String patronymic;
 
+    @NotNull(message = "Last name cant be null - annotation")
     @Size(min = 3, max = 30)
-    @NotNull(message = "Last name cant be null")
     @Column(name = "lastName", nullable = false)
     private String lastName;
 
+    @NotNull(message = "{negative.value}")
     @Digits(integer = 3, fraction = 0, message = "No more then three characters")
-    @NotNull(message = "Age cant be null")
     @CustomerAgeConstrain
     @Column(name = "age", nullable = false)
     private Integer age;
 
-    @Column(name = "birthData", nullable = false)
+    @NotNull(message = "birthDate cant be null - annotation")
 //    @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "birthData", nullable = false)
     private LocalDate birthDate;
 
-    @Email(message = "Email should be valid")
-    @NotNull(message = "Email cant be null")
-    @Basic
+    @Email(message = "Email should be valid - annotation")
+//    @NotNull(message = "Email cant be null - annotation")
+//    @NotEmpty(message = "Email cant be empty - annotation")
+    @NotEmpty(message = "{email.notempty}")
+//    @Basic
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
+    @NotNull(message = "Login name cant be null - annotation")
     @Size(min = 5, max = 30)
-    @NotNull(message = "Login name cant be null")
     @Column(name = "login", nullable = false, unique = true)
     private String login;
 
+    @NotNull(message = "Password name cant be null - annotation")
     @Size(min = 8, max = 32)
-    @NotNull(message = "Password name cant be null")
     @Column(name = "password", nullable = false)
     private String password;
 
+    @NotNull(message = "Repeat password cant be null - annotation")
+    @Size(min = 8, max = 32)
     @Transient
     private String repeatPassword;
 

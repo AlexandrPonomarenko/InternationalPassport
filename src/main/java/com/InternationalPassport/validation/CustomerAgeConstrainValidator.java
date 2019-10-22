@@ -9,6 +9,9 @@ public class CustomerAgeConstrainValidator implements ConstraintValidator<Custom
 
     @Override
     public boolean isValid(Integer age, ConstraintValidatorContext constraintValidatorContext) {
+        if(age == null) {
+            return false;
+        }
         return age > 0;
     }
 }

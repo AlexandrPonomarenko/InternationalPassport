@@ -39,7 +39,6 @@ public class CustomerValidationTest {
 
     }
 
-
     @Test
     public void checkCustomerTest() {
         Customer customer = new Customer("Alex", "Anatoliovich", "Ponomarenko",

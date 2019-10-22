@@ -19,7 +19,7 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@ComponentScan("com.InternationalPassport.businessLayer")
+@ComponentScan("com.InternationalPassport")
 @PropertySource("classpath:applicationTest.properties")
 @EnableJpaRepositories("com.InternationalPassport.businessLayer.implDAO")
 public class SpringJPAConfigTest {

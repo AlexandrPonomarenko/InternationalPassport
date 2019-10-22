@@ -1,18 +1,24 @@
 package com.InternationalPassport.controller;
 
 import com.InternationalPassport.businessLayer.model.Customer;
+import com.InternationalPassport.businessLayer.service.CustomerService;
 import com.InternationalPassport.helper.SearchPassportForm;
 //import com.sun.org.apache.xpath.internal.operations.String;
+import com.InternationalPassport.validation.CustomerValidator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
@@ -24,15 +30,16 @@ public class SignUpController {
 
     private SearchPassportForm searchPassportForm = new SearchPassportForm();
 
-//    @Autowired
-//    private CustomerService customerService;
+    @Autowired
+    private CustomerService customerService;
 
-//    @InitBinder
-//    public void initBinder(WebDataBinder binder) {
-////        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-//        SimpleDateFormat sdf = new SimpleDateFormat();
-//        sdf.setLenient(true);
-//        binder.registerCustomEditor(LocalDate.class, "birthDate", new CustomDateEditor(sdf, true));
+    @Autowired
+    @Qualifier("customerValidator")
+    private CustomerValidator customerValidator;
+
+//    @InitBinder("customer")
+//    private void customerValidation(WebDataBinder webDataBinder) {
+//        webDataBinder.addValidators(customerValidator);
 //    }
 
     @RequestMapping(value = "/signUp", method = RequestMethod.GET)
@@ -43,13 +50,21 @@ public class SignUpController {
     }
 
     @RequestMapping(value = "/signUp", method = RequestMethod.POST)
-    public void regCustomer(@ModelAttribute Customer customer, SearchPassportForm searchPassportForm) {
-        Customer cus = customer;
-//        logger.debug("JUST DATA " + localDate.toString());
-        logger.debug("SIGH-UP login customer " +  cus.toStringLogin());
-        logger.debug("SIGH-UP login searchPassportForm " +  searchPassportForm.toString());
-    }
+    public String regCustomer(@Valid @ModelAttribute("customer") Customer customer
+                                , BindingResult bindingResult, Model model) {
 
+        logger.debug("SIGH-UP login customer " +  customer.toStringLogin());
+        customerValidator.validate(customer, bindingResult);
+//        logger.debug("SIGH-UP login customer " +  customer.toStringLogin());
+//        logger.debug("SIGH-UP login searchPassportForm " +  searchPassportForm.toString());
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("searchPassportForm", new SearchPassportForm());
+//            model.addAttribute("customer", new Customer());
+            return "signUp";
+        }
+
+        return "redirect:/home";
+    }
 
 
     //TODO just for tests
