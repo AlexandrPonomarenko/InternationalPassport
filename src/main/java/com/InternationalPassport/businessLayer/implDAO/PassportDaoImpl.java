@@ -22,14 +22,13 @@ public class PassportDaoImpl extends AbstractPersistenceProducer implements Pass
     @Override
     public Passport findById(Integer id) {
         Passport passport = null;
-        try {
             passport = (Passport) getEntityManager().createQuery("SELECT r FROM Passport r WHERE r.id=:id")
                     .setParameter("id", id)
                     .getSingleResult();
             logger.debug("Passport  findById --- " + passport.toString());
-        } catch (JDBCException e) {
-            logger.error("Passport  findById  error--- " + e.getMessage());
-        }
+//        } catch (JDBCException e) {
+//            logger.error("Passport  findById  error--- " + e.getMessage());
+//        }
         return passport;
     }
 

@@ -29,10 +29,10 @@ import java.util.Set;
 public class CustomerValidationSpringTest {
 
     private final Logger logger = LogManager.getLogger(CustomerValidationSpringTest.class);
-    private static final ResourceBundleMessageSource RESOURCE_BUNDLE_MESSAGE_SOURCE  = new ResourceBundleMessageSource();
-    static {
-        RESOURCE_BUNDLE_MESSAGE_SOURCE.setBasename("validationMessages");
-    }
+//    private static final ResourceBundleMessageSource RESOURCE_BUNDLE_MESSAGE_SOURCE  = new ResourceBundleMessageSource();
+//    static {
+//        RESOURCE_BUNDLE_MESSAGE_SOURCE.setBasename("validationMessages");
+//    }
 
     @Autowired
     CustomerValidator customerValidator;
@@ -47,20 +47,29 @@ public class CustomerValidationSpringTest {
 
     }
 
+//    @Test
+//    public void checkCustomerSpringTest() {
+//        Customer customer = new Customer("Alex", "Anatoliovich", "Po",
+//                -4599, LocalDate.of(1992, 2, 23), "qwer", "login", "ttt");
+//        logger.debug(customer.toStringLogin());
+//        final DataBinder dataBinder = new DataBinder(customer);
+//        dataBinder.addValidators(customerValidator);
+//        dataBinder.validate();
+//
+//        Assert.assertTrue(dataBinder.getBindingResult().hasErrors());
+//
+////        if (dataBinder.getBindingResult().hasErrors()) {
+////            dataBinder.getBindingResult().getAllErrors().stream()
+////                    .forEach(e -> System.out.println(RESOURCE_BUNDLE_MESSAGE_SOURCE.getMessage(e, Locale.getDefault())));
+////        }
+//    }
+
+
     @Test
-    public void checkCustomerSpringTest() {
+    public void TestCustomer() {
         Customer customer = new Customer("Alex", "Anatoliovich", "Po",
                 -4599, LocalDate.of(1992, 2, 23), "qwer", "login", "ttt");
-        logger.debug(customer.toStringLogin());
-        final DataBinder dataBinder = new DataBinder(customer);
-        dataBinder.addValidators(customerValidator);
-        dataBinder.validate();
 
-        Assert.assertTrue(dataBinder.getBindingResult().hasErrors());
 
-        if (dataBinder.getBindingResult().hasErrors()) {
-            dataBinder.getBindingResult().getAllErrors().stream()
-                    .forEach(e -> System.out.println(RESOURCE_BUNDLE_MESSAGE_SOURCE.getMessage(e, Locale.getDefault())));
-        }
     }
 }

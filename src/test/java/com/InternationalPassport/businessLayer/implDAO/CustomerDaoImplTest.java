@@ -123,7 +123,7 @@ public class CustomerDaoImplTest {
         Role roleOne = new Role("User");
         Address addressOne = new Address("Germany", "Berlin", "Burface Street", 11);
         Customer customerOne = new Customer("Sharl", "Tuff", "Guff", 54, LocalDate.of(1952, 3,20),
-            "fgermany@gmail.com", "LOGIN14", "54rt67", roleOne);
+            "fgermany@gmail.com", "LOGIN14", "12345qwert", "12345qwert", roleOne);
         roleOne.getCustomers().add(customerOne);
         customerOne.setAddress(addressOne);
         addressOne.getCustomerList().add(customerOne);

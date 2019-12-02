@@ -25,8 +25,9 @@ public class CustomerValidationTest {
     private final Logger logger = LogManager.getLogger(CustomerValidationTest.class);
 
     static {
-        ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
-        validator = validatorFactory.usingContext().getValidator();
+//        ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
+//        validator = validatorFactory.usingContext().getValidator();
+
     }
 
     @Before
@@ -47,5 +48,22 @@ public class CustomerValidationTest {
         Set<ConstraintViolation<Customer>> validates = validator.validate(customer);
         Assert.assertTrue(validates.size() > 0);
         validates.stream().map(v -> v.getMessage()).forEach(System.out:: println);
+    }
+
+    @Test
+    public void customBinTest() {
+        TestBinForCustomAnntValid customAnntValid = new TestBinForCustomAnntValid(-22, "Alex", "123", "Kiev");
+        logger.debug(customAnntValid.toString());
+        Set<ConstraintViolation<TestBinForCustomAnntValid>> validates = validator.validate(customAnntValid);
+        Assert.assertTrue(validates.size() > 0);
+        validates.stream().map(v -> v.getMessage()).forEach(System.out:: println);
+    }
+
+    @Test
+    public void customBinTestV1() {
+        Customer customer = new Customer("Alex", "Anatoliovich", "Ponomarenko",
+                -4599, LocalDate.of(1992, 2, 23), "qwer", "login", "ttt");
+        logger.debug(customer.toStringLogin());
+        
     }
 }

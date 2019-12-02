@@ -26,53 +26,51 @@ public class Customer implements Serializable {
     @Column(name = "customerId")
     private Integer id;
 
-    @NotNull(message = "Name cant be null - annotation")
-    @Size(min = 3, max = 30)
+    @NotNull
+    @Size(min = 3, max = 30, message = "{customer.name.Size}")
     @Column(name = "name", nullable = false)
     private String name;
 
-    @NotNull(message = "Patronymic cant be null - annotation")
-    @Size(min = 3, max = 30)
+    @NotNull
+    @Size(min = 3, max = 30, message = "{customer.patronymic.Size}")
     @Column(name = "patronymic", nullable = false)
     private String patronymic;
 
-    @NotNull(message = "Last name cant be null - annotation")
-    @Size(min = 3, max = 30)
+    @NotNull
+    @Size(min = 3, max = 30, message = "{customer.lastName.Size}")
     @Column(name = "lastName", nullable = false)
     private String lastName;
 
-    @NotNull(message = "{negative.value}")
-    @Digits(integer = 3, fraction = 0, message = "No more then three characters")
-    @CustomerAgeConstrain
+    @NotNull
+//    @CustomerAgeConstrain
     @Column(name = "age", nullable = false)
     private Integer age;
 
-    @NotNull(message = "birthDate cant be null - annotation")
+    @NotNull
 //    @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "birthData", nullable = false)
     private LocalDate birthDate;
 
-    @Email(message = "Email should be valid - annotation")
-//    @NotNull(message = "Email cant be null - annotation")
-//    @NotEmpty(message = "Email cant be empty - annotation")
-    @NotEmpty(message = "{email.notempty}")
+
+    @NotNull
+    @Email
 //    @Basic
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @NotNull(message = "Login name cant be null - annotation")
-    @Size(min = 5, max = 30)
+    @NotNull
+    @Size(min = 5, max = 30, message = "{customer.login.Size}")
     @Column(name = "login", nullable = false, unique = true)
     private String login;
 
-    @NotNull(message = "Password name cant be null - annotation")
-    @Size(min = 8, max = 32)
+    @NotNull
+    @Size(min = 8, max = 32, message = "{customer.password.Size}")
     @Column(name = "password", nullable = false)
     private String password;
 
-    @NotNull(message = "Repeat password cant be null - annotation")
-    @Size(min = 8, max = 32)
+    @NotNull
+    @Size(min = 8, max = 32, message = "{customer.repeatPassword.Size}")
     @Transient
     private String repeatPassword;
 
@@ -81,11 +79,11 @@ public class Customer implements Serializable {
     private Role role;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "passport", nullable = false)
+    @JoinColumn(name = "passport")
     private Passport passport;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "address", nullable = false)
+    @JoinColumn(name = "address")
     private Address address;
 
     public Customer () { }
@@ -103,7 +101,7 @@ public class Customer implements Serializable {
     }
 
     public Customer(String name, String patronymic, String lastName, Integer age, LocalDate birthDate, String email,
-        String login, String password, Role role) {
+        String login, String password, String repeatPassword, Role role) {
         this.name = name;
         this.patronymic = patronymic;
         this.lastName = lastName;
@@ -112,6 +110,7 @@ public class Customer implements Serializable {
         this.email = email;
         this.login = login;
         this.password = password;
+        this.repeatPassword = repeatPassword;
         this.role = role;
     }
 
@@ -244,8 +243,6 @@ public class Customer implements Serializable {
                 ", password='" + password + '\'' +
                 ", repeatPassword='" + repeatPassword + '\'' +
                 ", role=" + role.getId() +
-                ", passport=" + passport.getId() +
-                ", address=" + address.getId() +
                 '}';
     }
 

@@ -1,6 +1,8 @@
 package com.InternationalPassport.controller;
 
+import com.InternationalPassport.businessLayer.model.Address;
 import com.InternationalPassport.businessLayer.model.Customer;
+import com.InternationalPassport.businessLayer.model.Role;
 import com.InternationalPassport.businessLayer.service.CustomerService;
 import com.InternationalPassport.helper.SearchPassportForm;
 //import com.sun.org.apache.xpath.internal.operations.String;
@@ -34,13 +36,7 @@ public class SignUpController {
     private CustomerService customerService;
 
     @Autowired
-    @Qualifier("customerValidator")
     private CustomerValidator customerValidator;
-
-//    @InitBinder("customer")
-//    private void customerValidation(WebDataBinder webDataBinder) {
-//        webDataBinder.addValidators(customerValidator);
-//    }
 
     @RequestMapping(value = "/signUp", method = RequestMethod.GET)
     public String signUp(Model model) {
@@ -54,16 +50,27 @@ public class SignUpController {
                                 , BindingResult bindingResult, Model model) {
 
         logger.debug("SIGH-UP login customer " +  customer.toStringLogin());
+
         customerValidator.validate(customer, bindingResult);
 //        logger.debug("SIGH-UP login customer " +  customer.toStringLogin());
 //        logger.debug("SIGH-UP login searchPassportForm " +  searchPassportForm.toString());
+
         if (bindingResult.hasErrors()) {
             model.addAttribute("searchPassportForm", new SearchPassportForm());
-//            model.addAttribute("customer", new Customer());
             return "signUp";
         }
 
+        saveCustomer(customer);
         return "redirect:/home";
+    }
+
+    private void saveCustomer(Customer customer) {
+        if (customer != null) {
+            Role role = new Role("User");
+            customer.setRole(role);
+            role.getCustomers().add(customer);
+            customerService.persist(customer);
+        }
     }
 
 
