@@ -4,6 +4,7 @@ import com.InternationalPassport.businessLayer.model.Address;
 import com.InternationalPassport.businessLayer.model.Customer;
 import com.InternationalPassport.businessLayer.model.Role;
 import com.InternationalPassport.businessLayer.service.CustomerService;
+import com.InternationalPassport.businessLayer.service.email.EmailService;
 import com.InternationalPassport.helper.SearchPassportForm;
 //import com.sun.org.apache.xpath.internal.operations.String;
 import com.InternationalPassport.validation.CustomerValidator;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -38,6 +40,9 @@ public class SignUpController {
     @Autowired
     private CustomerValidator customerValidator;
 
+    @Autowired
+    private EmailService emailService;
+
     @RequestMapping(value = "/signUp", method = RequestMethod.GET)
     public String signUp(Model model) {
         model.addAttribute("searchPassportForm", searchPassportForm);
@@ -61,6 +66,7 @@ public class SignUpController {
         }
 
         saveCustomer(customer);
+        emailService.sendRegistrationEmail(/*customer.getEmail()*/ "furriets@gmail.com", customer.getName(), "google.com");
         return "redirect:/home";
     }
 
