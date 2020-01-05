@@ -1,6 +1,7 @@
 package com.InternationalPassport.businessLayer.model;
 
 import antlr.LexerSharedInputState;
+import com.InternationalPassport.validation.CustomerAgeConstrain;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -9,6 +10,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import javax.validation.constraints.*;
 
 // TODO schema = test_schema -- for tests
 // TODO schema = dev_schema -- for work and tests
@@ -24,33 +26,51 @@ public class Customer implements Serializable {
     @Column(name = "customerId")
     private Integer id;
 
+    @NotNull
+    @Size(min = 3, max = 30, message = "{customer.name.Size}")
     @Column(name = "name", nullable = false)
     private String name;
 
+    @NotNull
+    @Size(min = 3, max = 30, message = "{customer.patronymic.Size}")
     @Column(name = "patronymic", nullable = false)
     private String patronymic;
 
+    @NotNull
+    @Size(min = 3, max = 30, message = "{customer.lastName.Size}")
     @Column(name = "lastName", nullable = false)
     private String lastName;
 
+    @NotNull
+//    @CustomerAgeConstrain
     @Column(name = "age", nullable = false)
     private Integer age;
 
-    @Column(name = "birthData", nullable = false)
+    @NotNull
 //    @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "birthData", nullable = false)
     private LocalDate birthDate;
 
-    @Basic
+
+    @NotNull
+    @Email
+//    @Basic
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
+    @NotNull
+    @Size(min = 5, max = 30, message = "{customer.login.Size}")
     @Column(name = "login", nullable = false, unique = true)
     private String login;
 
+    @NotNull
+    @Size(min = 8, max = 32, message = "{customer.password.Size}")
     @Column(name = "password", nullable = false)
     private String password;
 
+    @NotNull
+    @Size(min = 8, max = 32, message = "{customer.repeatPassword.Size}")
     @Transient
     private String repeatPassword;
 
@@ -59,11 +79,11 @@ public class Customer implements Serializable {
     private Role role;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "passport", nullable = false)
+    @JoinColumn(name = "passport")
     private Passport passport;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "address", nullable = false)
+    @JoinColumn(name = "address")
     private Address address;
 
     public Customer () { }
@@ -81,7 +101,7 @@ public class Customer implements Serializable {
     }
 
     public Customer(String name, String patronymic, String lastName, Integer age, LocalDate birthDate, String email,
-        String login, String password, Role role) {
+        String login, String password, String repeatPassword, Role role) {
         this.name = name;
         this.patronymic = patronymic;
         this.lastName = lastName;
@@ -90,6 +110,7 @@ public class Customer implements Serializable {
         this.email = email;
         this.login = login;
         this.password = password;
+        this.repeatPassword = repeatPassword;
         this.role = role;
     }
 
@@ -222,8 +243,6 @@ public class Customer implements Serializable {
                 ", password='" + password + '\'' +
                 ", repeatPassword='" + repeatPassword + '\'' +
                 ", role=" + role.getId() +
-                ", passport=" + passport.getId() +
-                ", address=" + address.getId() +
                 '}';
     }
 

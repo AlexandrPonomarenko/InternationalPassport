@@ -22,22 +22,9 @@ public class AddressDaoImpl extends AbstractPersistenceProducer implements Addre
 
     @Override
     public Address findById(Integer id) {
-        Address address = null;
-        try {
-            List<Address> addresses = getEntityManager().createQuery("SELECT a FROM Address a WHERE a.id =:id")
-                    .setParameter("id", id)
-                    .getResultList();
-            if (addresses.isEmpty()) {
-                logger.debug("RETURN NULL  ");
-                return address;
-            }
-            address = addresses.get(0);
-        }catch (JDBCException e ) {
-            logger.debug("GER EXPT -- " + e);
-        }
-//        Address address = (Address) entityManager.createQuery("SELECT a FROM Address a WHERE a.id =:id")
-//            .setParameter("id", id)
-//            .getSingleResult();
+        Address address = (Address) getEntityManager().createQuery("SELECT a FROM Address a WHERE a.id =:id")
+            .setParameter("id", id)
+            .getSingleResult();
         return address;
     }
 

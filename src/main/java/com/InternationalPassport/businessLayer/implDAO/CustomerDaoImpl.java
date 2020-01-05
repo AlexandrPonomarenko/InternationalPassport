@@ -23,14 +23,11 @@ public class CustomerDaoImpl extends AbstractPersistenceProducer implements Cust
 
     @Override
     public List<Customer> findByFirstName(String firstName) {
-        List<Customer> customers = new ArrayList<Customer>();
-        try {
-            customers = getEntityManager().createQuery("SELECT c FROM Customer c WHERE c.name = :firstName")
-                .setParameter("firstName", firstName).getResultList();
-            logger.debug(customers + " findByFirstName" + customers.getClass());
-        } catch (JDBCException e ) {
-            logger.error("error from findByFirstName", e);
-        }
+        List<Customer> customers;
+        customers = getEntityManager().createQuery("SELECT c FROM Customer c WHERE c.name = :firstName")
+            .setParameter("firstName", firstName).getResultList();
+        logger.debug(customers + " findByFirstName" + customers.getClass());
+
         return customers;
     }
 

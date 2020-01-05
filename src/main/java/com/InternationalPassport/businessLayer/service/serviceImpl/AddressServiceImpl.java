@@ -6,6 +6,7 @@ import com.InternationalPassport.businessLayer.service.AddressService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,7 +23,14 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public Address findById(Integer id) {
-        Address address = addressDAO.findById(id);
+        Address address = null;
+        try {
+            address = addressDAO.findById(id);
+            logger.debug("Service Address findById --- " + address.toString());
+        } catch (DataAccessException e) {
+            logger.error("Address error from findById " + e);
+        }
+
         logger.debug("Service Address findById --- " + address);
         return address;
     }
@@ -36,26 +44,44 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public List<Address> findAll() {
-        List<Address> addresses = addressDAO.findAll();
-        logger.debug("Service Address findAll --- " + addresses);
+        List<Address> addresses = null;
+        try {
+            addresses = addressDAO.findAll();
+            logger.debug("Service Address findAll --- " + addresses.size());
+        } catch (DataAccessException e ) {
+            logger.error("Error was in  Address findAll --- " + e);
+        }
         return addresses;
     }
 
     @Override
     public void persist(Address entity) {
-        logger.debug("Service Address persist --- " + entity);
-        addressDAO.persist(entity);
+        try {
+            logger.debug("Service Address persist --- " + entity);
+            addressDAO.persist(entity);
+        }catch (DataAccessException e ) {
+            logger.error("Error was service Address persist --- " + e);
+        }
     }
 
     @Override
     public void update(Address entity) {
-        logger.debug("Service Address update --- " + entity);
-        addressDAO.update(entity);
+         try {
+             logger.debug("Service Address update --- " + entity);
+             addressDAO.update(entity);
+         }catch (DataAccessException e ) {
+             logger.error("Service Address update --- " + e);
+         }
     }
 
     @Override
     public void delete(Address entity) {
-        logger.debug("Service Address delete --- " + entity);
-        addressDAO.delete(entity);
+        try {
+            logger.debug("Service Address delete --- " + entity);
+            addressDAO.delete(entity);
+        } catch (DataAccessException e ) {
+            logger.error("Service Address delete --- " + e);
+        }
+
     }
 }

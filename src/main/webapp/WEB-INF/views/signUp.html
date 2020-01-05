@@ -10,65 +10,42 @@
 </head>
     <body>
         <section layout:fragment="content">
-<!--            <div class="signup-form">-->
-<!--                <form th:action="@{/signUp}" th:object="${customer}"  method="post">-->
-<!--                    <h2>Register</h2>-->
-<!--                    <p class="hint-text">Create your account. It's free and only takes a minute.</p>-->
-<!--                    <div class="form-group">-->
-<!--                        <div class="row">-->
-<!--                            <div class="col-xs-6"><input type="text" th:field="*{name}" class="form-control" name="first_name" placeholder="First Name" required="required"></div>-->
-<!--                            <div class="col-xs-6"><input type="text" th:field="*{lastName}" class="form-control" name="last_name" placeholder="Last Name" required="required"></div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="form-group">-->
-<!--                        <input type="email" th:field="*{email}" class="form-control" name="email" placeholder="Email" required="required">-->
-<!--                    </div>-->
-<!--                    <div class="form-group">-->
-<!--                        <input type="password" th:field="*{password}" class="form-control" name="password" placeholder="Password" required="required">-->
-<!--                    </div>-->
-<!--                    <div class="form-group">-->
-<!--                        <input type="password" th:field="*{repeatPassword}" class="form-control" name="confirm_password" placeholder="Confirm Password" required="required">-->
-<!--                    </div>-->
-<!--                    <div class="form-group">-->
-<!--                        <label class="checkbox-inline"><input type="checkbox" required="required"> I accept the <a href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a></label>-->
-<!--                    </div>-->
-<!--                    <div class="form-group">-->
-<!--                        <button type="submit" class="btn btn-success btn-lg btn-block">Register Now</button>-->
-<!--                    </div>-->
-<!--                </form>-->
-<!--                <div class="text-center">Already have an account? <a href="/InternationalPassport/logIn" th:href="@{/logIn}">Sign in</a></div>-->
-<!--            </div>-->
-
             <div class="container-signup">
                 <div class="sign-up">
                     <form th:action="@{/signUp}" th:object="${customer}"  method="post">
                         <div class="form-group">
                             <label class="labelForm top" for="formFirstName">First name</label>
                             <input type="text" class="form-control" th:field="*{name}" id="formFirstName" placeholder="First name">
+                            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</span>
                         </div>
                         <div class="form-group">
                             <label class="labelForm" for="formMiddleName">Middle name</label>
                             <input type="text" class="form-control" th:field="*{patronymic}" id="formMiddleName" placeholder="Middle name">
+                            <span th:if="${#fields.hasErrors('patronymic')}" th:errors="*{patronymic}">Patronymic Error</span>
                         </div>
 
                         <div class="form-group">
                             <label class="labelForm" for="formLastName">Last name</label>
                             <input type="text" class="form-control" th:field="*{lastName}" id="formLastName" placeholder="Last name">
+                            <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">LastName Error</span>
                         </div>
 
                         <div class="form-group">
                             <label class="labelForm" for="formLogin">Login</label>
                             <input type="text" class="form-control" th:field="*{login}" id="formLogin" placeholder="Login">
+                            <span th:if="${#fields.hasErrors('login')}" th:errors="*{login}">Login Error</span>
                         </div>
 
                         <div class="form-group">
                             <label class="labelForm" for="formEmail">Email</label>
                             <input type="email" class="form-control" th:field="*{email}" id="formEmail" placeholder="Email">
+                            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</span>
                         </div>
 
                         <div class="form-group">
                             <label class="labelForm" for="formAge">Age</label>
                             <input type="text" class="form-control" th:field="*{age}" id="formAge" placeholder="Age">
+                            <span th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age Error</span>
                         </div>
 
                         <div class="form-group">
@@ -76,16 +53,19 @@
 <!--                            <input type="date" class="form-control" th:value="*{birthDate}" th:field="*{birthDate}" id="formBirthDay" placeholder="Birth day">-->
                             <input type="date" class="form-control" th:field="*{birthDate}" id="formBirthDay" placeholder="Birth day">
 <!--                            <input type="text" class="form-control" th:field="*{birthDate}" id="formBirthDay" placeholder="Birth day">-->
+                            <span th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}">BirthDate Error</span>
                         </div>
 
                         <div class="form-group">
                             <label class="labelForm" for="formPass">Password</label>
                             <input type="password" class="form-control" th:field="*{password}" id="formPass" placeholder="Password">
+                            <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</span>
                         </div>
 
                         <div class="form-group">
                             <label class="labelForm" for="formRepPass">Repeat password</label>
                             <input type="password" class="form-control" th:field="*{repeatPassword}" id="formRepPass" placeholder="Repeat password">
+<!--                            <span th:if="${#fields.hasErrors('name')}" th:field="*{name}">Name Error</span>-->
                         </div>
                         <button type="submit" class="btn btn-primary btnForm">Sign in</button>
                     </form>
