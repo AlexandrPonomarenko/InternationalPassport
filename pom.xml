@@ -14,7 +14,7 @@
   <url>http://www.example.com</url>
 
   <properties>
-      <spring.version>5.0.3.RELEASE</spring.version>
+      <spring.version>5.2.3.RELEASE</spring.version>
     <spring.context>5.0.0.RELEASE</spring.context>
     <spring.ORM>5.0.0.RELEASE</spring.ORM>
       <thymeleaf.version>3.0.9.RELEASE</thymeleaf.version>
