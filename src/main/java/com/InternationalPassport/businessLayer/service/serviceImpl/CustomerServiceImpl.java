@@ -37,6 +37,18 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    public List<Customer> findByRole(String role) {
+        List<Customer> customerList = null;
+        try {
+            customerList = customerDAO.findByRole(role);
+            loger.debug("Service Customer findByRole -- " + customerList.size());
+        } catch (DataAccessException e ) {
+            loger.error("Was error from findByRole " + e.getMessage());
+        }
+         return customerList;
+    }
+
+    @Override
     public Customer findByLogin(String login) {
         Customer customer = null;
         try{

@@ -1,17 +1,55 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th = "http://www.thymeleaf.org"
+      xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{patternViews/layout}">
+      layout:decorate="~{patternViews/layout}"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
 </head>
 <body>
-    <h1>Welcome to the home Boy</h1>
-    <section layout:fragment="contex">
+    <section layout:fragment="content">
+        <h1>Welcome to the home Boy</h1>
 
+<!--        <div sec:authorize="isAuthenticated()" >-->
+<!--            <h1>333 it is massage see only aunth users YO</h1>-->
+<!--        </div>-->
+<!--        <div sec:authorize="hasRole('ROLE_User')">-->
+<!--             444 This content is only shown to users.-->
+<!--        </div>-->
+
+        <div class="personal-data">
+            <p>Yur personal data</p>
+            <div class="customer-data">
+                <div>
+                    <span th:text="'Your Name : ' + ${customer.name}"></span>
+                    <div>
+                        <span> Edit name :</span>
+                        <form th:action="@{/changeData}" th:method="post">
+                            <input type="text" th:name="name">
+                            <input type="submit" name="changeName" value="change Name">
+                        </form>
+                    </div>
+
+                    <span th:text="'Your Patronymic : ' + ${customer.patronymic}"></span>
+                    <div>
+                        <span> Edit second name :</span>
+                        <form th:action="@{/changeData}" th:method="post">
+                            <input type="text" th:name="patronymic">
+                            <input type="submit" name="changePatronymic" value="change Patronymic">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        Logged user: <span sec:authentication="name">Bob</span><br>
+        Roles: <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span>
+        <th:block th:if="${customer.statusAccount}">
+            <p th:text="${customer.name} + ' your account is blocked, please contact the manager'"></p>
+        </th:block>
     </section>
-
 </body>
 </html>

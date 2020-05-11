@@ -1,14 +1,30 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
       layout:decorate="~{patternViews/layout}">
 <head>
     <meta charset="UTF-8">
+<!--    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com-->
+<!--    'unsafe-eval'; style-src 'self' 'unsafe-inline';-->
+<!--    media-src *;**script-src 'self' http://onlineerp.solution.quebec 'unsafe-inline' 'unsafe-eval';** ">-->
+
+
     <title>Template Thymeleaf</title>
 </head>
 <body>
     <section layout:fragment="content">
         <p th:text="@{/}"></p>
+<!--        <p th:text="${#request.contextPath}"></p>-->
+
+<!--        <div sec:authorize="isAuthenticated()" >-->
+<!--            <h1>it is massage see only aunth users YO</h1>-->
+<!--        </div>-->
+<!--        <div sec:authorize="hasRole('ROLE_User')">-->
+<!--            This content is only shown to users.-->
+<!--        </div>-->
+<!--        <div sec:authentication="name"></div>-->
+<!--        <div sec:authentication="principal.authorities"></div>-->
 
         <div class="container-content">
             <div class="block-user">

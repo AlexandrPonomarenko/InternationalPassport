@@ -9,12 +9,17 @@
     <div th:fragment="header" >
         <th:block th:insert="../resources/bootstrapComponent/cssBS :: css">
         </th:block>
+<!--        <link rel="stylesheet"-->
+<!--              href="resources/css/mainStyle.css"-->
+<!--              th:href="@{resources/css/mainStyle.css}">-->
+<!--        <link rel="stylesheet"-->
+<!--              href="resources/css/signUp.css"-->
+<!--              th:href="@{resources/css/signUp.css}">-->
+
         <link rel="stylesheet"
-              href="resources/css/mainStyle.css"
-              th:href="@{resources/css/mainStyle.css}">
+              th:href="@{/resources/css/mainStyle.css}">
         <link rel="stylesheet"
-              href="resources/css/signUp.css"
-              th:href="@{resources/css/signUp.css}">
+              th:href="@{/resources/css/signUp.css}">
     </div>
 </body>
 </html>

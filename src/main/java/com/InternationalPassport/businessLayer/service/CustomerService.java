@@ -9,6 +9,7 @@ public interface CustomerService {
     Customer findByLogin(String login);
     Customer findByEmail(String email);
     Customer findById(Integer id);
+    List<Customer> findByRole(String role);
     Customer findByQuery(String query);
     List<Customer> findAll();
     void persist(Customer entity);

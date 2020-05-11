@@ -32,6 +32,15 @@ public class CustomerDaoImpl extends AbstractPersistenceProducer implements Cust
     }
 
     @Override
+    public List<Customer> findByRole(String role) {
+        List<Customer> customers = getEntityManager()
+                .createQuery("SELECT c FROM Customer c, Role r WHERE  r.role = :role AND c.id = r.id")
+                .setParameter("role", role).getResultList();
+        logger.debug(" findByRole: " + customers);
+        return customers;
+    }
+
+    @Override
     public Customer findByLogin(String login) {
         Customer customer = (Customer) getEntityManager().createQuery("SELECT c FROM Customer AS c WHERE c.login LIKE :login")
                 .setParameter("login", login)
@@ -54,7 +63,7 @@ public class CustomerDaoImpl extends AbstractPersistenceProducer implements Cust
         Customer customer = (Customer) getEntityManager().createQuery("SELECT c FROM Customer AS c WHERE c.id =:id")
                 .setParameter("id", id)
                 .getSingleResult();
-        logger.debug(customer + " findById: " + customer.getId());
+        logger.debug("customer.getId() -- " + customer.getId() + " findById: " + customer);
         return customer;
     }
 
@@ -78,12 +87,20 @@ public class CustomerDaoImpl extends AbstractPersistenceProducer implements Cust
 
     @Override
     public void update(Customer entity) {
-        if(findById(entity.getId()).getId() == null) {
-            getEntityManager().persist(entity);
-            logger.debug(" update : - " + entity);
-        } else {
+//        Customer customer = findById(entity.getId());
+//        if(customer.getId() == null) {
+//            getEntityManager().persist(entity);
+//            logger.debug(" update : - " + entity);
+//        } else {
+//            logger.debug(entity.getRepeatPassword() + " update merge : - " + entity);
+//            getEntityManager().merge(entity);
+//        }
+
+//        Customer customer = findById(entity.getId());
+        if(entity != null) {
             getEntityManager().merge(entity);
-            logger.debug(" update merge : - " + entity);
+//            getEntityManager().flush();
+            logger.debug(entity.getRepeatPassword() + " update merge : - " + entity);
         }
     }
 

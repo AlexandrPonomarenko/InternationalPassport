@@ -3,7 +3,7 @@
     <Appenders>
         <!--Console Appender-->
         <Console name="Console" target="SYSTEM_OUT">
-            <PatternLayout pattern="%d{yyyy-MMM-dd HH:mm:ss a} [%t] %-5level %logger{36} - %msg%n"/>
+            <PatternLayout pattern="%highlight{%d{yyyy-MMM-dd HH:mm:ss a} [%t] %-5level %logger{36} - %msg%n} {DEBUG=green, TRACE=blue}"/>
         </Console>
 
     </Appenders>
@@ -20,6 +20,41 @@
         </Logger>
 
         <Logger name="com.InternationalPassport.controller" additivity="true">
+            <level value="debug, info"/>
+            <AppenderRef ref="Console"/>
+        </Logger>
+
+        <Logger name="com.InternationalPassport.springConfigs.WebSecurityConfig" additivity="true">
+            <level value="debug"/>
+            <AppenderRef ref="Console"/>
+        </Logger>
+
+        <Logger name="com.InternationalPassport.security" additivity="true">
+            <level value="debug"/>
+            <AppenderRef ref="Console"/>
+        </Logger>
+
+        <Logger name="org.springframework.security" additivity="true">
+            <level value="debug"/>
+            <AppenderRef ref="Console"/>
+        </Logger>
+
+        <Logger name="org.springframework.security.web" additivity="true">
+            <level value="debug"/>
+            <AppenderRef ref="Console"/>
+        </Logger>
+
+        <Logger name="org.springframework.security.web.debug" additivity="true">
+            <level value="debug"/>
+            <AppenderRef ref="Console"/>
+        </Logger>
+
+        <Logger name="org.springframework.http" additivity="true">
+            <level value="debug"/>
+            <AppenderRef ref="Console"/>
+        </Logger>
+
+        <Logger name="" additivity="true">
             <level value="debug"/>
             <AppenderRef ref="Console"/>
         </Logger>

@@ -56,6 +56,14 @@ public class Passport implements Serializable {
         this.seria = seria;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public Customer getCustomer() {
         return customer;
     }

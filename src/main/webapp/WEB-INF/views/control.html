@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th = "http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{patternViews/layout}">
+<head>
+<!--    <meta charset="UTF-8">-->
+    <meta name="_csrf" th:content="${_csrf.token}">
+    <meta name="_csrf.header" th:content="${_csrf.headerName}">
+    <meta name="_csrf.param" th:content="${_csrf.parameterName}">
+    <title>Control</title>
+</head>
+
+<body>
+<h1>Welcome to the Control page for manager Boy</h1>
+<section layout:fragment="content">
+    <div>
+        <span>All users</span>
+        <div class="block-user">
+            <h1 th:text="${_csrf.parameterName}">PARAM: </h1>
+            <h1 th:text="${_csrf.token}">TOKEN : </h1>
+            <h1 th:text="${_csrf.headerName}">header : </h1>
+            <th:block th:each="customer: ${customers}">
+                <div th:attr="data-ID=${customer.id}" class="customer-data">
+                    <span th:attr="data-name=${customer.name}"  th:text="${customer.name}"></span>
+                    <span th:attr="data-email=${customer.email}"  th:text="${customer.email}"></span>
+<!--                    <span><a th:href="@{/control(login=${customer.login})}" th:text="${customer.login}"></a></span>-->
+<!--                    <span><a th:href="@{/control/customer(login=${customer.login})}" th:text="${customer.login}"></a></span>-->
+                    <span th:attr="data-login=${customer.login}"><a th:href="@{/control/customer/{login}(login=${customer.login})}" th:text="${customer.login}"></a></span>
+                    <span th:attr="data-status=${customer.statusAccount}" th:text="${customer.statusAccount}"></span>
+<!--                    <form  class="form-block" th:action="@{/control}" method="post">-->
+<!--                        <button class="btn btn-outline-success my-2 my-sm-0 button-status" type="submit">Block</button>-->
+<!--                    </form>-->
+                    <th:block th:if="${customer.statusAccount}">
+                        <button th:attr="data-block=${customer.statusAccount}" class="btn btn-outline-success my-2 my-sm-0 button-status" type="submit">Block</button>
+                    </th:block>
+
+                    <th:block th:unless="${customer.statusAccount}">
+                        <button th:attr="data-block=${customer.statusAccount}" class="btn btn-outline-success my-2 my-sm-0 button-status" type="submit">Unblock</button>
+                    </th:block>
+                </div>
+            </th:block>
+        </div>
+    </div>
+<!--    <th:block  th:insert="../resources/jsFiles/jsFiles :: script" > </th:block>-->
+    <script th:src="@{/resources/js/ajaxQuery.js}"></script>
+    <script th:src="@{/resources/js/addEventButton.js}"></script>
+</section>
+
+</body>
+</html>

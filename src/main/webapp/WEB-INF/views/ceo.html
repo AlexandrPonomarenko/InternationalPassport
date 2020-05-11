@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{patternViews/layout}" xmlns:form="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>CEO</title>
+</head>
+<body>
+<h1>Welcome to the CEO page Boy</h1>
+<section layout:fragment="content">
+    <div>
+        <span>All users</span>
+        <div class="block-user">
+            <th:block th:each="customer: ${customers}">
+                <div>
+                    <span th:text="${customer.name}"></span>
+                    <span th:text="${customer.email}"></span>
+                    <span><a th:href="@{/ceo/customer/{login}(login=${customer.login})}" th:text="${customer.login}"></a></span>
+<!--                    <span th:text="${customer.role.role}"></span>-->
+                    <span th:text="${customer.statusAccount}"></span>
+                    <form th:id="${customer.statusAccount} + '' + ${customer.id}" th:action="@{/ceo2}"  method="post">
+                        <input type="hidden" th:form="${customer.statusAccount} + '' + ${customer.id}" name="login" th:value="${customer.login}">
+                        <input type="hidden" th:form="${customer.statusAccount} + '' + ${customer.id}" name="statusAccount" th:value="${customer.statusAccount}">
+                        <input type="hidden" th:form="${customer.statusAccount} + '' + ${customer.id}" name="action" value="block">
+                        <input type="submit" th:form="${customer.statusAccount} + '' + ${customer.id}" value="Block">
+                    </form>
+                    <form th:id="${customer.name}" th:action="@{/ceo}" method="post">
+                        <input type="hidden" th:form="${customer.name}" name="login" th:value="${customer.login}">
+                        <input type="hidden" th:form="${customer.name}" name="action" value="remove">
+                        <input type="submit" th:form="${customer.name}" value="Remove">
+                    </form>
+                    <form th:id="${customer.id} + 'role'" th:object="${sRole}" th:action="@{ceorole}" method="post">
+                        <span>Set new role for customer:
+                            <select size="1" name="role">
+                                <option disabled selected="role" th:value="${customer.role.role}" th:text="'current role ' + ${customer.role.role}"></option>
+                                <option th:each="role: ${roles}" th:value="${role.role}" th:text="'Role ' + ${role.role}"></option>
+                            </select>
+                        </span>
+                        <input type="hidden" th:form="${customer.id} + 'role'" name="login" th:value="${customer.login}">
+                        <input type="submit" th:form="${customer.id} + 'role'" value="Setup new role">
+                    </form>
+
+                </div>
+            </th:block>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

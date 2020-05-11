@@ -12,16 +12,13 @@
 <body>
     <div class="main-container">
         <div th:insert="patternViews/navbar :: navigation"></div>
+        <script th:src="@{/resources/js/jQuery.3.5.0.js}"></script>
 
-        <section layout:fragment ="content">
-
-        </section>
+        <section layout:fragment ="content"> </section>
 
         <div th:insert="patternViews/footer :: footer"></div>
 
-        <th:block th:insert="../resources/bootstrapComponent/scriptsBS :: script">
-
-        </th:block>
+        <th:block th:insert="../resources/bootstrapComponent/scriptsBS :: script"> </th:block>
     </div>
 </body>
 </html>
