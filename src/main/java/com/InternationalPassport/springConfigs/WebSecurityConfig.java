@@ -100,6 +100,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .contentSecurityPolicy ( "script-src 'self'").and()
                 .cacheControl();
         http.authorizeRequests()
+                .antMatchers("/loadPage").hasAnyRole("CEO", "Manager", "User")
                 .antMatchers("/home").hasAnyRole("CEO", "Manager", "User")
                 .antMatchers("/control", "/control/customer", "/control/customer/*", "/control/**").hasAnyRole("CEO", "Manager")
                 .antMatchers("/ceo", "/ceo/customer", "/ceo/customer/*",  "/ceo**").hasAnyRole("CEO")

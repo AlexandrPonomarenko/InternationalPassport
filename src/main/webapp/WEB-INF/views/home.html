@@ -20,30 +20,99 @@
 <!--        </div>-->
 
         <div class="personal-data">
-            <p>Yur personal data</p>
+            <p>Your personal data</p>
             <div class="customer-data">
                 <div>
-                    <span th:text="'Your Name : ' + ${customer.name}"></span>
-                    <div>
-                        <span> Edit name :</span>
-                        <form th:action="@{/changeData}" th:method="post">
-                            <input type="text" th:name="name">
-                            <input type="submit" name="changeName" value="change Name">
-                        </form>
-                    </div>
+                    <form th:action="@{/changeData}" th:object="${newCustomerData}" method="post">
+                        <span th:text="'Your Name : ' + ${customer.name}"></span>
+                        <div>
+                            <span> Edit name :</span>
+                            <input type="text" th:field="*{name}">
+                        </div>
 
-                    <span th:text="'Your Patronymic : ' + ${customer.patronymic}"></span>
-                    <div>
-                        <span> Edit second name :</span>
-                        <form th:action="@{/changeData}" th:method="post">
-                            <input type="text" th:name="patronymic">
-                            <input type="submit" name="changePatronymic" value="change Patronymic">
-                        </form>
-                    </div>
+                        <span th:text="'Your Patronymic : ' + ${customer.patronymic}"></span>
+                        <div>
+                            <span> Edit second name :</span>
+                            <input type="text" th:field="*{patronymic}">
+                        </div>
+
+                        <span th:text="'Your name : ' + ${customer.lastName}"></span>
+                        <div>
+                            <span> Edit last name :</span>
+                            <input type="text" th:field="*{lastName}">
+                        </div>
+
+                        <span th:text="'Your age : ' + ${customer.age}"></span>
+                        <div>
+                            <span> Edit your age :</span>
+                            <input type="text" th:field="*{age}">
+                        </div>
+
+                        <span th:text="'Your birthDate : ' + ${customer.birthDate}"></span>
+                        <div>
+                            <span> Edit your age :</span>
+                            <input type="text" th:field="*{birthDate}">
+                        </div>
+
+<!--                        <span th:text="'Your email : ' + ${customer.email}"></span>-->
+<!--                        <div>-->
+<!--                            <span> Edit your email :</span>-->
+<!--                            <input type="text" th:field="*{email}">-->
+<!--                        </div>-->
+                        <input type="submit" value="CHANGE">
+                    </form>
                 </div>
             </div>
-        </div>
 
+            <div class="address-data">
+                <p>Your address of residence data</p>
+                <form th:action="@{/addressData}" th:object="${newAddressData}" method="post">
+                    <span th:text="'Your country :' + ${address.country != null ? address.country : 'Non data'}">Non data</span>
+                    <div>
+                        <span> Edit your country :</span>
+                        <input type="text" th:field="*{country}">
+                    </div>
+
+                    <span th:text="'Your city : ' + ${address.city != null ? address.city : 'Non data'}">City</span>
+                    <div>
+                        <span> Edit your city :</span>
+                        <input type="text" th:field="*{city}">
+                    </div>
+
+                    <span th:text="'Your street : ' + ${address.street != null ? address.street : 'Non data'}">Non data</span>
+                    <div>
+                        <span> Edit your street :</span>
+                        <input type="text" th:field="*{street}">
+                    </div>
+
+                    <span th:text="'Your number home : ' + ${address.numberHome != null ? address.numberHome : 'Non data'}">Non data</span>
+                    <div>
+                        <span> Edit your number home :</span>
+                        <input type="text" th:field="*{numberHome}">
+                    </div>
+                    <input type="submit" value="change address data">
+                </form>
+            </div>
+
+            <div class="passport-data">
+                <p>Your passport data</p>
+                <form th:action="@{/passportData}" th:object="${newPassportData}" method="post">
+                    <span th:text="'your seria of passport : ' + ${passport.seria != null ? passport.seria : 'Non data'}">Non data</span>
+                    <div>
+                        <span> Edit seria of passport :</span>
+                        <input type="text" th:field="*{seria}">
+                    </div>
+
+                    <span th:text="'Your type of passport : ' + ${passport.type != null ? passport.type : 'Non data'}">Non data</span>
+                    <div>
+                        <span> Edit your type :</span>
+                        <input type="text" th:field="*{type}">
+                    </div>
+
+                    <input type="submit" value="change passport data">
+                </form>
+            </div>
+        </div>
 
         Logged user: <span sec:authentication="name">Bob</span><br>
         Roles: <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span>

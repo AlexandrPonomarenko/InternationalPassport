@@ -32,7 +32,7 @@ public class Address implements Serializable {
     @Column(name = "numberHome", nullable = false)
     private Integer numberHome;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "address")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "address", cascade = CascadeType.ALL)
     private List<Customer> customerList = new ArrayList<Customer>();
 
     public Address() {
@@ -73,7 +73,7 @@ public class Address implements Serializable {
         this.street = street;
     }
 
-    public long getNumberHome() {
+    public Integer getNumberHome() {
         return numberHome;
     }
 

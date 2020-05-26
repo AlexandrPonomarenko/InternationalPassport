@@ -20,6 +20,14 @@ public class CustomerSecurityRepImpl extends AbstractPersistenceProducer impleme
                 .getSingleResult();
         logger.debug(" findByLogin from -- CustomerSecurityRepImpl: " + customer.getLogin());
         customer.getRole().getRole();
+        if (customer.getAddress() != null) {
+            customer.getAddress().getCustomerList().size();
+        }
+
+        if (customer.getPassport() != null) {
+            customer.getPassport().getId();
+        }
+
         return customer;
     }
 }

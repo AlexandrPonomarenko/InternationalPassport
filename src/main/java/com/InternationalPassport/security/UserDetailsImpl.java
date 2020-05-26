@@ -2,8 +2,10 @@ package com.InternationalPassport.security;
 
 import com.InternationalPassport.businessLayer.model.Customer;
 import com.InternationalPassport.businessLayer.model.Role;
+import com.InternationalPassport.businessLayer.service.CustomerService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -17,6 +19,9 @@ public class UserDetailsImpl implements UserDetails {
     private Customer customer;
     private List<Role> roles;
     private Map<String, String> tempRoles = new HashMap<>();
+
+//    @Autowired
+//    private CustomerService customerService;
 
     public UserDetailsImpl(Customer customer) {
         this.customer = customer;
@@ -79,6 +84,11 @@ public class UserDetailsImpl implements UserDetails {
     public Customer getCust() {
         return customer;
     }
+
+//    public void initCustomer() {
+//        logger.debug(customerService + "INIT YO -------- " +  customer);
+//        customerService.update(customer);
+//    }
 
     private void initRoles() {
         tempRoles.put("CEO", "ROLE_CEO");

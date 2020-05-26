@@ -88,6 +88,26 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    public Customer findByIdInitAll(Integer id) {
+        Customer customer = null;
+        try {
+            customer = customerDAO.findById(id);
+            loger.debug("Service Customer findById -- " + customer);
+        } catch (DataAccessException e) {
+            loger.error("Error was in findById " + e.getMessage());
+        }
+        if (customer.getAddress() != null || customer.getPassport() != null) {
+            customer.getAddress().getCustomerList().size();
+        }
+        if (customer.getPassport() != null) {
+            customer.getPassport().getId();
+            loger.debug("PAAAAAAASSSSSSSSSPPPOOORRRRRRRTTTTTT " + customer.getPassport().getId());
+        }
+
+        return customer;
+    }
+
+    @Override
     public Customer findByQuery(String query) {
 //        Customer customer = customerDAO.findByQuery(query);
 //        loger.debug("Service Customer findByQuery -- " + customer);

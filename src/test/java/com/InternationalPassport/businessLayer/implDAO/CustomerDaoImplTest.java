@@ -1,5 +1,6 @@
 package com.InternationalPassport.businessLayer.implDAO;
 
+import com.InternationalPassport.businessLayer.DAO.AddressDAO;
 import com.InternationalPassport.businessLayer.DAO.CustomerDAO;
 import com.InternationalPassport.businessLayer.DAO.PassportDAO;
 import com.InternationalPassport.businessLayer.model.Address;
@@ -18,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
@@ -26,7 +28,8 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD) //- ???
-@ContextConfiguration(classes = {SpringJPAConfigTest.class, BeensConfig.class})
+@ContextConfiguration(classes = {SpringJPAConfigTest.class})
+@WebAppConfiguration
 @Transactional
 @RunWith(SpringJUnit4ClassRunner.class)
 public class CustomerDaoImplTest {
@@ -34,10 +37,11 @@ public class CustomerDaoImplTest {
     private static final Logger logger = LogManager.getLogger(CustomerDaoImplTest.class);
 
 
-//    @Autowired
-//    CustomerDaoImpl customerDaoImpl;
     @Autowired
     CustomerDAO customerDAO;
+
+    @Autowired
+    AddressDAO addressDAO;
 
     @Autowired
     PassportDAO passportDAO;
@@ -158,6 +162,50 @@ public class CustomerDaoImplTest {
         logger.debug("updateTest : ----- " + expect + "EXPECT " + actual + " Actual");
         assertNotNull(customerActual);
         assertEquals(expect, customerActual.getLastName());
+    }
+
+    @Test
+    public void updateAddressForCustomer() {
+        String expect = "Bagdad";
+        Address actual;
+
+        Address address = new Address("Irak", "Bagdad", "MAIN-street", 14);
+        Customer customerUpdate = customerDAO.findById(7);
+        actual = customerUpdate.getAddress();
+        assertNull(actual);
+        customerUpdate.setAddress(address);
+        address.getCustomerList().add(customerUpdate);
+//        addressDAO.update(address);
+        customerDAO.update(customerUpdate);
+        Customer customerActual = customerDAO.findById(7);
+//        Address adr = addressDAO.findById(customerActual.getId());
+        List<Address> adr = addressDAO.findAll();
+        logger.debug("ADDRESS BY ID  - " + adr.size());
+        adr.forEach((Address ad) -> {
+            System.out.println(ad.getId() + " AD " + ad.getCustomerList());
+        });
+//        logger.debug(adr.getCustomerList().size() + " ADDRESS BY ID LIST  - " + adr.getCustomerList());
+        logger.debug("updateTest : ----- " + expect + " EXPECT " + "customerActual " + customerActual.getAddress().getCity());
+        assertNotNull(customerActual);
+        assertEquals(expect, customerActual.getAddress().getCity());
+    }
+
+    @Test
+    public void updatePassportForCustomer() {
+        Passport passportActual = null;
+        Customer customerUpdate = customerDAO.findById(7);
+        passportActual = customerUpdate.getPassport();
+        assertNull(passportActual);
+        passportActual = new Passport("MM777TU", "international");
+        passportActual.setCustomer(customerUpdate);
+        customerUpdate.setPassport(passportActual);
+//        customerDAO.update();
+        Customer customerActual = customerDAO.findById(7);
+        logger.debug("PASSPORT UPDATE -->  updateTest : ----- " + customerActual.getPassport());
+        logger.debug("ALL CUSTOMER ");
+        List<Passport> ps = passportDAO.findAll();
+        ps.stream().forEach(System.out :: println);
+        assertNotNull(customerActual);
     }
 
     @Test
