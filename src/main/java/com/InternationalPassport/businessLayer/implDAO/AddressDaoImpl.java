@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,14 +18,18 @@ public class AddressDaoImpl extends AbstractPersistenceProducer implements Addre
 
     private static final Logger logger = LogManager.getLogger(AddressDaoImpl.class);
 
-//    @Autowired
-//    private EntityManager entityManager;
 
     @Override
     public Address findById(Integer id) {
-        Address address = (Address) getEntityManager().createQuery("SELECT a FROM Address a WHERE a.id =:id")
-            .setParameter("id", id)
-            .getSingleResult();
+        Address address = null;
+        try {
+             address = (Address) getEntityManager().createQuery("SELECT a FROM Address a WHERE a.id =:id")
+                    .setParameter("id", id)
+                    .getSingleResult();
+        } catch (NoResultException e ) {
+            logger.debug("findById - >  NoResultException " + e.getMessage()); ;
+        }
+
         return address;
     }
 
@@ -47,7 +52,7 @@ public class AddressDaoImpl extends AbstractPersistenceProducer implements Addre
 
     @Override
     public void update(Address entity) {
-        if(findById(entity.getId()).getId() == null) {
+        if(findById(entity.getId()) == null) {
             getEntityManager().persist(entity);
         } else {
             getEntityManager().merge(entity);

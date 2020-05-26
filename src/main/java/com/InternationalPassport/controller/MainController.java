@@ -7,14 +7,18 @@ import com.InternationalPassport.helper.SearchPassportForm;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
 import javax.jws.WebParam;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller("MainController")
@@ -27,11 +31,12 @@ public class MainController {
     private CustomerService customerService;
 
     @RequestMapping(value = {"/", "/main"} , method = RequestMethod.GET)
-    public String mainPage(Model model) {
+    public String mainPage(Model model, HttpSession session) {
         List<Customer> list = getUsersNames();
         model.addAttribute("users", list);
         model.addAttribute("searchPassportForm", searchPassportForm);
         logger.debug("mainPage, size list is " + list.size());
+        logger.debug(" SSSSSSSSSSSSSSSSSs " +  session.getAttribute("SPRING_SECURITY_CONTEXT"));
         return "main";
     }
 
@@ -45,11 +50,6 @@ public class MainController {
     public void searchUser(@ModelAttribute SearchPassportForm searchPassportForm) {
         logger.debug("searchUser " + searchPassportForm.getSeria());
     }
-
-//    @RequestMapping(value = "/home", method = RequestMethod.GET)
-//    public String home(Model model) {
-//        return "home";
-//    }
 
     @RequestMapping(value = "/about", method = RequestMethod.GET)
     public String about(Model model) {

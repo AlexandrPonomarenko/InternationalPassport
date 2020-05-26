@@ -37,6 +37,18 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    public List<Customer> findByRole(String role) {
+        List<Customer> customerList = null;
+        try {
+            customerList = customerDAO.findByRole(role);
+            loger.debug("Service Customer findByRole -- " + customerList.size());
+        } catch (DataAccessException e ) {
+            loger.error("Was error from findByRole " + e.getMessage());
+        }
+         return customerList;
+    }
+
+    @Override
     public Customer findByLogin(String login) {
         Customer customer = null;
         try{
@@ -70,6 +82,26 @@ public class CustomerServiceImpl implements CustomerService {
             loger.debug("Service Customer findById -- " + customer);
         } catch (DataAccessException e) {
             loger.error("Error was in findById " + e.getMessage());
+        }
+
+        return customer;
+    }
+
+    @Override
+    public Customer findByIdInitAll(Integer id) {
+        Customer customer = null;
+        try {
+            customer = customerDAO.findById(id);
+            loger.debug("Service Customer findById -- " + customer);
+        } catch (DataAccessException e) {
+            loger.error("Error was in findById " + e.getMessage());
+        }
+        if (customer.getAddress() != null || customer.getPassport() != null) {
+            customer.getAddress().getCustomerList().size();
+        }
+        if (customer.getPassport() != null) {
+            customer.getPassport().getId();
+            loger.debug("PAAAAAAASSSSSSSSSPPPOOORRRRRRRTTTTTT " + customer.getPassport().getId());
         }
 
         return customer;

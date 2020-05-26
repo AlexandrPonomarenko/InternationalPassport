@@ -1,6 +1,9 @@
 package com.InternationalPassport.springConfigs;
 
+import com.InternationalPassport.security.session.SessionListener;
+import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
+import org.springframework.web.servlet.FrameworkServlet;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import javax.servlet.ServletContext;
@@ -12,7 +15,7 @@ import javax.servlet.ServletRegistration;
 public class AppConfig extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class<?>[]{WebConfig.class};
+        return new Class<?>[]{ WebConfig.class, WebSecurityConfig.class};
     }
 
     @Override
@@ -28,8 +31,14 @@ public class AppConfig extends AbstractAnnotationConfigDispatcherServletInitiali
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
         super.onStartup(servletContext);
-//        ServletRegistration.Dynamic servletRegistration = servletContext.addServlet("dispatcher", new DispatcherServlet());
-//        servletRegistration.setLoadOnStartup(1);
-//        servletRegistration.addMapping("/");
+        servletContext.addListener(new SessionListener());
+    }
+
+
+    @Override
+    protected FrameworkServlet createDispatcherServlet(WebApplicationContext servletAppContext) {
+        final DispatcherServlet dispatcherServlet = (DispatcherServlet) super.createDispatcherServlet(servletAppContext);
+        dispatcherServlet.setThrowExceptionIfNoHandlerFound(true);
+        return dispatcherServlet;
     }
 }

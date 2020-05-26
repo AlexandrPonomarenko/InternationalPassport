@@ -14,6 +14,7 @@ import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.thymeleaf.extras.springsecurity5.dialect.SpringSecurityDialect;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
@@ -45,16 +46,22 @@ public class WebConfig implements WebMvcConfigurer {
     public SpringTemplateEngine templateEngine() {
         SpringTemplateEngine templateEngine = new SpringTemplateEngine();
         templateEngine.addDialect(new LayoutDialect());
+        templateEngine.addDialect(securityDialect());
         templateEngine.setTemplateResolver(templateResolver());
         templateEngine.setEnableSpringELCompiler(true);
         return templateEngine;
+    }
+
+    @Bean
+    public SpringSecurityDialect securityDialect() {
+        return new SpringSecurityDialect();
     }
 
     @Override
     public void configureViewResolvers(ViewResolverRegistry registry) {
         ThymeleafViewResolver thymeleafViewResolver = new ThymeleafViewResolver();
         thymeleafViewResolver.setTemplateEngine(templateEngine());
-        thymeleafViewResolver.setContentType("UTF-8");
+//        thymeleafViewResolver.setContentType("UTF-8");
 //        thymeleafViewResolver.setViewNames(new String[] {"*.html", "xhtml"});
         thymeleafViewResolver.setViewNames(new String[] {"*"});
         registry.viewResolver(thymeleafViewResolver);
@@ -64,6 +71,7 @@ public class WebConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**").addResourceLocations("/WEB-INF/resources/");
         registry.addResourceHandler("/resources/js/**").addResourceLocations("/WEB-INF/resources/js/");
+        registry.addResourceHandler("/resources/jsFiles/**").addResourceLocations("/WEB-INF/resources/jsFiles/");
         registry.addResourceHandler("/resources/css/**").addResourceLocations("/WEB-INF/resources/css/");
         registry.addResourceHandler("/resources/bootstrapComponent/**").addResourceLocations("/WEB-INF/resources/bootstrapComponent/");
     }

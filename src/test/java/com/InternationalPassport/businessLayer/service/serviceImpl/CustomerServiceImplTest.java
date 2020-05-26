@@ -13,8 +13,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
@@ -24,6 +26,7 @@ import static org.junit.Assert.*;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @Transactional
+@WebAppConfiguration
 @ContextConfiguration(classes = SpringJPAConfigTest.class)
 @RunWith(SpringJUnit4ClassRunner.class)
 public class CustomerServiceImplTest {
@@ -131,4 +134,15 @@ public class CustomerServiceImplTest {
         assertEquals(2, customers.size());
         logger.debug("Test delete --- " + customers.size());
     }
+
+//    @Test
+//    @Rollback(false)
+//    public void updateStatusCustomerTest() {
+//        List<Customer> customers = customerService.findAll();
+//        for (Customer customer : customers) {
+//            customer.setStatusAccount(true);
+//            customerService.update(customer);
+//        }
+//
+//    }
 }

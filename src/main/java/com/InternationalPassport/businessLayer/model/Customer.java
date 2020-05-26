@@ -65,14 +65,17 @@ public class Customer implements Serializable {
     private String login;
 
     @NotNull
-    @Size(min = 8, max = 32, message = "{customer.password.Size}")
+    @Size(min = 8, max = 256, message = "{customer.password.Size}")
     @Column(name = "password", nullable = false)
     private String password;
 
-    @NotNull
-    @Size(min = 8, max = 32, message = "{customer.repeatPassword.Size}")
+//    @NotNull
+//    @Size(min = 8, max = 256, message = "{customer.repeatPassword.Size}")
     @Transient
     private String repeatPassword;
+
+    @Column(name = "status", nullable = false)
+    private boolean statusAccount = true;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     @JoinColumn(name = "role", nullable = false)
@@ -190,6 +193,14 @@ public class Customer implements Serializable {
         this.repeatPassword = repeatPassword;
     }
 
+    public boolean isStatusAccount() {
+        return statusAccount;
+    }
+
+    public void setStatusAccount(boolean statusAccount) {
+        this.statusAccount = statusAccount;
+    }
+
     public Role getRole() {
         return role;
     }
@@ -240,6 +251,7 @@ public class Customer implements Serializable {
                 ", birthDate=" + birthDate +
                 ", email='" + email + '\'' +
                 ", login='" + login + '\'' +
+                ", statusAccount='" + statusAccount + '\'' +
                 ", password='" + password + '\'' +
                 ", repeatPassword='" + repeatPassword + '\'' +
                 ", role=" + role.getId() +
@@ -256,6 +268,7 @@ public class Customer implements Serializable {
                 ", birthDate=" + birthDate +
                 ", email='" + email + '\'' +
                 ", login='" + login + '\'' +
+                ", statusAccount='" + statusAccount + '\'' +
                 ", password='" + password + '\'' +
                 ", repeatPassword='" + repeatPassword + '\'' +
                 '}';

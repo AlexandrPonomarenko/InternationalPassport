@@ -1,17 +1,124 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th = "http://www.thymeleaf.org"
+      xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{patternViews/layout}">
+      layout:decorate="~{patternViews/layout}"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
 </head>
 <body>
-    <h1>Welcome to the home Boy</h1>
-    <section layout:fragment="contex">
+    <section layout:fragment="content">
+        <h1>Welcome to the home Boy</h1>
 
+<!--        <div sec:authorize="isAuthenticated()" >-->
+<!--            <h1>333 it is massage see only aunth users YO</h1>-->
+<!--        </div>-->
+<!--        <div sec:authorize="hasRole('ROLE_User')">-->
+<!--             444 This content is only shown to users.-->
+<!--        </div>-->
+
+        <div class="personal-data">
+            <p>Your personal data</p>
+            <div class="customer-data">
+                <div>
+                    <form th:action="@{/changeData}" th:object="${newCustomerData}" method="post">
+                        <span th:text="'Your Name : ' + ${customer.name}"></span>
+                        <div>
+                            <span> Edit name :</span>
+                            <input type="text" th:field="*{name}">
+                        </div>
+
+                        <span th:text="'Your Patronymic : ' + ${customer.patronymic}"></span>
+                        <div>
+                            <span> Edit second name :</span>
+                            <input type="text" th:field="*{patronymic}">
+                        </div>
+
+                        <span th:text="'Your name : ' + ${customer.lastName}"></span>
+                        <div>
+                            <span> Edit last name :</span>
+                            <input type="text" th:field="*{lastName}">
+                        </div>
+
+                        <span th:text="'Your age : ' + ${customer.age}"></span>
+                        <div>
+                            <span> Edit your age :</span>
+                            <input type="text" th:field="*{age}">
+                        </div>
+
+                        <span th:text="'Your birthDate : ' + ${customer.birthDate}"></span>
+                        <div>
+                            <span> Edit your age :</span>
+                            <input type="text" th:field="*{birthDate}">
+                        </div>
+
+<!--                        <span th:text="'Your email : ' + ${customer.email}"></span>-->
+<!--                        <div>-->
+<!--                            <span> Edit your email :</span>-->
+<!--                            <input type="text" th:field="*{email}">-->
+<!--                        </div>-->
+                        <input type="submit" value="CHANGE">
+                    </form>
+                </div>
+            </div>
+
+            <div class="address-data">
+                <p>Your address of residence data</p>
+                <form th:action="@{/addressData}" th:object="${newAddressData}" method="post">
+                    <span th:text="'Your country :' + ${address.country != null ? address.country : 'Non data'}">Non data</span>
+                    <div>
+                        <span> Edit your country :</span>
+                        <input type="text" th:field="*{country}">
+                    </div>
+
+                    <span th:text="'Your city : ' + ${address.city != null ? address.city : 'Non data'}">City</span>
+                    <div>
+                        <span> Edit your city :</span>
+                        <input type="text" th:field="*{city}">
+                    </div>
+
+                    <span th:text="'Your street : ' + ${address.street != null ? address.street : 'Non data'}">Non data</span>
+                    <div>
+                        <span> Edit your street :</span>
+                        <input type="text" th:field="*{street}">
+                    </div>
+
+                    <span th:text="'Your number home : ' + ${address.numberHome != null ? address.numberHome : 'Non data'}">Non data</span>
+                    <div>
+                        <span> Edit your number home :</span>
+                        <input type="text" th:field="*{numberHome}">
+                    </div>
+                    <input type="submit" value="change address data">
+                </form>
+            </div>
+
+            <div class="passport-data">
+                <p>Your passport data</p>
+                <form th:action="@{/passportData}" th:object="${newPassportData}" method="post">
+                    <span th:text="'your seria of passport : ' + ${passport.seria != null ? passport.seria : 'Non data'}">Non data</span>
+                    <div>
+                        <span> Edit seria of passport :</span>
+                        <input type="text" th:field="*{seria}">
+                    </div>
+
+                    <span th:text="'Your type of passport : ' + ${passport.type != null ? passport.type : 'Non data'}">Non data</span>
+                    <div>
+                        <span> Edit your type :</span>
+                        <input type="text" th:field="*{type}">
+                    </div>
+
+                    <input type="submit" value="change passport data">
+                </form>
+            </div>
+        </div>
+
+        Logged user: <span sec:authentication="name">Bob</span><br>
+        Roles: <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span>
+        <th:block th:if="${customer.statusAccount}">
+            <p th:text="${customer.name} + ' your account is blocked, please contact the manager'"></p>
+        </th:block>
     </section>
-
 </body>
 </html>
