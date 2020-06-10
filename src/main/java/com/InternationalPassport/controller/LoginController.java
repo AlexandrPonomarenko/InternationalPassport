@@ -26,51 +26,20 @@ public class LoginController {
     @Autowired
     private CustomerService customerService;
 
-//    @Autowired
-//    private CustomerLogInValidator customerLogInValidator;
-
     @RequestMapping(value = "/signin", method = RequestMethod.GET)
     public String logIn(Model model) {
         model.addAttribute("searchPassportForm", searchPassportForm);
         model.addAttribute("customer", new Customer());
-        logger.debug("METHODDDDDDD GETTTTTTTTTTTTTTTTTTT");
+
         return "signin";
     }
 
-//    @RequestMapping(value = "/singin", method = RequestMethod.POST)
-//    public String logInPost(@ModelAttribute Customer customer, SearchPassportForm searchPassportForm,
-//                            Model model, HttpSession session) {
-//        logger.debug("login customer " +  customer.toStringLogin());
-//        logger.debug("login searchPassportForm " +  searchPassportForm.toString());
-//        logger.info("INFOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO -->>>>>>>>>>>>>>>>");
-//        UsernamePasswordAuthenticationToken authentication = (UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
-//        System.out.println("authentication ----->>>> " + authentication.getName());
-//        validateCustomer(authentication.getPrincipal());
-//        Customer customerLogged = ((UserDetailsImpl) authentication.getPrincipal()).getCust();
-//        logger.debug("login SECURITY ------> " +  customerLogged.toStringLogin());
-//
-//        session.setAttribute("customerID", customerLogged.getId());
-//
-////        if (!IsLogin(customer)) {
-////            model.addAttribute("loginError", true);
-////            model.addAttribute("searchPassportForm", searchPassportForm);
-////            return "logIn";
-////        }
-//
-//        return "redirect:/home";
-//    }
-
     @RequestMapping(value = "/processSignIn", method = RequestMethod.POST)
-    public String signInPost(/*@ModelAttribute Customer customer, SearchPassportForm searchPassportForm,
-                            Model model,*/ HttpSession session) {
-//        logger.debug("login customer " +  customer.toStringLogin());
-//        logger.debug("login searchPassportForm " +  searchPassportForm.toString());
-        logger.info("INFOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO -->>>>>>>>>>>>>>>>");
+    public String signInPost(HttpSession session) {
+
         UsernamePasswordAuthenticationToken authentication = (UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
-        System.out.println("authentication ----->>>> " + authentication.getName());
         validateCustomer(authentication.getPrincipal());
         Customer customerLogged = ((UserDetailsImpl) authentication.getPrincipal()).getCust();
-        logger.debug("login SECURITY ------> " +  customerLogged.toStringLogin());
 
         session.setAttribute("customerID", customerLogged.getId());
 
@@ -82,16 +51,5 @@ public class LoginController {
         if(!(customer instanceof UserDetailsImpl)) {
             throw new  IllegalArgumentException("Principal can not be null!");
         }
-    }
-
-    private Boolean IsLogin (Customer customer) {
-        boolean result = false;
-        Customer fCus = customerService.findByLogin(customer.getLogin());
-        logger.debug(fCus.getPassword().equals(customer.getPassword()) + "LOGIIINNN" + customer.toStringLogin());
-        if (fCus != null && fCus.getLogin() != null && fCus.getPassword().equals(customer.getPassword())) {
-            logger.debug("CUSTOMER FROM BD - " + fCus.toStringLogin());
-            result = true;
-        }
-        return result;
     }
 }

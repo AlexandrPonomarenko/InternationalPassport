@@ -19,7 +19,6 @@ public class ErrorController {
 
     @RequestMapping(value = "/error", method = RequestMethod.GET)
     public String showErrorPage(Model model, HttpServletRequest req) {
-        logger.debug(req.getAttribute("directQuery") + " -- ERRRRRROR GETTTTT redirect :" +  req.getAttribute("error") + ":::");
 
         model.addAttribute("directQuery", req.getAttribute("directQuery"));
         model.addAttribute("searchPassportForm", searchPassportForm);

@@ -7,10 +7,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 
 public class FileLoader {
-//    private static final String PATH_LOAD = "/home/multimedia/www/InternationalPassport/src/main/resources/images/";
     private static final String PATH_LOAD_TWO = "/home/multimedia/www/InternationalPassport/src/main/webapp/WEB-INF/resources/images/";
     private Path path;
     private boolean statusLoad;
@@ -25,7 +23,6 @@ public class FileLoader {
     }
 
     public FileLoader(MultipartFile file) {
-//        path = Paths.get(PATH_LOAD);
         this.file = file;
         this.fileName = file.getOriginalFilename();
     }

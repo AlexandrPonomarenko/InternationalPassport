@@ -18,16 +18,12 @@ public class CustomerDaoImpl extends AbstractPersistenceProducer implements Cust
 
     private static final Logger logger = LogManager.getLogger(CustomerDaoImpl.class);
 
-//    @PersistenceContext
-//    private EntityManager entityManager;
 
     @Override
     public List<Customer> findByFirstName(String firstName) {
         List<Customer> customers;
         customers = getEntityManager().createQuery("SELECT c FROM Customer c WHERE c.name = :firstName")
             .setParameter("firstName", firstName).getResultList();
-        logger.debug(customers + " findByFirstName" + customers.getClass());
-
         return customers;
     }
 
@@ -36,7 +32,6 @@ public class CustomerDaoImpl extends AbstractPersistenceProducer implements Cust
         List<Customer> customers = getEntityManager()
                 .createQuery("SELECT c FROM Customer c, Role r WHERE  r.role = :role AND c.id = r.id")
                 .setParameter("role", role).getResultList();
-        logger.debug(" findByRole: " + customers);
         return customers;
     }
 
@@ -45,7 +40,6 @@ public class CustomerDaoImpl extends AbstractPersistenceProducer implements Cust
         Customer customer = (Customer) getEntityManager().createQuery("SELECT c FROM Customer AS c WHERE c.login LIKE :login")
                 .setParameter("login", login)
                 .getSingleResult();
-        logger.debug(customer + " findByLogin: " + customer.getLogin());
         return customer;
     }
 
@@ -54,7 +48,6 @@ public class CustomerDaoImpl extends AbstractPersistenceProducer implements Cust
         Customer customer = (Customer) getEntityManager().createQuery("SELECT c FROM Customer AS c WHERE c.email LIKE :email")
             .setParameter("email", email)
             .getSingleResult();
-        logger.debug(customer + " findByEmail:  " + customer.getEmail());
         return customer;
     }
 
@@ -63,7 +56,6 @@ public class CustomerDaoImpl extends AbstractPersistenceProducer implements Cust
         Customer customer = (Customer) getEntityManager().createQuery("SELECT c FROM Customer AS c WHERE c.id =:id")
                 .setParameter("id", id)
                 .getSingleResult();
-        logger.debug("customer.getId() -- " + customer.getId() + " findById: " + customer);
         return customer;
     }
 
@@ -76,7 +68,6 @@ public class CustomerDaoImpl extends AbstractPersistenceProducer implements Cust
     public List<Customer> findAll() {
         List<Customer> allCustomer = getEntityManager().createQuery("FROM Customer", Customer.class)
             .getResultList();
-        logger.debug(allCustomer + " findAll: -" + allCustomer.size());
         return allCustomer;
     }
 
@@ -87,26 +78,13 @@ public class CustomerDaoImpl extends AbstractPersistenceProducer implements Cust
 
     @Override
     public void update(Customer entity) {
-//        Customer customer = findById(entity.getId());
-//        if(customer.getId() == null) {
-//            getEntityManager().persist(entity);
-//            logger.debug(" update : - " + entity);
-//        } else {
-//            logger.debug(entity.getRepeatPassword() + " update merge : - " + entity);
-//            getEntityManager().merge(entity);
-//        }
-
-//        Customer customer = findById(entity.getId());
         if(entity != null) {
             getEntityManager().merge(entity);
-//            getEntityManager().flush();
-            logger.debug(entity.getRepeatPassword() + " update merge : - " + entity);
         }
     }
 
     @Override
     public void delete(Customer entity) {
         getEntityManager().remove(entity);
-        logger.debug(" delete: - " + entity);
     }
 }

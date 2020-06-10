@@ -18,7 +18,6 @@ public class PhotoDaoImpl extends AbstractPersistenceProducer implements PhotoDA
         Photo photo = (Photo) getEntityManager().createQuery("SELECT p FROM Photo AS p WHERE p.id =:id")
                 .setParameter("id", id)
                 .getSingleResult();
-        logger.debug("photo.getId() -- " + photo.getId() + " findById: " + photo);
         return photo;
     }
 
@@ -31,7 +30,6 @@ public class PhotoDaoImpl extends AbstractPersistenceProducer implements PhotoDA
     public List<Photo> findAll() {
         List<Photo> allPhotos = getEntityManager().createQuery("FROM Photo", Photo.class)
                 .getResultList();
-        logger.debug(allPhotos + " findAll: -" + allPhotos.size());
         return allPhotos;
     }
 
@@ -48,6 +46,5 @@ public class PhotoDaoImpl extends AbstractPersistenceProducer implements PhotoDA
     @Override
     public void delete(Photo entity) {
         getEntityManager().remove(entity);
-        logger.debug(" Photo - delete: - " + entity);
     }
 }

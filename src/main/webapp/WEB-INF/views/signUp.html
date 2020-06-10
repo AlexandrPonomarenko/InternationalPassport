@@ -50,9 +50,7 @@
 
                         <div class="form-group">
                             <label class="labelForm" for="formBirthDay">Birth day</label>
-<!--                            <input type="date" class="form-control" th:value="*{birthDate}" th:field="*{birthDate}" id="formBirthDay" placeholder="Birth day">-->
                             <input type="date" class="form-control" th:field="*{birthDate}" id="formBirthDay" placeholder="Birth day">
-<!--                            <input type="text" class="form-control" th:field="*{birthDate}" id="formBirthDay" placeholder="Birth day">-->
                             <span th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}">BirthDate Error</span>
                         </div>
 
@@ -65,7 +63,6 @@
                         <div class="form-group">
                             <label class="labelForm" for="formRepPass">Repeat password</label>
                             <input type="password" class="form-control" th:field="*{repeatPassword}" id="formRepPass" placeholder="Repeat password">
-<!--                            <span th:if="${#fields.hasErrors('name')}" th:field="*{name}">Name Error</span>-->
                         </div>
                         <button type="submit" class="btn btn-primary btnForm">Sign in</button>
                     </form>

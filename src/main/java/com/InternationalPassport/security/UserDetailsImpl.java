@@ -20,8 +20,6 @@ public class UserDetailsImpl implements UserDetails {
     private List<Role> roles;
     private Map<String, String> tempRoles = new HashMap<>();
 
-//    @Autowired
-//    private CustomerService customerService;
 
     public UserDetailsImpl(Customer customer) {
         this.customer = customer;
@@ -46,8 +44,7 @@ public class UserDetailsImpl implements UserDetails {
             authorities.add(new SimpleGrantedAuthority(tempRoles.get("Manager")));
             authorities.add(new SimpleGrantedAuthority(tempRoles.get("User")));
         }
-//        final List<GrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_User"));
-        logger.debug("getAuthorities --->> " + authorities.get(0).getAuthority());
+
         return authorities;
     }
 
@@ -84,11 +81,6 @@ public class UserDetailsImpl implements UserDetails {
     public Customer getCust() {
         return customer;
     }
-
-//    public void initCustomer() {
-//        logger.debug(customerService + "INIT YO -------- " +  customer);
-//        customerService.update(customer);
-//    }
 
     private void initRoles() {
         tempRoles.put("CEO", "ROLE_CEO");

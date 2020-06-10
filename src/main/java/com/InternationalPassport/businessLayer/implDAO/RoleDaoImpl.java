@@ -17,9 +17,6 @@ public class RoleDaoImpl extends AbstractPersistenceProducer implements RoleDAO 
 
     private static final Logger logger = LogManager.getLogger(RoleDaoImpl.class);
 
-//    @Autowired
-//    private EntityManager entityManager;
-
     @Override
     public Role findById(Integer id) {
         Role role = null;
@@ -28,11 +25,10 @@ public class RoleDaoImpl extends AbstractPersistenceProducer implements RoleDAO 
                     .setParameter("id", id)
                     .getResultList();
             if(roles.isEmpty()) {
-                logger.debug("RETURN NULL");
                 return role;
             }
             role = roles.get(0);
-            logger.debug(role + " ROLE RoleDaoImpl " + role.getId());
+
         } catch (JDBCException e) {
             logger.debug(" NO RESULT EXEPTION" + e);
         }
@@ -54,23 +50,19 @@ public class RoleDaoImpl extends AbstractPersistenceProducer implements RoleDAO 
     @Override
     public void persist(Role entity) {
         getEntityManager().persist(entity);
-        logger.debug("RoleDaoImpl Save -- " + entity);
     }
 
     @Override
     public void update(Role entity) {
         if(findById(entity.getId()).getId() == null) {
             getEntityManager().persist(entity);
-            logger.debug("RoleDaoImpl Save  -- " + entity);
         } else {
             getEntityManager().merge(entity);
-            logger.debug("RoleDaoImpl Update  -- " + entity);
         }
     }
 
     @Override
     public void delete(Role entity) {
         getEntityManager().remove(entity);
-        logger.debug("RoleDaoImpl delete -- " + entity);
     }
 }

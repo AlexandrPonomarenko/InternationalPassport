@@ -22,24 +22,9 @@ public class MyAccessDeniedHandler implements AccessDeniedHandler {
 
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException e) throws IOException, ServletException {
-        logger.debug(DispatcherServlet.DEFAULT_CONTEXT_CLASS + "DEBUG from MyAccessDeniedHandler --> " + e.getMessage());
-//        response.sendRedirect( request.getContextPath() + "/error");
-
-        logger.debug("contexPath" +  request.getContextPath());
-        logger.debug("getRequestURL()" +  request.getRequestURL());
-        logger.debug("getRequestURI()" +  request.getRequestURI());
         request.setAttribute("directQuery", true);
         request.setAttribute("user" , "Sorry " + request.getUserPrincipal().getName() + " but");
         request.setAttribute("accessDenied", e.getMessage());
         request.getRequestDispatcher("error").forward(request, response);
     }
-
-//    private ModelAndView forwardToErrorPage(HttpServletRequest httpServletRequest) {
-//        ModelAndView modelAndView = new ModelAndView();
-//        logger.debug("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-//        modelAndView.setViewName(httpServletRequest.getContextPath() + "/error");
-//        return modelAndView;
-//    }
-
-
 }

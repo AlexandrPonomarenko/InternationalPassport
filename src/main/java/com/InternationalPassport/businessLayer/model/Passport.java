@@ -26,8 +26,6 @@ public class Passport implements Serializable {
     @Column(name = "type", nullable = false)
     private String type;
 
-//    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    @JoinColumn(name = "customer", nullable = false)
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "passport")
     private Customer customer;
 

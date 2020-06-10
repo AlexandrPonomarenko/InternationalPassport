@@ -32,7 +32,6 @@ public class CustomerValidator implements org.springframework.validation.Validat
         ValidationUtils.rejectIfEmpty(errors, "name", "customer.name.NotNull");
         ValidationUtils.rejectIfEmpty(errors, "patronymic", "customer.patronymic.NotNull");
         ValidationUtils.rejectIfEmpty(errors, "lastName", "customer.lastName.NotNull");
-//        ValidationUtils.rejectIfEmpty(errors, "age", "customer.age.NotNull");
         ValidationUtils.rejectIfEmpty(errors, "birthDate", "customer.birthDate.NotNull");
         ValidationUtils.rejectIfEmpty(errors, "email", "customer.email.NotNull");
         ValidationUtils.rejectIfEmpty(errors, "login", "customer.login.NotNull");
@@ -55,12 +54,5 @@ public class CustomerValidator implements org.springframework.validation.Validat
         if (!(customer.getPassword().equals(customer.getRepeatPassword()))) {
             errors.rejectValue("repeatPassword", "customer.repeatPassword.same");
         }
-
-//        for (FieldError f : errors.getFieldErrors()) {
-//            logger.debug(f.getDefaultMessage() + " MES " + f.getField());
-//        }
-//
-//        logger.debug(errors.getFieldErrors().size() + " SIZE");
-
     }
 }

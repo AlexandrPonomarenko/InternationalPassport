@@ -35,18 +35,8 @@ public class CustomerInfoController {
 
     private SearchPassportForm searchPassportForm = new SearchPassportForm();
 
-//    @RequestMapping(value = "/control/customer", method = RequestMethod.GET)
-//    public ModelAndView infoCustomer(@RequestParam(required = false) String login, ModelAndView model) {
-//        model.addObject("searchPassportForm", searchPassportForm);
-//        model.addObject("customers", getCustomer(login));
-//        model.setViewName("customer");
-//        logger.debug("PARAM " + login);
-//        return model;
-//    }
-
     @RequestMapping(value = {"/control/customer", "/control/customer/{login}", "/ceo/customer", "/ceo/customer/{login}"}, method = RequestMethod.GET)
     public ModelAndView infoCustomer(@PathVariable(required = false) String login, ModelAndView model) {
-        logger.debug("PARAM " + login);
         customer = getCustomer(login);
         address = getAddress(customer.getId());
         passport = getPassport(customer.getId());

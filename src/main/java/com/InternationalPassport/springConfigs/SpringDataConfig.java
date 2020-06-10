@@ -23,11 +23,8 @@ import java.util.Properties;
 @Configuration
 @PropertySource("classpath:application.properties")
 @ComponentScan("com.InternationalPassport")
-//@ComponentScans(value = { @ComponentScan("com.InternationalPassport.controller"),
-//        @ComponentScan("com.InternationalPassport.businessLayer.DAO"),
-//        @ComponentScan("com.InternationalPassport.businessLayer.service")})
 @EnableTransactionManagement
-@EnableJpaRepositories("com.InternationalPassport.businessLayer.implDAO") // need turn on just for test
+@EnableJpaRepositories("com.InternationalPassport.businessLayer.implDAO")
 public class SpringDataConfig {
 
     @Autowired
@@ -37,9 +34,7 @@ public class SpringDataConfig {
     public LocalContainerEntityManagerFactoryBean getEntityManagerFactoryBean() {
         final LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
         factoryBean.setDataSource(dataSource());
-//        factoryBean.setPackagesToScan(new String [] {"com.InternationalPassport.businessLayer.model"});
 
-        // Just want test
         factoryBean.setPackagesToScan("com.InternationalPassport.businessLayer.model");
 
         final JpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
@@ -74,15 +69,6 @@ public class SpringDataConfig {
     }
 
     private Properties getJpaProperties() {
-//        final Properties pr = new Properties();
-//        pr.put("hibernate.dialect", env.getProperty("hibernate.dialect"));
-//        pr.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
-//        pr.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
-//        pr.put("hibernate.format_sql", env.getProperty("hibernate.format_sql"));
-//        pr.put("hibernate.generate_statistics", env.getProperty("hibernate.generate_statistics"));
-//
-//        return pr;
-
         final Properties pr = new Properties();
         pr.setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
         pr.setProperty("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));

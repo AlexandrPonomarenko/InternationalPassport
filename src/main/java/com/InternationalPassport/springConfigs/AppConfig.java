@@ -41,7 +41,6 @@ public class AppConfig extends AbstractAnnotationConfigDispatcherServletInitiali
         ServletRegistration.Dynamic appServlet = servletContext.addServlet("mvc", new DispatcherServlet(new GenericWebApplicationContext()));
 
         appServlet.addMapping("/uploadImage");
-//        appServlet.setLoadOnStartup(1);
 
         MultipartConfigElement mce = new MultipartConfigElement(TMP_FOLDER, MAX_UPLOAD_SIZE, MAX_UPLOAD_SIZE * 2, MAX_UPLOAD_SIZE / 2);
         appServlet.setMultipartConfig(mce);

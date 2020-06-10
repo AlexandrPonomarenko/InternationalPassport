@@ -26,19 +26,15 @@ public class AddressServiceImpl implements AddressService {
         Address address = null;
         try {
             address = addressDAO.findById(id);
-            logger.debug("Service Address findById --- " + address.toString());
         } catch (DataAccessException e) {
             logger.error("Address error from findById " + e);
         }
 
-        logger.debug("Service Address findById --- " + address);
         return address;
     }
 
     @Override
     public Address findByQuery(String query) {
-//        Address address = addressDAO.findById(id);
-//        logger.debug("Service Address findById --- " + address);
         return null;
     }
 
@@ -47,7 +43,6 @@ public class AddressServiceImpl implements AddressService {
         List<Address> addresses = null;
         try {
             addresses = addressDAO.findAll();
-            logger.debug("Service Address findAll --- " + addresses.size());
         } catch (DataAccessException e ) {
             logger.error("Error was in  Address findAll --- " + e);
         }
@@ -57,7 +52,6 @@ public class AddressServiceImpl implements AddressService {
     @Override
     public void persist(Address entity) {
         try {
-            logger.debug("Service Address persist --- " + entity);
             addressDAO.persist(entity);
         }catch (DataAccessException e ) {
             logger.error("Error was service Address persist --- " + e);
@@ -67,7 +61,6 @@ public class AddressServiceImpl implements AddressService {
     @Override
     public void update(Address entity) {
          try {
-             logger.debug("Service Address update --- " + entity);
              addressDAO.update(entity);
          }catch (DataAccessException e ) {
              logger.error("Service Address update --- " + e);
@@ -77,7 +70,6 @@ public class AddressServiceImpl implements AddressService {
     @Override
     public void delete(Address entity) {
         try {
-            logger.debug("Service Address delete --- " + entity);
             addressDAO.delete(entity);
         } catch (DataAccessException e ) {
             logger.error("Service Address delete --- " + e);

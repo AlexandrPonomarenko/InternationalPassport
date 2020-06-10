@@ -27,7 +27,6 @@ public class AddressDaoImpl extends AbstractPersistenceProducer implements Addre
                     .setParameter("id", id)
                     .getSingleResult();
         } catch (NoResultException e ) {
-            logger.debug("findById - >  NoResultException " + e.getMessage()); ;
         }
 
         return address;

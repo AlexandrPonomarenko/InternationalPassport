@@ -57,8 +57,6 @@ public class SignUpController {
         logger.debug("SIGH-UP login customer " +  customer.toStringLogin());
 
         customerValidator.validate(customer, bindingResult);
-//        logger.debug("SIGH-UP login customer " +  customer.toStringLogin());
-//        logger.debug("SIGH-UP login searchPassportForm " +  searchPassportForm.toString());
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("searchPassportForm", new SearchPassportForm());
@@ -66,7 +64,7 @@ public class SignUpController {
         }
 
         saveCustomer(customer);
-        emailService.sendRegistrationEmail(/*customer.getEmail()*/ "furriets@gmail.com", customer.getName(), "google.com");
+        emailService.sendRegistrationEmail("furriets@gmail.com", customer.getName(), "google.com");
         return "redirect:/home";
     }
 
@@ -78,20 +76,4 @@ public class SignUpController {
             customerService.persist(customer);
         }
     }
-
-
-    //TODO just for tests
-    @RequestMapping(value = "/testfile", method = RequestMethod.GET)
-    public String test(Model model) {
-        model.addAttribute("searchPassportForm", searchPassportForm);
-        model.addAttribute("test", new String());
-        return "testfile";
-    }
-
-    @RequestMapping(value = "/testfile", method = RequestMethod.POST)
-    public String getTest(@RequestParam(value = "test", required = false) String test, SearchPassportForm searchPassportForm) {
-        logger.debug("TESZT STRING " + test);
-        return "testfile";
-    }
-
 }

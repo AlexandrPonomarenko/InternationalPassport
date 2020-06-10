@@ -38,28 +38,21 @@ public class ControlController {
     @RequestMapping(value = "/control", method = RequestMethod.POST)
     @ResponseBody
     public CustomerTransferModel blockCustomer (@RequestBody CustomerTransferModel ctm) {
-        logger.debug("customer for block ");
-        logger.debug("CUSSSSSSSSS " + ctm.toString());
-//        model.addAttribute("searchPassportForm", searchPassportForm);
-//        model.addAttribute("customers", prepareCustomer());
 
-//        blockUser(ctm);
         buildResponseObject(blockUser(ctm));
-//        return customerTest;
         return customerTransferModel;
     }
 
     private List<Customer> prepareCustomer() {
         List<Customer> customers = customerService.findByRole("User");
-        logger.debug("FIND BY ROLE YO " + customers);
+
         return  customers;
     }
 
     private Customer blockUser(CustomerTransferModel ctm) {
         Customer customer = customerService.findByLogin(ctm.getLogin());
         customer.setStatusAccount(!ctm.isStatusAccount());
-        customer.setRepeatPassword("qweasdzxcrtyDSAv231xzX"); // with this need something to do!! here error!
-        logger.debug("BLOCK USER -- " + customer);
+
         customerService.update(customer);
         return customer;
     }

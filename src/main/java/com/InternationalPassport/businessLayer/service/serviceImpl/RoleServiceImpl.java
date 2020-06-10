@@ -26,7 +26,6 @@ public class RoleServiceImpl implements RoleService {
         Role role = null;
         try {
             role = roleDAO.findById(id);
-            logger.debug("Service Role findById ---- " + role);
         } catch (DataAccessException e) {
             logger.error("Error Service Role findById ---- " + e);
         }
@@ -36,8 +35,6 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public Role findByQuery(String query) {
-//        Role role = roleDAO.findById(id);
-//        logger.debug("Service Role findByQuery ---- " + role);
         return null;
     }
 
@@ -46,7 +43,6 @@ public class RoleServiceImpl implements RoleService {
         List<Role> roles = null;
         try {
             roles = roleDAO.findAll();
-            logger.debug("Service Role findAll ---- " + roles);
         } catch (DataAccessException e ) {
             logger.error("Error Service Role findAll ---- " + e);
         }
@@ -57,7 +53,6 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public void persist(Role entity) {
         try {
-            logger.debug("Service Role persist ---- " + entity);
             roleDAO.persist(entity);
         } catch (DataAccessException e ) {
             logger.error("Error Service Role persist ---- " + e);
@@ -68,13 +63,10 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public void update(Role entity) {
         try {
-            logger.debug("Service Role update ---- " + entity);
             roleDAO.update(entity);
         } catch (DataAccessException e ) {
             logger.error("Error Service Role update ---- " + e);
         }
-
-
     }
 
     @Override
