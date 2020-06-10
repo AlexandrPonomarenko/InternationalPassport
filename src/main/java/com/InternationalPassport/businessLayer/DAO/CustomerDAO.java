@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface CustomerDAO extends BaseDAO<Customer>{
+public interface CustomerDAO extends BaseDAO<Customer> {
     List<Customer> findByFirstName(String firstName);
     List<Customer> findByRole(String role);
     Customer findByLogin(String login);

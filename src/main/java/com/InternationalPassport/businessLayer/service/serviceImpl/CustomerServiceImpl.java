@@ -18,7 +18,7 @@ import java.util.List;
 @Transactional
 public class CustomerServiceImpl implements CustomerService {
 
-    private static final Logger loger = LogManager.getLogger(CustomerServiceImpl.class);
+    private static final Logger logger = LogManager.getLogger(CustomerServiceImpl.class);
 
     @Autowired
     CustomerDAO customerDAO;
@@ -28,9 +28,9 @@ public class CustomerServiceImpl implements CustomerService {
         List<Customer> customerList = null;
         try {
             customerList = customerDAO.findByFirstName(firstName);
-            loger.debug("Service Customer findByFirstName -- " + customerList.size());
+            logger.debug("Service Customer findByFirstName -- " + customerList.size());
         } catch (DataAccessException e ) {
-            loger.error("Was error from findByFirstName " + e.getMessage());
+            logger.error("Was error from findByFirstName " + e.getMessage());
         }
 
         return customerList;
@@ -41,9 +41,9 @@ public class CustomerServiceImpl implements CustomerService {
         List<Customer> customerList = null;
         try {
             customerList = customerDAO.findByRole(role);
-            loger.debug("Service Customer findByRole -- " + customerList.size());
+            logger.debug("Service Customer findByRole -- " + customerList.size());
         } catch (DataAccessException e ) {
-            loger.error("Was error from findByRole " + e.getMessage());
+            logger.error("Was error from findByRole " + e.getMessage());
         }
          return customerList;
     }
@@ -53,9 +53,9 @@ public class CustomerServiceImpl implements CustomerService {
         Customer customer = null;
         try{
             customer = customerDAO.findByLogin(login);
-            loger.debug("Service Customer findByLogin -- " + customer);
+            logger.debug("Service Customer findByLogin -- " + customer);
         } catch (DataAccessException e) {
-            loger.error("Was error from findByLogin " + e.getMessage());
+            logger.error("Was error from findByLogin " + e.getMessage());
         }
 
         return customer;
@@ -66,9 +66,9 @@ public class CustomerServiceImpl implements CustomerService {
         Customer customer = null;
         try {
             customer = customerDAO.findByEmail(email);
-            loger.debug("Service Customer findByEmail -- " + customer);
+            logger.debug("Service Customer findByEmail -- " + customer);
         } catch (DataAccessException e){
-            loger.error("Was error from findByLogin " + e.getMessage());
+            logger.error("Was error from findByLogin " + e.getMessage());
         }
 
         return customer;
@@ -79,9 +79,9 @@ public class CustomerServiceImpl implements CustomerService {
         Customer customer = null;
         try {
             customer = customerDAO.findById(id);
-            loger.debug("Service Customer findById -- " + customer);
+            logger.debug("Service Customer findById -- " + customer);
         } catch (DataAccessException e) {
-            loger.error("Error was in findById " + e.getMessage());
+            logger.error("Error was in findById " + e.getMessage());
         }
 
         return customer;
@@ -92,26 +92,33 @@ public class CustomerServiceImpl implements CustomerService {
         Customer customer = null;
         try {
             customer = customerDAO.findById(id);
-            loger.debug("Service Customer findById -- " + customer);
+            logger.debug("Service Customer findById -- " + customer);
         } catch (DataAccessException e) {
-            loger.error("Error was in findById " + e.getMessage());
+            logger.error("Error was in findById " + e.getMessage());
         }
-        if (customer.getAddress() != null || customer.getPassport() != null) {
-            customer.getAddress().getCustomerList().size();
+
+        initAllEntity(customer);
+
+        return customer;
+    }
+
+    @Override
+    public Customer findByLoginInitAll(String login) {
+        Customer customer = null;
+        try{
+            customer = customerDAO.findByLogin(login);
+            logger.debug("Service Customer findByLogin -- " + customer);
+        } catch (DataAccessException e) {
+            logger.error("Was error from findByLogin " + e.getMessage());
         }
-        if (customer.getPassport() != null) {
-            customer.getPassport().getId();
-            loger.debug("PAAAAAAASSSSSSSSSPPPOOORRRRRRRTTTTTT " + customer.getPassport().getId());
-        }
+
+        initAllEntity(customer);
 
         return customer;
     }
 
     @Override
     public Customer findByQuery(String query) {
-//        Customer customer = customerDAO.findByQuery(query);
-//        loger.debug("Service Customer findByQuery -- " + customer);
-//        return customer;
         return null;
     }
 
@@ -120,9 +127,9 @@ public class CustomerServiceImpl implements CustomerService {
         List<Customer> customers = null;
         try {
             customers = customerDAO.findAll();
-            loger.debug("Service Customer findAll -- " + customers.size());
+            logger.debug("Service Customer findAll -- " + customers.size());
         } catch (DataAccessException e) {
-            loger.error("Error was in findAll " + e.getLocalizedMessage());
+            logger.error("Error was in findAll " + e.getLocalizedMessage());
         }
 
         return customers;
@@ -131,20 +138,20 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void persist(Customer entity) {
         try {
-            loger.debug("Service Customer persist -- " + entity);
+            logger.debug("Service Customer persist -- " + entity);
             customerDAO.persist(entity);
         } catch (DataAccessException e) {
-            loger.error("Error was in persist " + e.getMessage());
+            logger.error("Error was in persist " + e.getMessage());
         }
     }
 
     @Override
     public void update(Customer entity) {
         try {
-            loger.debug("Service Customer update -- " + entity);
+            logger.debug("Service Customer update -- " + entity);
             customerDAO.update(entity);
         } catch (DataAccessException e) {
-            loger.error("Error was in update " + e.getMessage());
+            logger.error("Error was in update " + e.getMessage());
         }
 
     }
@@ -152,11 +159,24 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void delete(Customer entity) {
         try {
-            loger.debug("Service Customer delete -- " + entity);
+            logger.debug("Service Customer delete -- " + entity);
             customerDAO.delete(entity);
         } catch (DataAccessException e) {
-            loger.error("Error was in delete " + e.getMessage());
+            logger.error("Error was in delete " + e.getMessage());
         }
 
+    }
+
+    private void initAllEntity(Customer customer) {
+        if (customer.getAddress() != null || customer.getPassport() != null) {
+            customer.getAddress().getCustomerList().size();
+        }
+        if (customer.getPassport() != null) {
+            customer.getPassport().getId();
+        }
+
+        if (customer.getPhotos() != null) {
+            customer.getPhotos().size();
+        }
     }
 }

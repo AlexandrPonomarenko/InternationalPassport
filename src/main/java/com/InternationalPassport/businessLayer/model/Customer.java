@@ -42,12 +42,10 @@ public class Customer implements Serializable {
     private String lastName;
 
     @NotNull
-//    @CustomerAgeConstrain
     @Column(name = "age", nullable = false)
     private Integer age;
 
     @NotNull
-//    @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "birthData", nullable = false)
     private LocalDate birthDate;
@@ -55,7 +53,6 @@ public class Customer implements Serializable {
 
     @NotNull
     @Email
-//    @Basic
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
@@ -88,6 +85,9 @@ public class Customer implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "address")
     private Address address;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "customer")
+    private List<Photo> photos = new ArrayList<>();
 
     public Customer () { }
 
@@ -223,6 +223,14 @@ public class Customer implements Serializable {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public List<Photo> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(List<Photo> photos) {
+        this.photos = photos;
     }
 
     @Override

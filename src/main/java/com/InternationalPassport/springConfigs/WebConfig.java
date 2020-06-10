@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.thymeleaf.extras.springsecurity5.dialect.SpringSecurityDialect;
@@ -19,6 +20,8 @@ import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
+
+import javax.servlet.MultipartConfigElement;
 //import sun.security.validator.Validator;
 
 @Configuration
@@ -74,6 +77,7 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/resources/jsFiles/**").addResourceLocations("/WEB-INF/resources/jsFiles/");
         registry.addResourceHandler("/resources/css/**").addResourceLocations("/WEB-INF/resources/css/");
         registry.addResourceHandler("/resources/bootstrapComponent/**").addResourceLocations("/WEB-INF/resources/bootstrapComponent/");
+        registry.addResourceHandler("/resources/images/**").addResourceLocations("/WEB-INF/resources/images/");
     }
 
     @Bean
@@ -90,5 +94,10 @@ public class WebConfig implements WebMvcConfigurer {
         LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
         bean.setValidationMessageSource(messageSource());
         return bean;
+    }
+
+    @Bean
+    public StandardServletMultipartResolver multipartResolver () {
+        return new StandardServletMultipartResolver();
     }
 }

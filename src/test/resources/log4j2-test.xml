@@ -35,6 +35,7 @@
 
         <Logger name="com.InternationalPassport.businessLayer.implDAO.CustomerDaoImplTest" level="debug"/>
         <Logger name="com.InternationalPassport.businessLayer.implDAO.RoleDaoImplTest" level="debug"/>
+        <Logger name="com.InternationalPassport.helper.CheckPathFileTest" level="debug"/>
 
         <Root level="info">
             <AppenderRef ref="Console" />

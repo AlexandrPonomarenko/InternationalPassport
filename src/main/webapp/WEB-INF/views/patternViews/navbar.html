@@ -13,13 +13,12 @@
             <p sec:authorize="!isAuthenticated()">
                 <a href="/InternationalPassport/singin" th:href="@{/signin}" class="flex-sm-fill text-sm-center nav-link">signIn</a>
             </p>
+            <a href="#" th:href="@{/passportView}" class="flex-sm-fill text-sm-center nav-link">View</a>
             <a href="#" th:href="@{/main}" class="flex-sm-fill text-sm-center nav-link">We</a>
             <a href="/InternationalPassport/signUp" th:href="@{/signUp}" class="flex-sm-fill text-sm-center nav-link">Sing Up</a>
             <a href="/InternationalPassport/home" th:href="@{/home}" class="flex-sm-fill text-sm-center nav-link">home</a>
             <a href="/InternationalPassport/testfile" th:href="@{/testfile}" class="flex-sm-fill text-sm-center nav-link">Test</a>
             <a class="flex-sm-fill text-sm-center nav-link disabled" href="#">Disabled</a>
-<!--            <form action="#" th:action="@{/main}" method="post" class="form-inline">-->
-<!--                <input class="form-control mr-sm-2" type="search" name="seria" th:value="${seria}" placeholder="Search" aria-label="Search">-->
             <form action="#" th:action="@{/main}" th:object="${searchPassportForm}" method="post" class="form-inline">
                 <input class="form-control mr-sm-2" type="search" th:field="*{seria}" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
