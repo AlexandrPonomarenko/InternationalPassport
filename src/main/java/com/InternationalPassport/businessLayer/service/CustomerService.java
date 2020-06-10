@@ -7,6 +7,7 @@ import java.util.List;
 public interface CustomerService {
     List<Customer> findByFirstName(String firstName);
     Customer findByLogin(String login);
+    Customer findByLoginInitAll(String login);
     Customer findByEmail(String email);
     Customer findById(Integer id);
     Customer findByIdInitAll(Integer id);

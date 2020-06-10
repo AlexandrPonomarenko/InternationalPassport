@@ -19,6 +19,15 @@
 <!--             444 This content is only shown to users.-->
 <!--        </div>-->
 
+        Logged user: <span sec:authentication="name">Bob</span><br>
+        Roles: <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span>
+        <th:block th:if="${customer.statusAccount}">
+            <p th:text="${customer.name} + ' your account is blocked, please contact the manager'"></p>
+        </th:block>
+
+        <p>You can edit your photo</p>
+        <div><a th:href="@{/uploadImage}">Edit photo</a></div>
+
         <div class="personal-data">
             <p>Your personal data</p>
             <div class="customer-data">
@@ -114,11 +123,9 @@
             </div>
         </div>
 
-        Logged user: <span sec:authentication="name">Bob</span><br>
-        Roles: <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span>
-        <th:block th:if="${customer.statusAccount}">
-            <p th:text="${customer.name} + ' your account is blocked, please contact the manager'"></p>
-        </th:block>
+        <div>
+            <img th:src="@{(${photo.rightPath})}">
+        </div>
     </section>
 </body>
 </html>

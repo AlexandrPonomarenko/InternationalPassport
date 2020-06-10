@@ -86,7 +86,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/resources/js/**")
                 .antMatchers("/resources/jsFiles/**")
                 .antMatchers("/resources/css/**")
-                .antMatchers("/resources/patternViews/**");
+                .antMatchers("/resources/patternViews/**")
+                .antMatchers("/resources/images/**");
     }
 
     @Override
@@ -100,12 +101,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .contentSecurityPolicy ( "script-src 'self'").and()
                 .cacheControl();
         http.authorizeRequests()
-                .antMatchers("/loadPage").hasAnyRole("CEO", "Manager", "User")
                 .antMatchers("/home").hasAnyRole("CEO", "Manager", "User")
+                .antMatchers("/uploadImage").hasAnyRole("CEO", "Manager", "User")
                 .antMatchers("/control", "/control/customer", "/control/customer/*", "/control/**").hasAnyRole("CEO", "Manager")
                 .antMatchers("/ceo", "/ceo/customer", "/ceo/customer/*",  "/ceo**").hasAnyRole("CEO")
                 .antMatchers("/error").hasAnyRole("CEO", "Manager", "User")
-                .antMatchers("/main", "/signin", "/signUp").permitAll()
+                .antMatchers("/main", "/signin", "/signUp", "/passportView").permitAll()
                 .antMatchers("/**").permitAll()
                 .anyRequest().authenticated()
                 .and()

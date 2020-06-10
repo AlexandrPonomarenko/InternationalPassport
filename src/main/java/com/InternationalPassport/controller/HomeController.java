@@ -70,6 +70,10 @@ public class HomeController {
         model.addAttribute("customer", authCustomer);
         model.addAttribute("address", authCustomer.getAddress());
         model.addAttribute("passport", authCustomer.getPassport());
+        model.addAttribute("photo", authCustomer.getPhotos().get(0));
+
+        logger.debug("PHOTO YO !!!!!!!!!!! --- > " + authCustomer.getPhotos().get(0));
+
         if (authCustomer.getAddress() == null) {
             model.addAttribute("address", new Address());
         }

@@ -37,7 +37,7 @@ public class ControlController {
 
     @RequestMapping(value = "/control", method = RequestMethod.POST)
     @ResponseBody
-    public CustomerTransferModel blockCustomer (@RequestBody CustomerTransferModel ctm/*, Model model, HttpServletRequest request*/) {
+    public CustomerTransferModel blockCustomer (@RequestBody CustomerTransferModel ctm) {
         logger.debug("customer for block ");
         logger.debug("CUSSSSSSSSS " + ctm.toString());
 //        model.addAttribute("searchPassportForm", searchPassportForm);

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{patternViews/layout}"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <section layout:fragment="content">
+        <h1>Here you can show you passport</h1>
+        <p>Please enter you login</p>
+
+        <form th:action="@{/passportView}" method="post">
+            <input type="text" name="login">
+            <input type="submit" value="Show">
+        </form>
+
+        <th:block th:if="${customer}" >
+            <div class="block-image" style="width: 100px; height: 100px">
+                <img th:src="@{(${photo.rightPath })}">
+            </div>
+        </th:block>
+
+        <th:block th:if="${notFound}" >
+            <h1 th:text="${notFound}"></h1>
+        </th:block>
+    </section>
+</body>
+</html>
