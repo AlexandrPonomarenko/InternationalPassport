@@ -1,0 +1,4 @@
+drop table my_test_schema.customer cascade;
+drop table my_test_schema.role cascade;
+drop table my_test_schema.address cascade;
+drop table my_test_schema.passport cascade;

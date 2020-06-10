@@ -1,0 +1,29 @@
+.container-signup {
+    display: flex;
+    flex-direction: row;
+}
+.sign-up {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-grow: 1;
+    width: 50%;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.picture {
+    display: flex;
+    flex-grow: 1;
+    background-color: red;
+    width: 50%;
+}
+.labelForm {
+    margin-bottom: 0px;
+}
+.top{
+    margin-top: 10px;
+}
+
+.btnForm {
+    margin: 5px;
+}

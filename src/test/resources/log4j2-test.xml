@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration monitorInterval = "30">
+    <Appenders>
+<!--        Console Appender-->
+<!--                old-->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MMM-dd HH:mm:ss a} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+
+    </Appenders>
+    <Loggers>
+
+
+<!--        <Logger name="org.springframework.web" additivity="true">-->
+<!--            <level value="ERROR"/>-->
+<!--            <AppenderRef ref="Console"/>-->
+<!--        </Logger>-->
+
+<!--&lt;!&ndash;        additivity="false"&ndash;&gt;-->
+<!--        <Logger name="com.InternationalPassport.businessLayer" level="debug">-->
+<!--            <AppenderRef ref="Console" />-->
+<!--        </Logger>-->
+
+        <Logger name="com.InternationalPassport.businessLayer" level="trace" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+        <Logger name="com.InternationalPassport.validation" level="trace" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+
+        <Logger name="com.InternationalPassport.security" level="trace" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+        <Logger name="org.springframework.data" level="debug"/>
+
+        <Logger name="com.InternationalPassport.businessLayer.implDAO.CustomerDaoImplTest" level="debug"/>
+        <Logger name="com.InternationalPassport.businessLayer.implDAO.RoleDaoImplTest" level="debug"/>
+        <Logger name="com.InternationalPassport.helper.CheckPathFileTest" level="debug"/>
+
+        <Root level="info">
+            <AppenderRef ref="Console" />
+        </Root>
+    </Loggers>
+</Configuration>

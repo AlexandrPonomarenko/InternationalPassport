@@ -1,15 +1,22 @@
 package com.InternationalPassport.businessLayer.model;
 
 import javax.persistence.*;
-import java.security.PrivateKey;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+// TODO schema = test_schema -- for tests
+// TODO schema = dev_schema -- for work and tests
+// TODO schema = prod_schema -- for deploy
+// TODO schema = my_test_schema -- for custom tables
+
+
 @Entity
-@Table(name = "role" , schema = "test_schema", uniqueConstraints = {@UniqueConstraint(columnNames = "roleId")})
-public class Role {
+@Table(name = "role" , schema = "dev_schema", uniqueConstraints = {@UniqueConstraint(columnNames = "roleId")})
+public class Role implements Serializable {
     @Id
-    @SequenceGenerator(name = "r_idr_seq", sequenceName = "r_idr_seq", allocationSize = 1)
+    @SequenceGenerator(name = "r_idr_seq", schema = "test_schema", sequenceName = "r_idr_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "r_idr_seq")
     @Column(name = "roleId")
     private Integer id;
@@ -18,20 +25,16 @@ public class Role {
     private String role;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "role")
-    private List<Customer> customers;
+    private List<Customer> customers = new ArrayList<Customer>();
 
     public Role() { }
 
-    public Role( String role) {
+    public Role(String role) {
         this.role = role;
     }
 
-    public long getId() {
+    public Integer getId() {
         return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getRole() {
@@ -46,9 +49,8 @@ public class Role {
         return customers;
     }
 
-    public void setCustomers(Customer customer) {
-//        this.customers = customers;
-        customers.add(customer);
+    public void setCustomers(List<Customer> customers) {
+        this.customers = customers;
     }
 
     @Override
@@ -69,7 +71,7 @@ public class Role {
         return "Role{" +
                 "id=" + id +
                 ", role='" + role + '\'' +
-                ", customers=" + customers +
+                ", customers=" + customers.size() +
                 '}';
     }
 }

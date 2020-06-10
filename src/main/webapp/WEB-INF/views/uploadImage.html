@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{patternViews/layout}"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Upload Image</title>
+</head>
+<body>
+    <section layout:fragment="content" >
+        <h1> UPLOAD FILE </h1>
+
+        <form th:action="@{/uploadImage}" enctype="multipart/form-data" method="POST" >
+            <input type="file" name="file" />
+            <input type="submit" value="Upload" />
+        </form>
+
+        <th:block th:if="${message}" >
+            <h1 th:text="${message}"></h1>
+        </th:block>
+    </section>
+</body>
+</html>

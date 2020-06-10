@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      layout:decorate="~{patternViews/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Error</title>
+</head>
+<body>
+<section layout:fragment="content">
+    <span th:text="${directQuery}" > YOYOYOYOYOY </span>
+    <div th:if="${directQuery}">
+        <h1>Something go wrong</h1>
+        <div sec:authorize="isAuthenticated()">
+            <span th:text="${user}"></span>
+            <span th:text="${accessDenied}"></span>
+        </div>
+        <span th:text="${error}" > </span>
+    </div>
+    <a href="/InternationalPassport/main" th:href="@{/main}" class="flex-sm-fill text-sm-center nav-link">Come back to main page.</a>
+
+</section>
+</body>
+</html>

@@ -1,14 +1,21 @@
 package com.InternationalPassport.businessLayer.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+// TODO schema = test_schema -- for tests
+// TODO schema = dev_schema -- for work and tests
+// TODO schema = prod_schema -- for deploy
+// TODO schema = my_test_schema -- for custom tables
+
 @Entity
-@Table(name = "address", schema = "test_schema", uniqueConstraints = {@UniqueConstraint(columnNames = "addressId") })
-public class Address {
+@Table(name = "address", schema = "dev_schema", uniqueConstraints = {@UniqueConstraint(columnNames = "addressId") })
+public class Address implements Serializable {
     @Id
-    @SequenceGenerator(name = "addr_idaddr_seq", sequenceName = "addr_idaddr_seq", allocationSize = 1)
+    @SequenceGenerator(name = "addr_idaddr_seq", schema = "test_schema", sequenceName = "addr_idaddr_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "addr_idaddr_seq")
     @Column(name = "addressId")
     private Integer id;
@@ -16,35 +23,30 @@ public class Address {
     @Column(name = "country", nullable = false)
     private String country;
 
-    @Column(name = "country", nullable = false)
+    @Column(name = "city", nullable = false)
     private String city;
 
-    @Column(name = "country", nullable = false)
+    @Column(name = "street", nullable = false)
     private String street;
 
-    @Column(name = "country", nullable = false)
+    @Column(name = "numberHome", nullable = false)
     private Integer numberHome;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "address")
-    private List<Customer> customerList;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "address", cascade = CascadeType.ALL)
+    private List<Customer> customerList = new ArrayList<Customer>();
 
     public Address() {
     }
 
-    public Address(Integer id, String country, String city, String street, Integer numberHome) {
-        this.id = id;
+    public Address(String country, String city, String street, Integer numberHome) {
         this.country = country;
         this.city = city;
         this.street = street;
         this.numberHome = numberHome;
     }
 
-    public long getId() {
+    public Integer getId() {
         return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getCountry() {
@@ -71,7 +73,7 @@ public class Address {
         this.street = street;
     }
 
-    public long getNumberHome() {
+    public Integer getNumberHome() {
         return numberHome;
     }
 
@@ -83,8 +85,8 @@ public class Address {
         return customerList;
     }
 
-    public void setCustomerList(Customer customer) {
-        this.customerList.add(customer);
+    public void setCustomerList(List<Customer> customers) {
+        this.customerList = customers;
     }
 
     @Override
@@ -108,7 +110,7 @@ public class Address {
                 ", city='" + city + '\'' +
                 ", street='" + street + '\'' +
                 ", numberHome=" + numberHome +
-                ", customerList=" + customerList +
+                ", customerList=" + customerList.size() +
                 '}';
     }
 }

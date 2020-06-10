@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th = "http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{patternViews/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Control</title>
+</head>
+<body>
+<h1>Customer info</h1>
+<section layout:fragment="content">
+    <span>Customer data</span>
+    <div th:if="${customer}">
+        <div>
+            <span>Personal data</span>
+
+            <div th:text="${customer.name}"></div>
+            <div th:text="${customer.patronymic}"></div>
+            <div th:text="${customer.lastName}"></div>
+            <div th:text="${customer.login}"></div>
+            <div th:text="${customer.email}"></div>
+            <div th:text="${customer.age}"></div>
+            <div th:text="${customer.birthDate}"></div>
+            <div th:text="${customer.statusAccount}"></div>
+        </div>
+        <div>
+            <span>Roles</span>
+            <div th:text="${customer.role.role}"></div>
+        </div>
+        <div>
+            <span>Location data</span>
+            <div th:unless="${address}">
+                <span>Customer no added address yet.</span>
+            </div>
+
+            <div th:if="${address}">
+                <div th:text="${address.country}"></div>
+                <div th:text="${address.city}"></div>
+                <div th:text="${address.street}"></div>
+                <div th:text="${address.numberHome}"></div>
+            </div>
+        </div>
+        <div>
+            <span>Passport data</span>
+            <div th:unless="${passport}">
+                <span>Customer no added passport yet.</span>
+            </div>
+
+            <div th:if="${passport}">
+                <div th:text="${passport.seria}"></div>
+                <div th:text="${passport.type}"></div>
+            </div>
+        </div>
+
+        <div>
+            <span>Load data</span>
+        </div>
+    </div>
+    <div th:unless="${customer}">
+        <span>No data user for this login</span>
+    </div>
+</section>
+
+</body>
+</html>
