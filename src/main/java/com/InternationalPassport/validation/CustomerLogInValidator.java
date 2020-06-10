@@ -20,6 +20,5 @@ public class CustomerLogInValidator implements org.springframework.validation.Va
     public void validate(Object o, Errors errors) {
         ValidationUtils.rejectIfEmpty(errors, "login", "customer.login.NotNull");
         ValidationUtils.rejectIfEmpty(errors, "password", "customer.password.NotNull");
-        logger.debug("VALIDATION LOGIN");
     }
 }

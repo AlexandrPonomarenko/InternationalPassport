@@ -41,28 +41,13 @@ public class HomeController {
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public String home(Model model, HttpSession httpSession) {
-//        model.addAttribute("searchPassportForm", searchPassportForm);
-        logger.debug("FROM HOME");
         UsernamePasswordAuthenticationToken authentication = (UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
-        System.out.println("authentication getPrincipal get role ----->>>> " + ((UserDetailsImpl) authentication.getPrincipal()).getCust().getPassword());
-        Customer authCustomer = ((UserDetailsImpl) authentication.getPrincipal()).getCust();
-//        System.out.println("authentication isAuthenticated----->>>> " + authentication.isAuthenticated());
-        System.out.println("GET NAME "  +  ((UserDetailsImpl) authentication.getPrincipal()).getUsername());
-        System.out.println("authentication getCredentials ----->>>> " + (String) SecurityContextHolder.getContext().getAuthentication().getCredentials());
-        System.out.println(" httpSession.getId() ----->>>> " + httpSession.getId());
-        System.out.println(" httpSession. RESULTTTTTTTT () ----->>>> " + httpSession.getAttribute("BRO"));
-        System.out.println("SPRING_SECURITY_CONTEXT ----->>>> " + httpSession.getAttribute("SPRING_SECURITY_CONTEXT"));
-        SecurityContext crt = (SecurityContext) httpSession.getAttribute("SPRING_SECURITY_CONTEXT");
-//        UsernamePasswordAuthenticationToken upat = (UsernamePasswordAuthenticationToken) crt.getAuthentication().getDetails();
-        System.out.println(" CUS DUESD  ----->>>> " + ((UserDetailsImpl) crt.getAuthentication().getPrincipal()).getCust());
+        Customer authCustomer;
 
 
         Authentication auth =  SecurityContextHolder.getContext().getAuthentication();
         Object objCus = auth.getPrincipal();
-        if (objCus instanceof UserDetailsImpl) {
-            UserDetailsImpl c = (UserDetailsImpl) objCus;
-            System.out.println(auth.getName() + " ::: AAAAAAAAAAAAAAA EEEEEEEEEEEEEEEEEEEEE WWWWWWWWWWWWWWWWWw" + c);
-        }
+
 
         authCustomer = getAuthCustomer();
 
@@ -71,8 +56,6 @@ public class HomeController {
         model.addAttribute("address", authCustomer.getAddress());
         model.addAttribute("passport", authCustomer.getPassport());
         model.addAttribute("photo", authCustomer.getPhotos().get(0));
-
-        logger.debug("PHOTO YO !!!!!!!!!!! --- > " + authCustomer.getPhotos().get(0));
 
         if (authCustomer.getAddress() == null) {
             model.addAttribute("address", new Address());
@@ -88,26 +71,11 @@ public class HomeController {
 
     @RequestMapping(value = "/changeData", method = RequestMethod.POST)
     public String changeName(@ModelAttribute(name = "newCustomerData") Customer newCustomerData, Model model) {
-        logger.debug("change name  REDIRECT -- POST -- newCustomerData" + newCustomerData.toStringLogin());
-//        Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
-//        Customer authCustomer = ((UserDetailsImpl) authentication.getPrincipal()).getCust();
-
-//        logger.debug("ADDRES -- " + authCustomer.getAddress());
-
-//        model.addAttribute("customer", authCustomer);
-//        model.addAttribute("newCustomerData", new Customer());
-//        model.addAttribute("address", authCustomer.getAddress());
-//        model.addAttribute("newAddressData", new Address());
-//        model.addAttribute("passport", authCustomer.getPassport());
-//        model.addAttribute("newPassportData", new Passport());
-//        return "redirect:home";
-//        return "forward:home";
         return "home";
     }
 
     @RequestMapping(value = "/addressData", method = RequestMethod.POST)
     public String changeAddressData(@ModelAttribute(name = "newAddressData") Address newAddressData, Model model) {
-        logger.debug("PROCCESS DATA ADDRESS " + newAddressData.toString());
 
         updateAddressCustomer(newAddressData);
 
@@ -116,8 +84,6 @@ public class HomeController {
 
     @RequestMapping(value = "/passportData", method = RequestMethod.POST)
     public String changePassportData(@ModelAttribute(name = "newPassportData") Passport newPassportData, Model model) {
-
-        logger.debug("PROCCESS DATA PASSPORT " + newPassportData.toString());
 
         updatePassportCustomer(newPassportData);
 
@@ -137,7 +103,6 @@ public class HomeController {
         Customer customer = customerService.findByIdInitAll(getAuthCustomer().getId());
         Address findAddress = null;
         if (customer.getAddress() != null) {
-//            findAddress = addressService.findById(customer.getAddress().getId());
             findAddress = customer.getAddress();
             findAddress.setCity(address.getCity());
             findAddress.setStreet(address.getStreet());
@@ -152,7 +117,6 @@ public class HomeController {
     private void updatePassportCustomer(Passport passport) {
         if (passport == null) { return; }
         Customer customer = customerService.findByIdInitAll(getAuthCustomer().getId());
-        logger.debug("PASSPORT -- > " + customer.getPassport());
 
         if (customer.getPassport() != null) {
             Passport findPassport = customer.getPassport();
@@ -165,23 +129,4 @@ public class HomeController {
         customerService.update(customer);
 
     }
-
-//    private void updatePersonalData(Customer customer) {
-//        if (customer == null) { return; }
-//        Customer customer = customerService.findByIdInitAll(getAuthCustomer().getId());
-//        logger.debug("PASSPORT -- > " + customer.getPassport());
-//
-//        if (customer.getPassport() != null) {
-//            Passport findPassport = customer.getPassport();
-//            findPassport.setSeria(passport.getSeria());
-//            findPassport.setType(passport.getType());
-//        } else {
-//            customer.setPassport(passport);
-//            passport.setCustomer(customer);
-//        }
-//        customerService.update(customer);
-//
-//    }
-
-
 }

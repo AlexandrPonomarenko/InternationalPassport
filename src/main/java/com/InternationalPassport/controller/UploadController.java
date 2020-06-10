@@ -38,9 +38,7 @@ public class UploadController {
 
     @RequestMapping(value = "/uploadImage", method = RequestMethod.POST)
     public String uploadImage(@RequestParam("file") MultipartFile file, Model model, RedirectAttributes redirectAttributes) {
-        logger.debug("UPLOAD FILE getContentType" + file.getContentType());
-        logger.debug("UPLOAD FILE getName " + file.getName());
-        logger.debug("UPLOAD FILE getOriginalFilename " + file.getOriginalFilename());
+
         if (file.isEmpty()) {
             redirectAttributes.addFlashAttribute("message", "Sorry file not upload");
             return "redirect:uploadImage";
@@ -62,7 +60,6 @@ public class UploadController {
         fl.setMultipartFile(file);
         fl.setFileName(file.getOriginalFilename());
         fl.loadFile();
-        logger.debug("PATH FOR LOADING " + fl.getPath());
     }
 
     private Customer getAuthCustomer() {
@@ -73,7 +70,6 @@ public class UploadController {
     }
 
     private void updateCustomer() {
-        logger.debug("PATH FROM FL -- > " + fl.getPath().toString());
         Customer customer = getAuthCustomer();
         Photo photo = null;
         if (customer.getPhotos().size() < 1) {

@@ -12,13 +12,6 @@
     <section layout:fragment="content">
         <h1>Welcome to the home Boy</h1>
 
-<!--        <div sec:authorize="isAuthenticated()" >-->
-<!--            <h1>333 it is massage see only aunth users YO</h1>-->
-<!--        </div>-->
-<!--        <div sec:authorize="hasRole('ROLE_User')">-->
-<!--             444 This content is only shown to users.-->
-<!--        </div>-->
-
         Logged user: <span sec:authentication="name">Bob</span><br>
         Roles: <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span>
         <th:block th:if="${customer.statusAccount}">
@@ -63,11 +56,6 @@
                             <input type="text" th:field="*{birthDate}">
                         </div>
 
-<!--                        <span th:text="'Your email : ' + ${customer.email}"></span>-->
-<!--                        <div>-->
-<!--                            <span> Edit your email :</span>-->
-<!--                            <input type="text" th:field="*{email}">-->
-<!--                        </div>-->
                         <input type="submit" value="CHANGE">
                     </form>
                 </div>

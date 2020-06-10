@@ -18,7 +18,6 @@
                     <span th:text="${customer.name}"></span>
                     <span th:text="${customer.email}"></span>
                     <span><a th:href="@{/ceo/customer/{login}(login=${customer.login})}" th:text="${customer.login}"></a></span>
-<!--                    <span th:text="${customer.role.role}"></span>-->
                     <span th:text="${customer.statusAccount}"></span>
                     <form th:id="${customer.statusAccount} + '' + ${customer.id}" th:action="@{/ceo2}"  method="post">
                         <input type="hidden" th:form="${customer.statusAccount} + '' + ${customer.id}" name="login" th:value="${customer.login}">

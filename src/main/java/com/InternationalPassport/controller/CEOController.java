@@ -53,9 +53,8 @@ public class CEOController {
 
     @RequestMapping(value = "/ceo", method = RequestMethod.POST)
     public String postCeo(@ModelAttribute("rcf") RemoveCustomerForm rcf, Model model) {
-        logger.debug("RemoveCustomerForm -- 111111" + rcf.toString());
 
-//        removeCustomer(rcf);
+        removeCustomer(rcf);
         model.addAttribute("customers", prepareCustomer());
         model.addAttribute("roles", prepareRoles());
         model.addAttribute("sRole", new Role());
@@ -65,7 +64,6 @@ public class CEOController {
 
     @RequestMapping(value = "/ceo2", method = RequestMethod.POST)
     public String postCeoTwo(@ModelAttribute("ctm") CustomerTransferModel ctm, Model model) {
-        logger.debug("CustomerTransferModel 22222222222 -- " + ctm.toString());
 
         blockUser(ctm);
 
@@ -78,8 +76,6 @@ public class CEOController {
 
     @RequestMapping(value = "/ceorole", method = RequestMethod.POST)
     public String postCeoRole(@ModelAttribute("role") Role role, @ModelAttribute("ctm") CustomerTransferModel ctm, Model model) {
-        logger.debug("CEO ROLES -- " + role);
-        logger.debug("CEO ROLES ---- CustomerTransferModel ++++ " + ctm.toString());
 
         setNewRole(role, ctm);
         model.addAttribute("customers", prepareCustomer());
@@ -96,7 +92,7 @@ public class CEOController {
 
     private void blockUser(CustomerTransferModel ctm) {
         Customer customer = customerService.findByLogin(ctm.getLogin());
-        logger.debug("customer -- block user " + customer);
+
         if (customer != null) {
             customer.setStatusAccount(!customer.isStatusAccount());
             customerService.update(customer);

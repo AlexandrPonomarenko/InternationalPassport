@@ -24,7 +24,6 @@ public class PhotoServiceImpl implements PhotoService {
         Photo photo = null;
         try {
             photo = photoDAO.findById(id);
-            logger.debug("Service Photo findById -- " + photo);
         } catch (DataAccessException dae) {
             logger.error("Was error from findById " + dae.getMessage());
         }
@@ -42,7 +41,6 @@ public class PhotoServiceImpl implements PhotoService {
         List<Photo> photos = null;
         try {
             photos = photoDAO.findAll();
-            logger.debug("Service Photo findAll -- " + photos.size());
         } catch (DataAccessException dae) {
             logger.error("Was error from findAll " + dae.getMessage());
         }
@@ -53,7 +51,6 @@ public class PhotoServiceImpl implements PhotoService {
     public void persist(Photo entity) {
         try {
             photoDAO.persist(entity);
-            logger.debug("Service Photo persist -- " + entity);
         } catch (DataAccessException dae) {
             logger.error("Was error from persist " + dae.getMessage());
         }
@@ -63,7 +60,6 @@ public class PhotoServiceImpl implements PhotoService {
     public void update(Photo entity) {
         try {
             photoDAO.update(entity);
-            logger.debug("Service Photo update -- " + entity);
         } catch (DataAccessException dae) {
             logger.error("Was error from update " + dae.getMessage());
         }
@@ -73,7 +69,6 @@ public class PhotoServiceImpl implements PhotoService {
     public void delete(Photo entity) {
         try {
             photoDAO.delete(entity);
-            logger.debug("Service Photo delete -- " + entity);
         } catch (DataAccessException dae) {
             logger.error("Was error from delete " + dae.getMessage());
         }

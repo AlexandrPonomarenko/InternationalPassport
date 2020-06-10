@@ -66,8 +66,6 @@ public class Customer implements Serializable {
     @Column(name = "password", nullable = false)
     private String password;
 
-//    @NotNull
-//    @Size(min = 8, max = 256, message = "{customer.repeatPassword.Size}")
     @Transient
     private String repeatPassword;
 

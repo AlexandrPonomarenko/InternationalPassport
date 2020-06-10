@@ -28,7 +28,6 @@ public class CustomerServiceImpl implements CustomerService {
         List<Customer> customerList = null;
         try {
             customerList = customerDAO.findByFirstName(firstName);
-            logger.debug("Service Customer findByFirstName -- " + customerList.size());
         } catch (DataAccessException e ) {
             logger.error("Was error from findByFirstName " + e.getMessage());
         }
@@ -41,7 +40,6 @@ public class CustomerServiceImpl implements CustomerService {
         List<Customer> customerList = null;
         try {
             customerList = customerDAO.findByRole(role);
-            logger.debug("Service Customer findByRole -- " + customerList.size());
         } catch (DataAccessException e ) {
             logger.error("Was error from findByRole " + e.getMessage());
         }
@@ -53,7 +51,6 @@ public class CustomerServiceImpl implements CustomerService {
         Customer customer = null;
         try{
             customer = customerDAO.findByLogin(login);
-            logger.debug("Service Customer findByLogin -- " + customer);
         } catch (DataAccessException e) {
             logger.error("Was error from findByLogin " + e.getMessage());
         }
@@ -66,7 +63,6 @@ public class CustomerServiceImpl implements CustomerService {
         Customer customer = null;
         try {
             customer = customerDAO.findByEmail(email);
-            logger.debug("Service Customer findByEmail -- " + customer);
         } catch (DataAccessException e){
             logger.error("Was error from findByLogin " + e.getMessage());
         }
@@ -79,7 +75,6 @@ public class CustomerServiceImpl implements CustomerService {
         Customer customer = null;
         try {
             customer = customerDAO.findById(id);
-            logger.debug("Service Customer findById -- " + customer);
         } catch (DataAccessException e) {
             logger.error("Error was in findById " + e.getMessage());
         }
@@ -92,7 +87,6 @@ public class CustomerServiceImpl implements CustomerService {
         Customer customer = null;
         try {
             customer = customerDAO.findById(id);
-            logger.debug("Service Customer findById -- " + customer);
         } catch (DataAccessException e) {
             logger.error("Error was in findById " + e.getMessage());
         }
@@ -107,7 +101,6 @@ public class CustomerServiceImpl implements CustomerService {
         Customer customer = null;
         try{
             customer = customerDAO.findByLogin(login);
-            logger.debug("Service Customer findByLogin -- " + customer);
         } catch (DataAccessException e) {
             logger.error("Was error from findByLogin " + e.getMessage());
         }
@@ -127,7 +120,6 @@ public class CustomerServiceImpl implements CustomerService {
         List<Customer> customers = null;
         try {
             customers = customerDAO.findAll();
-            logger.debug("Service Customer findAll -- " + customers.size());
         } catch (DataAccessException e) {
             logger.error("Error was in findAll " + e.getLocalizedMessage());
         }
@@ -138,7 +130,6 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void persist(Customer entity) {
         try {
-            logger.debug("Service Customer persist -- " + entity);
             customerDAO.persist(entity);
         } catch (DataAccessException e) {
             logger.error("Error was in persist " + e.getMessage());
@@ -148,7 +139,6 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void update(Customer entity) {
         try {
-            logger.debug("Service Customer update -- " + entity);
             customerDAO.update(entity);
         } catch (DataAccessException e) {
             logger.error("Error was in update " + e.getMessage());
@@ -159,7 +149,6 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void delete(Customer entity) {
         try {
-            logger.debug("Service Customer delete -- " + entity);
             customerDAO.delete(entity);
         } catch (DataAccessException e) {
             logger.error("Error was in delete " + e.getMessage());

@@ -35,13 +35,11 @@ public class MainController {
         List<Customer> list = getUsersNames();
         model.addAttribute("users", list);
         model.addAttribute("searchPassportForm", searchPassportForm);
-        logger.debug("mainPage, size list is " + list.size());
-        logger.debug(" SSSSSSSSSSSSSSSSSs " +  session.getAttribute("SPRING_SECURITY_CONTEXT"));
+
         return "main";
     }
 
     private List<Customer> getUsersNames() {
-        System.out.println("vieweUserName");
         List<Customer> customers = customerService.findAll();
         return customers;
     }

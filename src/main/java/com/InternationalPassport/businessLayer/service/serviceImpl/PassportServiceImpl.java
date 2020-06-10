@@ -27,7 +27,6 @@ public class PassportServiceImpl implements PassportService {
         Passport passport = null;
         try {
             passport = passportDAO.findById(id);
-            logger.debug("Service Passport findById --- " + passport);
         }catch (DataAccessException e ) {
             logger.error("Passport  findById  error--- " + e.getMessage());
         }
@@ -37,7 +36,6 @@ public class PassportServiceImpl implements PassportService {
 
     @Override
     public Passport findByQuery(String query) {
-//        logger.debug("Service Passport findById --- " + passport);
         return null;
     }
 
@@ -46,7 +44,6 @@ public class PassportServiceImpl implements PassportService {
         List<Passport> passports = null;
         try {
              passports = passportDAO.findAll();
-            logger.debug("Service Passport findAll --- " + passports);
         } catch (DataAccessException e ) {
             logger.error("Error Service Passport findAll --- " + e);
         }
@@ -56,7 +53,6 @@ public class PassportServiceImpl implements PassportService {
     @Override
     public void persist(Passport entity) {
         try {
-            logger.debug("Service Passport persist --- " + entity);
             passportDAO.persist(entity);
         } catch (DataAccessException e ) {
             logger.error("Error Service Passport persist --- " + e);
@@ -67,7 +63,6 @@ public class PassportServiceImpl implements PassportService {
     @Override
     public void update(Passport entity) {
         try {
-            logger.debug("Service Passport update --- " + entity);
             passportDAO.update(entity);
         } catch (DataAccessException e ) {
             logger.error( " Error Service Passport update --- " + e);
@@ -78,12 +73,9 @@ public class PassportServiceImpl implements PassportService {
     @Override
     public void delete(Passport entity) {
         try {
-            logger.debug("Service Passport delete --- " + entity);
             passportDAO.delete(entity);
         } catch (DataAccessException e ) {
             logger.debug("Error Service Passport delete --- " + e);
         }
-
-
     }
 }

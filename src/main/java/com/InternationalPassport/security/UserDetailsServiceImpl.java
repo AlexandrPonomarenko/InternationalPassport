@@ -27,14 +27,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String userLogin) throws UsernameNotFoundException {
-        logger.debug( "DEBUG FROM loadUserByUsername " + userLogin + " ::::");
         Customer customer = customerSecurityRep.findByLogin(userLogin);
 
         if (customer == null) {
             throw new UsernameNotFoundException("User not found.");
         }
 
-        logger.debug("CUSTOMER FROM UserDetailsServiceImpl -- " + customer.getLogin() + "and password " + customer.getPassword());
         return new UserDetailsImpl(customer, getRoles());
     }
 

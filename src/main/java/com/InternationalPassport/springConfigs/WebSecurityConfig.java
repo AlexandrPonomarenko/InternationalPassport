@@ -46,19 +46,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new SecurityUserHelper();
     }
 
-//    @Bean
-//    public ExceptionTranslationFilter exceptionTranslationFilter() {
-//        ExceptionTranslationFilter etf = new ExceptionTranslationFilter(authenticationEntryPoint());
-//        etf.setAccessDeniedHandler(accessDeniedHandler());
-//        return etf;
-//    }
-//
-//    @Bean
-//    public AuthenticationEntryPoint authenticationEntryPoint() {
-//        AuthenticationEntryPoint authenticationEntryPoint = new LoginUrlAuthenticationEntryPoint("/signin");
-//        return authenticationEntryPoint;
-//    }
-
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
@@ -115,20 +102,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .loginProcessingUrl("/signin")
-//                .defaultSuccessUrl("/processSignIn")
-//                .successForwardUrl("/processSignIn")
                 .successHandler(myAuthenticationSuccessHandler())
                 .and()
                 .logout()
-//                .logout().deleteCookies("JSESSIONID")
                 .logoutUrl("/signout")
                 .logoutSuccessUrl("/signin")
                 .and()
-//                    .exceptionHandling().accessDeniedPage("/error");
                 .exceptionHandling().accessDeniedHandler(accessDeniedHandler());
-                /*.and()
-                .sessionManagement()
-                .invalidSessionUrl("/signin")
-                .maximumSessions(1);*/
+
     }
 }

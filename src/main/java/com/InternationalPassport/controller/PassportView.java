@@ -44,7 +44,6 @@ public class PassportView {
         try {
             customerF = customerService.findByLoginInitAll(customer.getLogin());
         } catch (DataAccessException e ) {
-            logger.error("CUSTOMER NOT FOUND" +  e);
         }
         return customerF;
     }
