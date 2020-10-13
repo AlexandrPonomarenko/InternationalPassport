@@ -33,7 +33,7 @@
 <!--      <hibernate-validator>6.0.17.Fina</hibernate-validator>-->
         <sun.email>1.6.2</sun.email>
         <hibernate-validator>6.1.0.Final</hibernate-validator>
-        <jUnit.version>4.12</jUnit.version>
+        <jUnit.version>4.13.1</jUnit.version>
         <logger.Log4J2.version>2.8.2</logger.Log4J2.version>
         <logger.SLF4J.version>1.7.25</logger.SLF4J.version>
 <!--    <logger.SLF4J.version>1.7.5</logger.SLF4J.version>-->
