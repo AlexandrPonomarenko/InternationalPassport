@@ -19,7 +19,7 @@
         <spring.ORM>5.0.0.RELEASE</spring.ORM>
         <spring.data.JPA>2.1.9.RELEASE</spring.data.JPA>
         <spring.data>2.1.9.RELEASE</spring.data>
-        <spring.security>5.0.0.RELEASE</spring.security>
+        <spring.security>5.2.10.RELEASE</spring.security>
         <spring.context.support>5.0.8.RELEASE</spring.context.support>
         <spring.test.version>5.0.0.RELEASE</spring.test.version>
         <thymeleaf.version>3.0.9.RELEASE</thymeleaf.version>
