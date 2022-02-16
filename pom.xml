@@ -24,7 +24,7 @@
         <spring.test.version>5.0.0.RELEASE</spring.test.version>
         <thymeleaf.version>3.0.9.RELEASE</thymeleaf.version>
         <hibernate.version>5.2.10.Final</hibernate.version>
-        <postgres.GDBC.driver>42.2.5</postgres.GDBC.driver>
+        <postgres.GDBC.driver>42.3.3</postgres.GDBC.driver>
         <apache.commons.dbcp2>2.5.0</apache.commons.dbcp2>
         <thymeleaf.versionSpringFive>3.0.9.RELEASE</thymeleaf.versionSpringFive>
         <servlet.versionThree>3.0.1</servlet.versionThree>
